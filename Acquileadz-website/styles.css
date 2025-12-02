@@ -58,6 +58,12 @@ body {
     color: var(--cyan);
 }
 
+/* Active navigation state */
+.nav-links a.active {
+    color: var(--cyan);
+    font-weight: 600;
+}
+
 .cta-btn {
     padding: 10px 20px;
     background-color: var(--cyan);
@@ -68,6 +74,11 @@ body {
 
 .cta-btn:hover {
     opacity: 0.85;
+    color: var(--navy) !important;
+}
+
+.cta-btn.active {
+    background-color: #1ca6c8;
 }
 
 /* HERO SECTION -------------------------------------- */
@@ -91,6 +102,7 @@ body {
 }
 
 .cta-btn-large {
+    display: inline-block;
     padding: 16px 32px;
     background-color: var(--cyan);
     color: var(--navy);
@@ -99,10 +111,31 @@ body {
     text-decoration: none;
     font-size: 18px;
     transition: 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .cta-btn-large:hover {
     background-color: #1ca6c8;
+}
+
+/* Outlined CTA button */
+.cta-btn-outline {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: transparent;
+    color: var(--navy);
+    border: 2px solid var(--navy);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+.cta-btn-outline:hover {
+    background-color: var(--navy);
+    color: var(--white);
 }
 
 /* VALUE PROPS ---------------------------------------- */
@@ -172,6 +205,16 @@ body {
     background-color: var(--navy);
 }
 
+.services-header h1 {
+    font-size: 42px;
+    margin-bottom: 16px;
+}
+
+.services-header p {
+    font-size: 18px;
+    color: var(--gray);
+}
+
 .services-grid {
     padding: 80px 40px;
     background-color: #ffffff;
@@ -179,17 +222,30 @@ body {
     display: grid;
     gap: 40px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .service-detail {
     padding: 30px;
     background-color: #f4f4f4;
     border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.service-detail:hover {
+    background-color: #e8e8e8;
+    transform: translateY(-4px);
 }
 
 .service-detail h3 {
     margin-bottom: 12px;
     font-size: 22px;
+    color: var(--navy);
+}
+
+.service-detail p {
+    color: #333;
 }
 
 /* CONTACT PAGE ------------------------------------------- */
@@ -197,6 +253,16 @@ body {
     padding: 100px 40px;
     text-align: center;
     background-color: var(--navy);
+}
+
+.contact-header h1 {
+    font-size: 42px;
+    margin-bottom: 16px;
+}
+
+.contact-header p {
+    font-size: 18px;
+    color: var(--gray);
 }
 
 .contact-form-section {
@@ -222,10 +288,18 @@ body {
     border-radius: 6px;
     font-size: 16px;
     font-family: var(--font-main);
+    transition: 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
 }
 
 .contact-form textarea {
     height: 160px;
+    resize: vertical;
 }
 
 /* FOOTER ------------------------------------------------- */
@@ -251,5 +325,19 @@ footer {
 
     .hero h1 {
         font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .services-preview h2,
+    .services-header h1,
+    .contact-header h1 {
+        font-size: 32px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
     }
 }
