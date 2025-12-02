@@ -25,18 +25,3 @@ window.addEventListener('load', function() {
         document.body.style.opacity = '1';
     }, 100);
 });
-```
-
----
-
-## 📁 Your Complete File Structure:
-```
-acquileadz/
-├── index.html
-├── services.html
-├── contact.html
-├── styles.css
-├── script.js
-└── assets/
-    ├── logo-light.png
-    └── favicon.ico
