@@ -38,11 +38,11 @@ body {
 
 /* UPDATED LOGO SIZE */
 .nav-logo img {
-    height: 95px;        /* Larger, more authoritative */
-    width: auto;
-    max-width: 400px;    /* Prevents clipping, allows scaling */
+    height: auto;
+    width: min(360px, 36vw); /* Wider on desktops while scaling down on small screens */
+    max-height: 110px;       /* Keeps the header height contained */
     object-fit: contain;
-    margin-left: -6px;   /* Alignment tweak */
+    margin-left: -6px;       /* Alignment tweak */
 }
 
 .nav-links {
