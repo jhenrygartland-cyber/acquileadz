@@ -38,9 +38,9 @@ body {
 
 /* UPDATED LOGO SIZE */
 .nav-logo img {
-    height: 90px;        /* Larger, more authoritative */
+    height: 95px;        /* Larger, more authoritative */
     width: auto;
-    max-width: 320px;    /* Prevents clipping, allows scaling */
+    max-width: 400px;    /* Prevents clipping, allows scaling */
     object-fit: contain;
     margin-left: -6px;   /* Alignment tweak */
 }
@@ -391,8 +391,8 @@ footer {
 
 @media (max-width: 480px) {
     .nav-logo img {
-        height: 50px;
-        max-width: 170px;
+        height: 65px;
+        max-width: 240px;
     }
 
     .hero h1 {
@@ -409,3 +409,4 @@ footer {
         max-width: 300px;
     }
 }
+
