@@ -28,7 +28,7 @@ body {
 /* NAVIGATION -------------------------------------- */
 .nav {
     width: 100%;
-    padding: 24px 40px; /* Tighter for a cleaner, more professional presence */
+    padding: 18px 36px; /* Slightly slimmer to follow the reduced logo footprint */
     background: linear-gradient(135deg, #0A1927 0%, #0C2033 40%, #0A1927 100%);
     display: flex;
     justify-content: space-between;
@@ -490,14 +490,13 @@ footer {
 
     .nav {
         flex-direction: column;
-        gap: 16px;
-        padding: 20px;
-        min-height: 220px;
+        gap: 12px;
+        padding: 16px 18px;
     }
 
     .nav-logo img {
-        width: min(220px, 50vw);
-        max-height: 80px;
+        width: min(210px, 46vw);
+        max-height: 78px;
     }
 
     .hero {
@@ -536,8 +535,8 @@ footer {
 
 @media (max-width: 480px) {
     .nav-logo img {
-        width: min(180px, 60vw);
-        max-height: 70px;
+        width: min(170px, 58vw);
+        max-height: 68px;
     }
 
     .hero h1 {
