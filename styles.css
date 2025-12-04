@@ -28,7 +28,7 @@ body {
 /* NAVIGATION -------------------------------------- */
 .nav {
     width: 100%;
-    padding: 16px 32px; /* Final resolved spacing to keep the compact header aligned to the smaller logo */
+    padding: 16px 32px; /* Compact header aligned to smaller logo */
     background: linear-gradient(135deg, #0A1927 0%, #0C2033 40%, #0A1927 100%);
     display: flex;
     justify-content: space-between;
@@ -553,4 +553,3 @@ footer {
         max-width: 300px;
     }
 }
-
