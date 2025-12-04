@@ -28,7 +28,7 @@ body {
 /* NAVIGATION -------------------------------------- */
 .nav {
     width: 100%;
-    padding: 16px 32px; /* Compact header aligned to smaller logo */
+    padding: 12px 32px; /* More compact header for smaller logo */
     background: linear-gradient(135deg, #0A1927 0%, #0C2033 40%, #0A1927 100%);
     display: flex;
     justify-content: space-between;
@@ -47,8 +47,8 @@ body {
 
 .nav-logo img {
     height: auto;
-    width: min(260px, 32vw); /* Slightly smaller default footprint */
-    max-height: 90px;        /* Keeps the header height contained */
+    width: min(180px, 28vw); /* Smaller logo */
+    max-height: 60px;        /* Reduced header height */
     object-fit: contain;
     margin-left: -6px;       /* Alignment tweak */
 }
@@ -495,8 +495,8 @@ footer {
     }
 
     .nav-logo img {
-        width: min(210px, 46vw);
-        max-height: 78px;
+        width: min(150px, 42vw);
+        max-height: 52px;
     }
 
     .hero {
@@ -535,8 +535,8 @@ footer {
 
 @media (max-width: 480px) {
     .nav-logo img {
-        width: min(170px, 58vw);
-        max-height: 68px;
+        width: min(130px, 52vw);
+        max-height: 48px;
     }
 
     .hero h1 {
