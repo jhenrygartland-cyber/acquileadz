@@ -292,3 +292,137 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ============================================
+// ANIMATED SPIRAL PROCESS FLOW
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const spiralProcess = document.getElementById('spiralProcess');
+    
+    if (spiralProcess) {
+        const flowSteps = spiralProcess.querySelectorAll('.flow-step');
+        
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.3, // Trigger when 30% of element is visible
+            rootMargin: '0px 0px -100px 0px' // Start animation slightly before element enters viewport
+        };
+        
+        const stepObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add visible class to trigger animations
+                    entry.target.classList.add('visible');
+                    
+                    // Optional: Unobserve after animation (one-time animation)
+                    // Comment out the next line if you want animations to repeat
+                    stepObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe each flow step
+        flowSteps.forEach(step => {
+            stepObserver.observe(step);
+        });
+        
+        // Add parallax effect on scroll (optional enhancement)
+        let ticking = false;
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const spiralTop = spiralProcess.getBoundingClientRect().top + scrolled;
+                    const spiralHeight = spiralProcess.offsetHeight;
+                    
+                    flowSteps.forEach((step, index) => {
+                        const stepTop = step.getBoundingClientRect().top + scrolled;
+                        const progress = (scrolled - spiralTop) / spiralHeight;
+                        
+                        // Subtle parallax movement
+                        if (step.classList.contains('visible')) {
+                            const offset = index % 2 === 0 ? -10 : 10;
+                            const parallax = progress * offset;
+                            step.style.transform = `translateY(${parallax}px)`;
+                        }
+                    });
+                    
+                    ticking = false;
+                });
+                
+                ticking = true;
+            }
+        }, { passive: true });
+        
+        // ===== PROGRESS INDICATOR =====
+        // Create progress indicator
+        const progressBar = document.createElement('div');
+        progressBar.className = 'process-progress-bar';
+        progressBar.innerHTML = '<div class="progress-fill"></div>';
+        spiralProcess.appendChild(progressBar);
+        
+        const progressFill = progressBar.querySelector('.progress-fill');
+        
+        // Update progress on scroll
+        window.addEventListener('scroll', () => {
+            const rect = spiralProcess.getBoundingClientRect();
+            const scrolled = window.pageYOffset;
+            const processTop = spiralProcess.offsetTop;
+            const processHeight = spiralProcess.offsetHeight;
+            
+            const progress = Math.max(0, Math.min(1, 
+                (scrolled - processTop + window.innerHeight / 2) / processHeight
+            ));
+            
+            progressFill.style.height = `${progress * 100}%`;
+        }, { passive: true });
+    }
+});
+
+// ===== LETTER ANIMATION ENHANCEMENT =====
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedTexts = document.querySelectorAll('.animated-text');
+    
+    animatedTexts.forEach(text => {
+        const letters = text.querySelectorAll('.letter');
+        
+        // Add hover effect - letters bounce on hover
+        text.addEventListener('mouseenter', () => {
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.animation = 'letterBounce 0.4s ease';
+                }, index * 30);
+            });
+        });
+        
+        text.addEventListener('mouseleave', () => {
+            letters.forEach(letter => {
+                letter.style.animation = '';
+            });
+        });
+    });
+    
+    // Add bounce animation to CSS dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes letterBounce {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-8px) rotateX(10deg); }
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+// ===== MOBILE TOUCH OPTIMIZATION =====
+if ('ontouchstart' in window) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const flowSteps = document.querySelectorAll('.flow-step');
+        
+        flowSteps.forEach(step => {
+            // Reduce motion for better mobile performance
+            step.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+    });
+}
