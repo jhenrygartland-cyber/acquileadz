@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Acquileadz to discuss your contractor acquisition needs. Get more booked jobs with our proven lead management system.">
     <title>Contact | Acquileadz</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="/acquileadz/assets/favicon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="/acquileadz/assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 
 <body>
@@ -16,6 +17,11 @@
                 <img src="assets/logo-dark.png" alt="Acquileadz Logo">
             </a>
         </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
@@ -31,20 +37,15 @@
 
     <section class="contact-form-section">
         <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-            <!-- Your Web3Forms access key -->
             <input type="hidden" name="access_key" value="1b112abb-70d7-4e79-a0af-5d0b3e425015">
-            
-            <!-- Honeypot Spam Protection -->
             <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
             
-            <!-- Form Fields -->
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="text" name="company" placeholder="Business Name">
             <input type="email" name="email" placeholder="Email" required>
             <input type="tel" name="phone" placeholder="Phone" required>
             <textarea name="message" placeholder="How can we help?" required></textarea>
             
-            <!-- Success/Error Messages -->
             <div id="result" style="display: none; padding: 14px; border-radius: 6px; margin-bottom: 10px;"></div>
             
             <button type="submit" class="cta-btn-large">Send Message</button>
@@ -55,58 +56,6 @@
         <p>© 2025 Acquileadz. All rights reserved.</p>
     </footer>
 
-    <script>
-        const form = document.querySelector('.contact-form');
-        const result = document.getElementById('result');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-            
-            result.innerHTML = "Sending...";
-            result.style.display = "block";
-            result.style.backgroundColor = "#d1ecf1";
-            result.style.color = "#0c5460";
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                let json = await response.json();
-                if (response.status == 200) {
-                    result.innerHTML = "Message sent successfully! We'll get back to you soon.";
-                    result.style.backgroundColor = "#d4edda";
-                    result.style.color = "#155724";
-                    form.reset();
-                } else {
-                    console.log(response);
-                    result.innerHTML = json.message;
-                    result.style.backgroundColor = "#f8d7da";
-                    result.style.color = "#721c24";
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                result.innerHTML = "Something went wrong. Please try again.";
-                result.style.backgroundColor = "#f8d7da";
-                result.style.color = "#721c24";
-            })
-            .then(function() {
-                setTimeout(() => {
-                    result.style.display = "none";
-                }, 5000);
-            });
-        });
-    </script>
-
-    <!-- Add JavaScript for animations -->
     <script src="script.js"></script>
 </body>
 </html>
