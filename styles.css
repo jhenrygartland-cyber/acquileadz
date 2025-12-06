@@ -27,8 +27,10 @@ body {
 
 /* NAVIGATION -------------------------------------- */
 .nav {
+    --header-height: 96px;
     width: 100%;
-    padding: 10px 32px; /* Very minimal padding for compact header */
+    height: var(--header-height);
+    padding: 0 28px; /* Reduced padding so the logo can fill the header height */
     background: linear-gradient(135deg, #0A1927 0%, #0C2033 40%, #0A1927 100%);
     display: flex;
     justify-content: space-between;
@@ -46,10 +48,11 @@ body {
 }
 
 .nav-logo img {
-    height: 88px;           /* Logo fills header height - prominent and noticeable */
-    width: auto;            /* Width adjusts automatically to maintain aspect ratio */
+    height: var(--header-height);    /* Logo height matches header height */
+    max-height: var(--header-height);
+    width: auto;                     /* Width adjusts automatically to maintain aspect ratio */
     object-fit: contain;
-    margin-left: -6px;      /* Alignment tweak */
+    margin-left: -6px;               /* Alignment tweak */
 }
 
 .nav-links {
@@ -566,13 +569,16 @@ footer {
     }
 
     .nav {
+        --header-height: 88px;
+        height: auto;
         flex-direction: column;
         gap: 12px;
-        padding: 10px 18px;
+        padding: 8px 18px;
     }
 
     .nav-logo img {
-        height: 80px;
+        height: var(--header-height);
+        max-height: var(--header-height);
     }
 
     .hero {
@@ -610,8 +616,13 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .nav {
+        --header-height: 76px;
+    }
+
     .nav-logo img {
-        height: 73px;
+        height: var(--header-height);
+        max-height: var(--header-height);
     }
 
     .hero h1 {
