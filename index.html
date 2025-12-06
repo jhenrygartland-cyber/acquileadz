@@ -35,95 +35,167 @@
         </div>
         <div class="hero-visual">
             <div class="hero-image-container">
-                <svg width="100%" height="100%" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Dashboard Window -->
-                    <rect x="60" y="80" width="480" height="440" rx="20" fill="rgba(255, 255, 255, 0.95)" stroke="rgba(43, 183, 218, 0.3)" stroke-width="2"/>
-                    
-                    <!-- Header Bar -->
-                    <rect x="60" y="80" width="480" height="60" rx="20" fill="rgba(43, 183, 218, 0.15)"/>
-                    <rect x="60" y="120" width="480" height="20" fill="rgba(43, 183, 218, 0.15)"/>
-                    
-                    <!-- Window Dots -->
-                    <circle cx="90" cy="110" r="8" fill="#FF5F57"/>
-                    <circle cx="115" cy="110" r="8" fill="#FEBC2E"/>
-                    <circle cx="140" cy="110" r="8" fill="#28C840"/>
-                    
-                    <!-- Dashboard Title -->
-                    <text x="180" y="115" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0A1927">Lead Pipeline Dashboard</text>
-                    
-                    <!-- Stats Cards Row -->
-                    <!-- Card 1 -->
-                    <rect x="90" y="170" width="110" height="80" rx="12" fill="rgba(43, 183, 218, 0.1)" stroke="rgba(43, 183, 218, 0.3)" stroke-width="2"/>
-                    <text x="145" y="205" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#2BB7DA" text-anchor="middle">74%</text>
-                    <text x="145" y="230" font-family="Inter, sans-serif" font-size="11" fill="#4a5568" text-anchor="middle">Conversion</text>
-                    
-                    <!-- Card 2 -->
-                    <rect x="220" y="170" width="110" height="80" rx="12" fill="rgba(43, 183, 218, 0.1)" stroke="rgba(43, 183, 218, 0.3)" stroke-width="2"/>
-                    <text x="275" y="205" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#2BB7DA" text-anchor="middle">142</text>
-                    <text x="275" y="230" font-family="Inter, sans-serif" font-size="11" fill="#4a5568" text-anchor="middle">Active Leads</text>
-                    
-                    <!-- Card 3 -->
-                    <rect x="350" y="170" width="110" height="80" rx="12" fill="rgba(43, 183, 218, 0.1)" stroke="rgba(43, 183, 218, 0.3)" stroke-width="2"/>
-                    <text x="405" y="205" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#2BB7DA" text-anchor="middle">12m</text>
-                    <text x="405" y="230" font-family="Inter, sans-serif" font-size="11" fill="#4a5568" text-anchor="middle">Response Time</text>
-                    
-                    <!-- Chart Section -->
-                    <rect x="90" y="275" width="370" height="200" rx="12" fill="rgba(248, 249, 251, 0.5)" stroke="rgba(43, 183, 218, 0.2)" stroke-width="1"/>
-                    
-                    <!-- Chart Title -->
-                    <text x="105" y="300" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0A1927">Weekly Performance</text>
-                    
-                    <!-- Bar Chart -->
-                    <rect x="120" y="380" width="35" height="60" rx="4" fill="rgba(43, 183, 218, 0.6)"/>
-                    <rect x="170" y="350" width="35" height="90" rx="4" fill="rgba(43, 183, 218, 0.7)"/>
-                    <rect x="220" y="320" width="35" height="120" rx="4" fill="rgba(43, 183, 218, 0.8)"/>
-                    <rect x="270" y="340" width="35" height="100" rx="4" fill="rgba(43, 183, 218, 0.7)"/>
-                    <rect x="320" y="300" width="35" height="140" rx="4" fill="#2BB7DA"/>
-                    <rect x="370" y="330" width="35" height="110" rx="4" fill="rgba(43, 183, 218, 0.8)"/>
-                    
-                    <!-- Chart Labels -->
-                    <text x="137" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Mon</text>
-                    <text x="187" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Tue</text>
-                    <text x="237" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Wed</text>
-                    <text x="287" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Thu</text>
-                    <text x="337" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Fri</text>
-                    <text x="387" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Sat</text>
-                    
-                    <!-- Activity Feed -->
-                    <rect x="480" y="275" width="140" height="200" rx="12" fill="rgba(248, 249, 251, 0.5)" stroke="rgba(43, 183, 218, 0.2)" stroke-width="1"/>
-                    <text x="495" y="300" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0A1927">Recent Activity</text>
-                    
-                    <!-- Activity Items -->
-                    <circle cx="500" cy="325" r="6" fill="#28C840"/>
-                    <text x="515" y="330" font-family="Inter, sans-serif" font-size="9" fill="#4a5568">New Lead</text>
-                    
-                    <circle cx="500" cy="355" r="6" fill="#2BB7DA"/>
-                    <text x="515" y="360" font-family="Inter, sans-serif" font-size="9" fill="#4a5568">Follow-up</text>
-                    
-                    <circle cx="500" cy="385" r="6" fill="#FEBC2E"/>
-                    <text x="515" y="390" font-family="Inter, sans-serif" font-size="9" fill="#4a5568">Scheduled</text>
-                    
-                    <circle cx="500" cy="415" r="6" fill="#28C840"/>
-                    <text x="515" y="420" font-family="Inter, sans-serif" font-size="9" fill="#4a5568">Booked</text>
-                    
-                    <circle cx="500" cy="445" r="6" fill="#2BB7DA"/>
-                    <text x="515" y="450" font-family="Inter, sans-serif" font-size="9" fill="#4a5568">In Progress</text>
-                    
-                    <!-- Floating Notification Badge -->
-                    <circle cx="530" cy="95" r="20" fill="#FF5F57" opacity="0.9"/>
-                    <text x="530" y="101" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">8</text>
-                    
-                    <!-- Subtle Glow Effect -->
-                    <defs>
-                        <filter id="glow">
-                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                            <feMerge>
-                                <feMergeNode in="coloredBlur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-                </svg>
+                <!-- Floating depth elements -->
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                
+                <div class="dashboard-3d" id="dashboard3d">
+                    <svg width="100%" height="100%" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Dashboard Window with depth -->
+                        <defs>
+                            <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:rgba(255,255,255,0.98);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgba(248,249,251,0.95);stop-opacity:1" />
+                            </linearGradient>
+                            
+                            <filter id="shadow">
+                                <feDropShadow dx="0" dy="10" stdDeviation="15" flood-opacity="0.3"/>
+                            </filter>
+                            
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Main dashboard container -->
+                        <g filter="url(#shadow)">
+                            <rect x="60" y="80" width="480" height="440" rx="20" fill="url(#cardGradient)" stroke="rgba(43, 183, 218, 0.4)" stroke-width="2"/>
+                        </g>
+                        
+                        <!-- Header Bar with gradient -->
+                        <rect x="60" y="80" width="480" height="60" rx="20" fill="rgba(43, 183, 218, 0.2)"/>
+                        <rect x="60" y="120" width="480" height="20" fill="rgba(43, 183, 218, 0.15)"/>
+                        
+                        <!-- Window Control Dots -->
+                        <circle cx="90" cy="110" r="8" fill="#FF5F57"/>
+                        <circle cx="115" cy="110" r="8" fill="#FEBC2E"/>
+                        <circle cx="140" cy="110" r="8" fill="#28C840"/>
+                        
+                        <!-- Dashboard Title -->
+                        <text x="180" y="115" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0A1927">Lead Pipeline Dashboard</text>
+                        
+                        <!-- Stats Cards with enhanced depth -->
+                        <g filter="url(#shadow)">
+                            <!-- Card 1 -->
+                            <rect x="90" y="170" width="110" height="80" rx="12" fill="rgba(43, 183, 218, 0.15)" stroke="rgba(43, 183, 218, 0.4)" stroke-width="2"/>
+                            <text x="145" y="205" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#2BB7DA" text-anchor="middle">74%</text>
+                            <text x="145" y="230" font-family="Inter, sans-serif" font-size="11" fill="#4a5568" text-anchor="middle" font-weight="600">Conversion</text>
+                        </g>
+                        
+                        <g filter="url(#shadow)">
+                            <!-- Card 2 -->
+                            <rect x="220" y="170" width="110" height="80" rx="12" fill="rgba(43, 183, 218, 0.15)" stroke="rgba(43, 183, 218, 0.4)" stroke-width="2"/>
+                            <text x="275" y="205" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#2BB7DA" text-anchor="middle">142</text>
+                            <text x="275" y="230" font-family="Inter, sans-serif" font-size="11" fill="#4a5568" text-anchor="middle" font-weight="600">Active Leads</text>
+                        </g>
+                        
+                        <g filter="url(#shadow)">
+                            <!-- Card 3 -->
+                            <rect x="350" y="170" width="110" height="80" rx="12" fill="rgba(43, 183, 218, 0.15)" stroke="rgba(43, 183, 218, 0.4)" stroke-width="2"/>
+                            <text x="405" y="205" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#2BB7DA" text-anchor="middle">12m</text>
+                            <text x="405" y="230" font-family="Inter, sans-serif" font-size="11" fill="#4a5568" text-anchor="middle" font-weight="600">Response Time</text>
+                        </g>
+                        
+                        <!-- Chart Section with depth -->
+                        <g filter="url(#shadow)">
+                            <rect x="90" y="275" width="370" height="200" rx="12" fill="rgba(255, 255, 255, 0.7)" stroke="rgba(43, 183, 218, 0.3)" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Chart Title -->
+                        <text x="105" y="300" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#0A1927">Weekly Performance</text>
+                        
+                        <!-- Animated Bar Chart with glow -->
+                        <g filter="url(#glow)">
+                            <rect x="120" y="380" width="35" height="60" rx="4" fill="rgba(43, 183, 218, 0.6)">
+                                <animate attributeName="height" values="60;70;60" dur="3s" repeatCount="indefinite"/>
+                                <animate attributeName="y" values="380;370;380" dur="3s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="170" y="350" width="35" height="90" rx="4" fill="rgba(43, 183, 218, 0.7)">
+                                <animate attributeName="height" values="90;100;90" dur="3.5s" repeatCount="indefinite"/>
+                                <animate attributeName="y" values="350;340;350" dur="3.5s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="220" y="320" width="35" height="120" rx="4" fill="rgba(43, 183, 218, 0.8)">
+                                <animate attributeName="height" values="120;130;120" dur="4s" repeatCount="indefinite"/>
+                                <animate attributeName="y" values="320;310;320" dur="4s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="270" y="340" width="35" height="100" rx="4" fill="rgba(43, 183, 218, 0.75)">
+                                <animate attributeName="height" values="100;110;100" dur="3.8s" repeatCount="indefinite"/>
+                                <animate attributeName="y" values="340;330;340" dur="3.8s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="320" y="300" width="35" height="140" rx="4" fill="#2BB7DA">
+                                <animate attributeName="height" values="140;150;140" dur="4.2s" repeatCount="indefinite"/>
+                                <animate attributeName="y" values="300;290;300" dur="4.2s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="370" y="330" width="35" height="110" rx="4" fill="rgba(43, 183, 218, 0.8)">
+                                <animate attributeName="height" values="110;120;110" dur="3.6s" repeatCount="indefinite"/>
+                                <animate attributeName="y" values="330;320;330" dur="3.6s" repeatCount="indefinite"/>
+                            </rect>
+                        </g>
+                        
+                        <!-- Chart Labels -->
+                        <text x="137" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Mon</text>
+                        <text x="187" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Tue</text>
+                        <text x="237" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Wed</text>
+                        <text x="287" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Thu</text>
+                        <text x="337" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Fri</text>
+                        <text x="387" y="455" font-family="Inter, sans-serif" font-size="10" fill="#6b7785" text-anchor="middle">Sat</text>
+                        
+                        <!-- Activity Feed with depth -->
+                        <g filter="url(#shadow)">
+                            <rect x="480" y="275" width="140" height="200" rx="12" fill="rgba(255, 255, 255, 0.7)" stroke="rgba(43, 183, 218, 0.3)" stroke-width="1"/>
+                        </g>
+                        <text x="495" y="300" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A1927">Recent Activity</text>
+                        
+                        <!-- Animated Activity Items -->
+                        <g>
+                            <circle cx="500" cy="325" r="6" fill="#28C840">
+                                <animate attributeName="r" values="6;7;6" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="515" y="330" font-family="Inter, sans-serif" font-size="9" fill="#4a5568" font-weight="600">New Lead</text>
+                        </g>
+                        
+                        <g>
+                            <circle cx="500" cy="355" r="6" fill="#2BB7DA">
+                                <animate attributeName="r" values="6;7;6" dur="2.2s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="515" y="360" font-family="Inter, sans-serif" font-size="9" fill="#4a5568" font-weight="600">Follow-up</text>
+                        </g>
+                        
+                        <g>
+                            <circle cx="500" cy="385" r="6" fill="#FEBC2E">
+                                <animate attributeName="r" values="6;7;6" dur="2.4s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="515" y="390" font-family="Inter, sans-serif" font-size="9" fill="#4a5568" font-weight="600">Scheduled</text>
+                        </g>
+                        
+                        <g>
+                            <circle cx="500" cy="415" r="6" fill="#28C840">
+                                <animate attributeName="r" values="6;7;6" dur="2.6s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="515" y="420" font-family="Inter, sans-serif" font-size="9" fill="#4a5568" font-weight="600">Booked</text>
+                        </g>
+                        
+                        <g>
+                            <circle cx="500" cy="445" r="6" fill="#2BB7DA">
+                                <animate attributeName="r" values="6;7;6" dur="2.8s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="515" y="450" font-family="Inter, sans-serif" font-size="9" fill="#4a5568" font-weight="600">In Progress</text>
+                        </g>
+                        
+                        <!-- Pulsing Notification Badge -->
+                        <g filter="url(#glow)">
+                            <circle cx="530" cy="95" r="20" fill="#FF5F57" opacity="0.9">
+                                <animate attributeName="r" values="20;22;20" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="530" y="101" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">8</text>
+                        </g>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
@@ -239,4 +311,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
