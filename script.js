@@ -1,6 +1,5 @@
 // Acquileadz Website JavaScript
 // Future enhancements and interactions
-
 console.log('Acquileadz site loaded successfully');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Subtle scroll reveal animations
+    // Subtle scroll reveal animations - comprehensive selector list
     const animatedElements = document.querySelectorAll(
         'section, h1, h2, h3, h4, h5, p, .card, .service-card, .service-detail, .value-box, .feature-card, .process-step, .step, .metric, .cta-strip, .about-card, .contact-form input, .contact-form textarea, .contact-form button'
     );
