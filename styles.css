@@ -1091,3 +1091,82 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* 3D DASHBOARD ANIMATION */
+.hero-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.1) 0%, rgba(43, 183, 218, 0.05) 100%);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    perspective: 1200px;
+    transform-style: preserve-3d;
+}
+
+.dashboard-3d {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+}
+
+.dashboard-3d svg {
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+/* Floating elements for depth */
+.floating-element {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.4), rgba(61, 200, 232, 0.2));
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.floating-element:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: -5%;
+    animation-delay: 0s;
+}
+
+.floating-element:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: -3%;
+    animation-delay: 2s;
+}
+
+.floating-element:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    bottom: 15%;
+    left: -8%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Glow effect on hover */
+.hero-image-container:hover .dashboard-3d {
+    filter: drop-shadow(0 0 40px rgba(43, 183, 218, 0.4));
+}
