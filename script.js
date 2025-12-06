@@ -305,18 +305,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Intersection Observer for scroll-triggered animations
         const observerOptions = {
-            threshold: 0.3, // Trigger when 30% of element is visible
-            rootMargin: '0px 0px -100px 0px' // Start animation slightly before element enters viewport
+            threshold: 0.15, // Trigger when 15% of element is visible
+            rootMargin: '0px 0px -20% 0px' // Trigger when element is 20% from bottom of screen
         };
         
         const stepObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Add visible class to trigger animations
-                    entry.target.classList.add('visible');
+                    // Small delay before adding visible class for smoother effect
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, 50);
                     
-                    // Optional: Unobserve after animation (one-time animation)
-                    // Comment out the next line if you want animations to repeat
+                    // Unobserve after animation (one-time animation)
                     stepObserver.unobserve(entry.target);
                 }
             });
@@ -326,35 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
         flowSteps.forEach(step => {
             stepObserver.observe(step);
         });
-        
-        // Add parallax effect on scroll (optional enhancement)
-        let ticking = false;
-        
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const scrolled = window.pageYOffset;
-                    const spiralTop = spiralProcess.getBoundingClientRect().top + scrolled;
-                    const spiralHeight = spiralProcess.offsetHeight;
-                    
-                    flowSteps.forEach((step, index) => {
-                        const stepTop = step.getBoundingClientRect().top + scrolled;
-                        const progress = (scrolled - spiralTop) / spiralHeight;
-                        
-                        // Subtle parallax movement
-                        if (step.classList.contains('visible')) {
-                            const offset = index % 2 === 0 ? -10 : 10;
-                            const parallax = progress * offset;
-                            step.style.transform = `translateY(${parallax}px)`;
-                        }
-                    });
-                    
-                    ticking = false;
-                });
-                
-                ticking = true;
-            }
-        }, { passive: true });
         
         // ===== PROGRESS INDICATOR =====
         // Create progress indicator
