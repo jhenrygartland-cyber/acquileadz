@@ -1323,13 +1323,19 @@ footer {
     margin-bottom: 120px;
     opacity: 0;
     transform: translateY(80px) scale(0.9);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .flow-step.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
+}
+
+/* When removing visible class (scrolling up), animate back down */
+.flow-step:not(.visible) {
+    opacity: 0;
+    transform: translateY(80px) scale(0.9);
 }
 
 /* Alternating pattern - zigzag */
@@ -1474,6 +1480,12 @@ footer {
     width: 120px;
     height: 120px;
     pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.arrow-connector.visible {
+    opacity: 1;
 }
 
 .arrow-down-right {
@@ -1495,23 +1507,33 @@ footer {
 .arrow-path {
     stroke-dasharray: 200;
     stroke-dashoffset: 200;
-    transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .arrow-head {
     opacity: 0;
     transform-origin: center;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
 }
 
-/* Animate arrows when step becomes visible */
-.flow-step.visible .arrow-path {
+/* Animate arrows when visible */
+.arrow-connector.visible .arrow-path {
     stroke-dashoffset: 0;
 }
 
-.flow-step.visible .arrow-head {
+.arrow-connector.visible .arrow-head {
     opacity: 1;
     animation: arrowPulse 2s ease-in-out infinite;
+}
+
+/* Reset arrows when not visible */
+.arrow-connector:not(.visible) .arrow-path {
+    stroke-dashoffset: 200;
+}
+
+.arrow-connector:not(.visible) .arrow-head {
+    opacity: 0;
+    animation: none;
 }
 
 @keyframes arrowPulse {
