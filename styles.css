@@ -107,8 +107,8 @@ p {
 }
 
 .nav-logo img {
-    height: calc(var(--header-height) - 16px);
-    max-height: calc(var(--header-height) - 16px);
+    height: calc(var(--header-height) - 4px);
+    max-height: calc(var(--header-height) - 4px);
     width: auto;
     object-fit: contain;
     margin-left: -6px;
@@ -1170,3 +1170,4 @@ footer {
 .hero-image-container:hover .dashboard-3d {
     filter: drop-shadow(0 0 40px rgba(43, 183, 218, 0.4));
 }
+
