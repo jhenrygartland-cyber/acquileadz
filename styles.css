@@ -2,13 +2,19 @@
    ACQUILEADZ GLOBAL BRAND STYLING
    ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700&display=swap');
+
 /* BRAND COLORS */
 :root {
     --navy: #0A1927; /* Matches the brand background behind the logo */
+    --navy-alt: #0F2335;
     --white: #ffffff;
     --cyan: #2BB7DA;
-    --gray: #95A5A6;
+    --gray: #94A6B8;
+    --muted: #B8C4D3;
+    --surface: rgba(255,255,255,0.04);
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    --font-alt: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 /* GLOBAL RESET */
@@ -20,9 +26,16 @@
 
 body {
     font-family: var(--font-main);
-    background-color: var(--navy);
+    background: radial-gradient(circle at 20% 20%, rgba(43, 183, 218, 0.09), transparent 28%),
+                radial-gradient(circle at 80% 0%, rgba(43, 183, 218, 0.06), transparent 22%),
+                linear-gradient(180deg, #081424 0%, #0B1A2A 45%, #081424 100%);
     color: var(--white);
-    line-height: 1.6;
+    line-height: 1.65;
+    min-height: 100vh;
+}
+
+p {
+    color: var(--muted);
 }
 
 /* SMOOTH REVEAL ANIMATION */
@@ -39,16 +52,17 @@ body {
 
 /* NAVIGATION -------------------------------------- */
 .nav {
-    --header-height: 96px;
+    --header-height: 86px;
     width: 100%;
     height: var(--header-height);
-    padding: 0 28px; /* Reduced padding so the logo can fill the header height */
-    background: linear-gradient(135deg, #0A1927 0%, #0C2033 40%, #0A1927 100%);
+    padding: 0 32px;
+    background: rgba(10, 25, 39, 0.85);
+    backdrop-filter: blur(14px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -69,24 +83,24 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 28px;
+    gap: 22px;
     align-items: center;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--white);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.02em;
     padding: 10px 14px;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: all 0.2s ease;
 }
 
 .nav-links a:hover {
     color: var(--cyan);
-    background-color: rgba(255,255,255,0.06);
+    background-color: rgba(255,255,255,0.07);
     transform: translateY(-1px);
 }
 
@@ -101,7 +115,8 @@ body {
     color: var(--navy) !important;
     border-radius: 8px;
     font-weight: 800;
-    box-shadow: 0 8px 18px rgba(43, 183, 218, 0.35);
+    box-shadow: 0 10px 24px rgba(43, 183, 218, 0.28);
+    letter-spacing: 0.01em;
 }
 
 .cta-btn:hover {
@@ -117,21 +132,28 @@ body {
 .hero {
     padding: 120px 40px 140px;
     text-align: center;
-    background-color: var(--navy);
+    background: radial-gradient(circle at 15% 20%, rgba(43, 183, 218, 0.18), transparent 30%),
+                radial-gradient(circle at 85% 10%, rgba(43, 183, 218, 0.12), transparent 26%),
+                var(--navy);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
 }
 
 .hero h1 {
-    font-size: 50px;
+    font-size: 52px;
     margin-bottom: 20px;
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-family: var(--font-alt);
 }
 
 .hero p {
     font-size: 20px;
-    max-width: 700px;
-    margin: 0 auto 40px auto;
-    color: var(--gray);
+    max-width: 720px;
+    margin: 0 auto 36px auto;
+    color: var(--muted);
 }
 
 .cta-btn-large {
@@ -146,12 +168,14 @@ body {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    letter-spacing: 0.01em;
+    box-shadow: 0 18px 42px rgba(43, 183, 218, 0.32);
 }
 
 .cta-btn-large:hover {
     background-color: #1ca6c8;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(43, 183, 218, 0.3);
+    box-shadow: 0 14px 36px rgba(43, 183, 218, 0.34);
 }
 
 .cta-btn-outline {
@@ -178,31 +202,37 @@ body {
     justify-content: center;
     gap: 40px;
     padding: 80px 40px;
-    background-color: var(--navy);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .value-box {
     background-color: rgba(255,255,255,0.05);
-    padding: 30px;
-    border-radius: 8px;
+    padding: 32px 30px;
+    border-radius: 12px;
     width: 260px;
-    text-align: center;
+    text-align: left;
     transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.22);
 }
 
 .value-box:hover {
     background-color: rgba(255,255,255,0.08);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    border-color: rgba(43, 183, 218, 0.5);
 }
 
 .value-box h3 {
     margin-bottom: 12px;
     font-size: 22px;
     color: var(--white);
+    font-family: var(--font-alt);
 }
 
 .value-box p {
-    color: var(--gray);
+    color: var(--muted);
 }
 
 /* SERVICES PREVIEW ---------------------------------------- */
@@ -211,12 +241,17 @@ body {
     color: var(--navy);
     text-align: center;
     padding: 100px 40px;
+    border-radius: 18px 18px 0 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 -12px 24px rgba(0,0,0,0.08);
 }
 
 .services-preview h2 {
     font-size: 36px;
     margin-bottom: 16px;
     font-weight: 800;
+    letter-spacing: -0.01em;
 }
 
 .services-preview p {
@@ -230,19 +265,20 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    padding: 60px 40px;
-    background: linear-gradient(90deg, rgba(43, 183, 218, 0.12), rgba(10, 25, 39, 0.95));
-    border-top: 1px solid rgba(255,255,255,0.08);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 70px 40px;
+    background: linear-gradient(115deg, rgba(43, 183, 218, 0.18) 0%, rgba(10, 25, 39, 0.96) 42%, rgba(10, 25, 39, 0.98) 100%);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .metric {
     background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 22px 20px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 24px 20px;
     text-align: center;
-    box-shadow: 0 16px 36px rgba(0,0,0,0.28);
+    box-shadow: 0 18px 42px rgba(0,0,0,0.32);
+    backdrop-filter: blur(6px);
 }
 
 .metric h4 {
@@ -263,31 +299,35 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
     padding: 100px 40px;
-    background-color: #0C2033;
+    background: linear-gradient(180deg, #0D1E2E 0%, #0B1725 100%);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .feature-card {
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 28px;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 14px 32px rgba(0,0,0,0.32);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
 }
 
 .feature-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(43, 183, 218, 0.6);
-    box-shadow: 0 16px 36px rgba(0,0,0,0.42);
+    transform: translateY(-8px);
+    border-color: rgba(43, 183, 218, 0.55);
+    box-shadow: 0 18px 44px rgba(0,0,0,0.42);
 }
 
 .feature-card h3 {
     font-size: 22px;
     margin-bottom: 10px;
+    font-family: var(--font-alt);
 }
 
 .feature-card p {
-    color: var(--gray);
+    color: var(--muted);
 }
 
 /* PROCESS TIMELINE --------------------------------------- */
@@ -295,6 +335,10 @@ body {
     padding: 90px 40px;
     background-color: #f5f7fb;
     color: var(--navy);
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
 }
 
 .process h2 {
@@ -318,9 +362,10 @@ body {
 .step {
     background: #ffffff;
     border: 1px solid #e4e8ef;
-    border-radius: 12px;
-    padding: 22px;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    position: relative;
 }
 
 .step h4 {
@@ -338,6 +383,10 @@ body {
     text-align: center;
     background: linear-gradient(135deg, #2BB7DA 0%, #0A1927 80%);
     color: var(--white);
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.26);
 }
 
 .cta-strip h2 {
@@ -363,17 +412,20 @@ body {
 }
 
 .service-card {
-    background-color: var(--navy);
+    background: linear-gradient(145deg, #0D2438 0%, #0B1D2D 100%);
     color: var(--white);
     padding: 20px 30px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 600;
     transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.24);
 }
 
 .service-card:hover {
     background-color: #0d2440;
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    border-color: rgba(43, 183, 218, 0.5);
 }
 
 /* SERVICES PAGE FULL GRID ----------------------------------- */
@@ -381,6 +433,11 @@ body {
     padding: 120px 40px;
     text-align: center;
     background-color: var(--navy);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 18% 22%, rgba(43,183,218,0.18), transparent 32%),
+                radial-gradient(circle at 86% 12%, rgba(43,183,218,0.12), transparent 28%),
+                linear-gradient(180deg, #0A1927 0%, #0C2033 100%);
 }
 
 .services-header h1 {
@@ -407,15 +464,17 @@ body {
 
 .service-detail {
     padding: 30px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
+    background: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+    border-radius: 12px;
     transition: all 0.3s ease;
+    border: 1px solid #e4e8ef;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
 }
 
 .service-detail:hover {
     background-color: #e8e8e8;
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.12);
 }
 
 .service-detail h3 {
@@ -435,6 +494,11 @@ body {
     padding: 100px 40px;
     text-align: center;
     background-color: var(--navy);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 20% 26%, rgba(43,183,218,0.18), transparent 32%),
+                radial-gradient(circle at 78% 12%, rgba(43,183,218,0.12), transparent 28%),
+                linear-gradient(180deg, #0A1927 0%, #0C2033 100%);
 }
 
 .contact-header h1 {
@@ -454,6 +518,7 @@ body {
     color: var(--navy);
     display: flex;
     justify-content: center;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.04);
 }
 
 .contact-form {
@@ -467,11 +532,13 @@ body {
 .contact-form input,
 .contact-form textarea {
     padding: 14px;
-    border: 2px solid #dddddd;
-    border-radius: 6px;
+    border: 2px solid #d7dce4;
+    border-radius: 10px;
     font-size: 16px;
     font-family: var(--font-main);
     transition: all 0.2s ease;
+    background: #f8f9fb;
+    color: #0a1826;
 }
 
 .contact-form input:focus,
@@ -491,6 +558,11 @@ body {
     padding: 110px 40px 80px;
     text-align: center;
     background-color: var(--navy);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 24% 18%, rgba(43,183,218,0.16), transparent 28%),
+                radial-gradient(circle at 82% 6%, rgba(43,183,218,0.12), transparent 24%),
+                linear-gradient(180deg, #0A1927 0%, #0C2033 100%);
 }
 
 .about-hero h1 {
@@ -558,6 +630,7 @@ body {
 .about-card h3 {
     margin-bottom: 10px;
     font-size: 20px;
+    font-family: var(--font-alt);
 }
 
 .about-card p {
@@ -568,9 +641,10 @@ body {
 footer {
     text-align: center;
     padding: 30px;
-    background-color: var(--navy);
+    background: linear-gradient(180deg, rgba(10,25,39,0.95) 0%, rgba(8,18,30,0.98) 100%);
     color: var(--gray);
     border-top: 1px solid rgba(255,255,255,0.08);
+    letter-spacing: 0.01em;
 }
 
 /* RESPONSIVE ------------------------------------------------ */
