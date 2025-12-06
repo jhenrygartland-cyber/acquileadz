@@ -45,4 +45,60 @@ window.addEventListener('load', function() {
         document.body.style.transition = 'opacity 0.3s ease';
         document.body.style.opacity = '1';
     }, 100);
+
+});
+
+// 3D Dashboard Scroll Animation
+document.addEventListener('DOMContentLoaded', () => {
+    const dashboard = document.getElementById('dashboard3d');
+    
+    if (dashboard) {
+        let ticking = false;
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const heroHeight = document.querySelector('.hero').offsetHeight;
+                    
+                    // Calculate rotation based on scroll position within hero section
+                    const scrollProgress = Math.min(scrolled / heroHeight, 1);
+                    
+                    // 3D rotation values
+                    const rotateX = scrollProgress * 15 - 7.5; // -7.5 to 7.5 degrees
+                    const rotateY = scrollProgress * 20 - 10;  // -10 to 10 degrees
+                    const translateZ = scrollProgress * 30;     // Add depth
+                    
+                    dashboard.style.transform = `
+                        rotateX(${rotateX}deg) 
+                        rotateY(${rotateY}deg) 
+                        translateZ(${translateZ}px)
+                    `;
+                    
+                    ticking = false;
+                });
+                
+                ticking = true;
+            }
+        });
+        
+        // Mouse move parallax effect
+        const heroSection = document.querySelector('.hero');
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            
+            dashboard.style.transform = `
+                rotateX(${y * -10}deg) 
+                rotateY(${x * 10}deg) 
+                translateZ(20px)
+            `;
+        });
+        
+        // Reset on mouse leave
+        heroSection.addEventListener('mouseleave', () => {
+            dashboard.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        });
+    }
 });
