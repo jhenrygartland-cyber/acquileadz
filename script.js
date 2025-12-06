@@ -303,33 +303,91 @@ document.addEventListener('DOMContentLoaded', () => {
     if (spiralProcess) {
         const flowSteps = spiralProcess.querySelectorAll('.flow-step');
         
-        // Intersection Observer for scroll-triggered animations
-        const observerOptions = {
-            threshold: 0.15, // Trigger when 15% of element is visible
-            rootMargin: '0px 0px -20% 0px' // Trigger when element is 20% from bottom of screen
+        // Track which steps should be visible based on scroll position
+        let currentVisibleStep = 0;
+        
+        // Intersection Observer for the entire process section
+        const sectionObserverOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
         };
         
-        const stepObserver = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Small delay before adding visible class for smoother effect
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, 50);
-                    
-                    // Unobserve after animation (one-time animation)
-                    stepObserver.unobserve(entry.target);
+                    // Start observing individual steps when section is in view
+                    startStepObservation();
                 }
             });
-        }, observerOptions);
+        }, sectionObserverOptions);
         
-        // Observe each flow step
-        flowSteps.forEach(step => {
-            stepObserver.observe(step);
-        });
+        sectionObserver.observe(spiralProcess);
+        
+        function startStepObservation() {
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+        
+        function handleScroll() {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const processTop = spiralProcess.offsetTop;
+            const processBottom = processTop + spiralProcess.offsetHeight;
+            
+            // Calculate which step should be visible based on scroll
+            flowSteps.forEach((step, index) => {
+                const stepTop = step.offsetTop + processTop;
+                const stepMiddle = stepTop + (step.offsetHeight / 2);
+                
+                // Check if we've scrolled past this step's midpoint
+                if (scrollPosition > stepMiddle) {
+                    // Show this step and its arrow
+                    if (!step.classList.contains('visible')) {
+                        showStep(step, index);
+                    }
+                } else {
+                    // Hide this step and its arrow when scrolling back up
+                    if (step.classList.contains('visible')) {
+                        hideStep(step, index);
+                    }
+                }
+            });
+        }
+        
+        function showStep(step, index) {
+            // First, animate the previous step's arrow (if it exists)
+            if (index > 0) {
+                const previousStep = flowSteps[index - 1];
+                const arrow = previousStep.querySelector('.arrow-connector');
+                if (arrow) {
+                    // Small delay, then animate arrow
+                    setTimeout(() => {
+                        arrow.classList.add('visible');
+                    }, 100);
+                }
+            }
+            
+            // Then animate the step itself after arrow finishes
+            setTimeout(() => {
+                step.classList.add('visible');
+            }, index > 0 ? 600 : 100); // Delay for arrow animation
+        }
+        
+        function hideStep(step, index) {
+            // Remove visible class from step first
+            step.classList.remove('visible');
+            
+            // Then hide the arrow from previous step
+            if (index > 0) {
+                const previousStep = flowSteps[index - 1];
+                const arrow = previousStep.querySelector('.arrow-connector');
+                if (arrow) {
+                    setTimeout(() => {
+                        arrow.classList.remove('visible');
+                    }, 100);
+                }
+            }
+        }
         
         // ===== PROGRESS INDICATOR =====
-        // Create progress indicator
         const progressBar = document.createElement('div');
         progressBar.className = 'process-progress-bar';
         progressBar.innerHTML = '<div class="progress-fill"></div>';
