@@ -195,9 +195,9 @@ p {
     content: '';
     position: absolute;
     top: -50%;
-    right: -20%;
-    width: 800px;
-    height: 800px;
+    right: -30%;
+    width: 1000px;
+    height: 1000px;
     background: radial-gradient(circle, rgba(43, 183, 218, 0.15) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
@@ -240,6 +240,8 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%; /* Added */
+    height: 100%; /* Added */
 }
 
 .hero-image-container {
@@ -1170,4 +1172,5 @@ footer {
 .hero-image-container:hover .dashboard-3d {
     filter: drop-shadow(0 0 40px rgba(43, 183, 218, 0.4));
 }
+
 
