@@ -59,7 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 obs.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
 
     animatedElements.forEach(element => observer.observe(element));
 
@@ -93,20 +96,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const dashboard = document.getElementById('dashboard3d');
     
     if (dashboard) {
-        let ticking = false;
+        let scrollTicking = false;
+        let mouseTicking = false;
         
-        // Scroll animation
+        // Scroll animation - optimized
         window.addEventListener('scroll', () => {
-            if (!ticking) {
+            if (!scrollTicking) {
                 window.requestAnimationFrame(() => {
                     const scrolled = window.pageYOffset;
                     const heroHeight = document.querySelector('.hero').offsetHeight;
                     
                     const scrollProgress = Math.min(scrolled / heroHeight, 1);
                     
-                    const rotateX = scrollProgress * 15 - 7.5;
-                    const rotateY = scrollProgress * 20 - 10;
-                    const translateZ = scrollProgress * 30;
+                    const rotateX = scrollProgress * 10 - 5;
+                    const rotateY = scrollProgress * 15 - 7.5;
+                    const translateZ = scrollProgress * 20;
                     
                     dashboard.style.transform = `
                         rotateX(${rotateX}deg) 
@@ -114,33 +118,51 @@ document.addEventListener('DOMContentLoaded', () => {
                         translateZ(${translateZ}px)
                     `;
                     
-                    ticking = false;
+                    scrollTicking = false;
                 });
                 
-                ticking = true;
+                scrollTicking = true;
             }
-        });
+        }, { passive: true });
         
-        // Extended mouse move parallax effect - track entire hero section
+        // Mouse parallax - throttled for performance
         const heroSection = document.querySelector('.hero');
         const heroVisual = document.querySelector('.hero-visual');
         
         if (heroSection && heroVisual) {
+            let lastMouseMove = 0;
+            
             heroSection.addEventListener('mousemove', (e) => {
-                const rect = heroSection.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                const now = Date.now();
+                if (now - lastMouseMove < 50) return; // Throttle to every 50ms
+                lastMouseMove = now;
                 
-                dashboard.style.transform = `
-                    rotateX(${y * -10}deg) 
-                    rotateY(${x * 10}deg) 
-                    translateZ(20px)
-                `;
-            });
+                if (!mouseTicking) {
+                    window.requestAnimationFrame(() => {
+                        const rect = heroSection.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width - 0.5;
+                        const y = (e.clientY - rect.top) / rect.height - 0.5;
+                        
+                        dashboard.style.transform = `
+                            rotateX(${y * -8}deg) 
+                            rotateY(${x * 8}deg) 
+                            translateZ(15px)
+                        `;
+                        
+                        mouseTicking = false;
+                    });
+                    
+                    mouseTicking = true;
+                }
+            }, { passive: true });
             
             // Reset on mouse leave
             heroSection.addEventListener('mouseleave', () => {
+                dashboard.style.transition = 'transform 0.3s ease';
                 dashboard.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                setTimeout(() => {
+                    dashboard.style.transition = '';
+                }, 300);
             });
         }
     }
