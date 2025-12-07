@@ -679,86 +679,6 @@ p {
     line-height: 1.6;
 }
 
-/* PROCESS TIMELINE --------------------------------------- */
-.process {
-    padding: 120px 80px;
-    background: linear-gradient(180deg, #f5f7fb 0%, #e8ecf2 100%);
-    color: var(--navy);
-    max-width: 1400px;
-    margin: 60px auto;
-    border-radius: 32px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    position: relative;
-}
-
-.process h2 {
-    text-align: center;
-    font-size: 48px;
-    margin-bottom: 20px;
-    font-weight: 800;
-    font-family: var(--font-alt);
-    letter-spacing: -0.02em;
-}
-
-.process p.subtext {
-    text-align: center;
-    color: #56606c;
-    margin-bottom: 80px;
-    font-size: 20px;
-}
-
-.process-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
-    position: relative;
-}
-
-.step {
-    background: #ffffff;
-    border: 1px solid #e4e8ef;
-    border-radius: 20px;
-    padding: 40px 32px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    position: relative;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.step::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 0;
-    background: linear-gradient(180deg, var(--cyan), var(--cyan-light));
-    border-radius: 4px;
-    transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.step:hover::before {
-    height: 100%;
-}
-
-.step:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-    border-color: rgba(43, 183, 218, 0.3);
-}
-
-.step h4 {
-    font-size: 20px;
-    margin-bottom: 12px;
-    font-weight: 700;
-    font-family: var(--font-alt);
-}
-
-.step p {
-    color: #3c4753;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
 /* CTA STRIP ---------------------------------------------- */
 .cta-strip {
     padding: 100px 80px;
@@ -1123,6 +1043,313 @@ footer {
     filter: drop-shadow(0 0 40px rgba(43, 183, 218, 0.4));
 }
 
+/* ============================================
+   BUTTER SMOOTH ANIMATED SPIRAL PROCESS FLOW
+   ============================================ */
+
+/* PROCESS FLOW CONTAINER */
+.process-flow-container {
+    padding: 120px 40px;
+    background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.process-flow-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(43, 183, 218, 0.5), transparent);
+}
+
+.process-flow-intro {
+    text-align: center;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 2;
+}
+
+.process-flow-intro h2 {
+    font-size: 52px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    background: linear-gradient(135deg, var(--white) 0%, var(--cyan-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+}
+
+.process-flow-intro .subtext {
+    font-size: 20px;
+    color: var(--muted);
+}
+
+/* SPIRAL PROCESS */
+.spiral-process {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding: 40px 20px 80px;
+}
+
+/* FLOW STEPS - Ultra-smooth scroll control */
+.flow-step {
+    position: relative;
+    margin-bottom: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(40px) scale(0.92);
+    will-change: opacity, transform;
+    /* NO transitions - every frame controlled by scroll */
+}
+
+/* First step is always visible */
+.flow-step[data-step="1"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.flow-step[data-step="1"] .letter {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Alternating pattern - zigzag */
+.flow-step[data-step="1"],
+.flow-step[data-step="3"],
+.flow-step[data-step="5"] {
+    padding-left: 0;
+    padding-right: 40%;
+}
+
+.flow-step[data-step="2"],
+.flow-step[data-step="4"] {
+    padding-left: 40%;
+    padding-right: 0;
+}
+
+.flow-step[data-step="6"] {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+/* STEP BOX */
+.step-box {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%);
+    border: 2px solid rgba(43, 183, 218, 0.3);
+    border-radius: 24px;
+    padding: 40px 32px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step-box:hover {
+    transform: translateY(-8px);
+    border-color: rgba(43, 183, 218, 0.6);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(43, 183, 218, 0.3);
+}
+
+.flow-step.active .step-box {
+    border-color: rgba(43, 183, 218, 0.65);
+    box-shadow: 0 28px 84px rgba(0,0,0,0.55), 0 0 48px rgba(43, 183, 218, 0.35);
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.18) 0%, rgba(43, 183, 218, 0.08) 100%);
+}
+
+.step-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+    border-radius: 24px 24px 0 0;
+}
+
+/* Final step special styling */
+.step-final {
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.15) 0%, rgba(43, 183, 218, 0.08) 100%);
+    border-color: rgba(43, 183, 218, 0.5);
+}
+
+.step-final::before {
+    background: linear-gradient(90deg, #28C840, var(--cyan-light));
+}
+
+/* STEP NUMBER */
+.step-number {
+    position: absolute;
+    top: -20px;
+    left: 32px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-light) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--navy-deep);
+    box-shadow: 0 8px 24px rgba(43, 183, 218, 0.5);
+    border: 3px solid var(--navy);
+}
+
+/* ANIMATED TEXT - Ultra-smooth letter reveal */
+.animated-text {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--font-alt);
+    color: var(--white);
+    margin-bottom: 12px;
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.animated-text .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px) scale(0.8);
+    will-change: opacity, transform;
+    /* NO animation - JavaScript controls every frame */
+}
+
+.step-box p {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ARROW CONNECTORS - Smooth curved paths */
+.arrow-connector {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    will-change: opacity;
+}
+
+.arrow-down-right {
+    bottom: -100px;
+    right: 20%;
+}
+
+.arrow-down-left {
+    bottom: -100px;
+    left: 20%;
+}
+
+.arrow-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.arrow-path {
+    stroke: #2BB7DA;
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgba(43, 183, 218, 0.6));
+    will-change: stroke-dashoffset;
+    /* JavaScript calculates and sets stroke-dasharray and stroke-dashoffset */
+}
+
+.arrow-head {
+    fill: #2BB7DA;
+    opacity: 0;
+    transform-origin: center;
+    filter: drop-shadow(0 0 6px rgba(43, 183, 218, 0.8));
+    will-change: opacity, transform;
+}
+
+/* SUCCESS BADGE */
+.success-badge {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.success-circle {
+    stroke-dasharray: 176;
+    stroke-dashoffset: 176;
+}
+
+.success-check {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+}
+
+.flow-step.visible .success-circle {
+    animation: drawCircle 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+.flow-step.visible .success-check {
+    animation: drawCheck 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+}
+
+@keyframes drawCircle {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes drawCheck {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* PROCESS FLOW CTA */
+.process-flow-cta {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 80px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.process-flow-cta p {
+    font-size: 22px;
+    color: var(--muted);
+    margin-bottom: 32px;
+}
+
+/* PROGRESS BAR */
+.process-progress-bar {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(43, 183, 218, 0.1);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    overflow: hidden;
+    z-index: 0;
+}
+
+.progress-fill {
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(180deg, var(--cyan), var(--cyan-light));
+    transition: height 0.1s linear;
+    box-shadow: 0 0 10px rgba(43, 183, 218, 0.3);
+}
+
 /* RESPONSIVE ------------------------------------------------ */
 @media (max-width: 1200px) {
     .hero {
@@ -1208,7 +1435,6 @@ footer {
     .metrics,
     .values,
     .feature-grid,
-    .process,
     .services-grid,
     .about-grid,
     .contact-form-section {
@@ -1223,356 +1449,11 @@ footer {
         font-size: 38px;
     }
     
-    .process h2 {
-        font-size: 36px;
-    }
-    
     .metric h4 {
         font-size: 42px;
     }
-}
 
-@media (max-width: 480px) {
-    .hero-title-line {
-        font-size: 32px;
-    }
-    
-    .hero-arrow {
-        font-size: 28px;
-    }
-    
-    .nav-logo img {
-        height: 52px;
-        max-height: 52px;
-    }
-    
-    .metrics,
-    .values,
-    .feature-grid,
-    .process,
-    .services-grid,
-    .about-grid,
-    .contact-form-section {
-        padding-left: 24px;
-        padding-right: 24px;
-        gap: 24px;
-    }
-    
-    .service-list {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ============================================
-   ANIMATED SPIRAL PROCESS FLOW
-   ============================================ */
-
-/* PROCESS FLOW CONTAINER */
-.process-flow-container {
-    padding: 120px 40px;
-    background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
-}
-
-.process-flow-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(43, 183, 218, 0.5), transparent);
-}
-
-.process-flow-intro {
-    text-align: center;
-    margin-bottom: 100px;
-    position: relative;
-    z-index: 2;
-}
-
-.process-flow-intro h2 {
-    font-size: 52px;
-    font-weight: 800;
-    font-family: var(--font-alt);
-    background: linear-gradient(135deg, var(--white) 0%, var(--cyan-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 16px;
-}
-
-.process-flow-intro .subtext {
-    font-size: 20px;
-    color: var(--muted);
-}
-
-/* SPIRAL PROCESS */
-.spiral-process {
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    padding: 40px 20px 80px;
-}
-
-/* FLOW STEPS - Controlled by JavaScript */
-.flow-step {
-    position: relative;
-    margin-bottom: 120px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(60px) scale(0.9);
-    /* NO transitions - scroll controls everything directly */
-}
-
-/* First step is always visible */
-.flow-step[data-step="1"] {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-}
-
-.flow-step[data-step="1"] .letter {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* States set by JavaScript based on scroll position */
-
-/* Alternating pattern - zigzag */
-.flow-step[data-step="1"],
-.flow-step[data-step="3"],
-.flow-step[data-step="5"] {
-    padding-left: 0;
-    padding-right: 40%;
-}
-
-.flow-step[data-step="2"],
-.flow-step[data-step="4"] {
-    padding-left: 40%;
-    padding-right: 0;
-}
-
-.flow-step[data-step="6"] {
-    padding-left: 20%;
-    padding-right: 20%;
-}
-
-/* STEP BOX */
-.step-box {
-    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%);
-    border: 2px solid rgba(43, 183, 218, 0.3);
-    border-radius: 24px;
-    padding: 40px 32px;
-    position: relative;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    backdrop-filter: blur(20px);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.step-box:hover {
-    transform: translateY(-8px);
-    border-color: rgba(43, 183, 218, 0.6);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(43, 183, 218, 0.3);
-}
-
-.flow-step.active .step-box {
-    border-color: rgba(43, 183, 218, 0.65);
-    box-shadow: 0 28px 84px rgba(0,0,0,0.55), 0 0 48px rgba(43, 183, 218, 0.35);
-    background: linear-gradient(135deg, rgba(43, 183, 218, 0.18) 0%, rgba(43, 183, 218, 0.08) 100%);
-}
-
-.step-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
-    border-radius: 24px 24px 0 0;
-}
-
-/* Final step special styling */
-.step-final {
-    background: linear-gradient(135deg, rgba(43, 183, 218, 0.15) 0%, rgba(43, 183, 218, 0.08) 100%);
-    border-color: rgba(43, 183, 218, 0.5);
-}
-
-.step-final::before {
-    background: linear-gradient(90deg, #28C840, var(--cyan-light));
-}
-
-/* STEP NUMBER */
-.step-number {
-    position: absolute;
-    top: -20px;
-    left: 32px;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-light) 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--navy-deep);
-    box-shadow: 0 8px 24px rgba(43, 183, 218, 0.5);
-    border: 3px solid var(--navy);
-}
-
-/* ANIMATED TEXT - Controlled by JavaScript */
-.animated-text {
-    font-size: 28px;
-    font-weight: 700;
-    font-family: var(--font-alt);
-    color: var(--white);
-    margin-bottom: 12px;
-    margin-top: 12px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
-}
-
-.animated-text .letter {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(15px);
-    /* NO animation or transition - scroll controls each letter */
-}
-
-.step-box p {
-    color: var(--muted);
-    font-size: 17px;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* ARROW CONNECTORS - Controlled by JavaScript */
-.arrow-connector {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    /* NO transitions - scroll controls everything */
-}
-
-.arrow-down-right {
-    bottom: -100px;
-    right: 20%;
-}
-
-.arrow-down-left {
-    bottom: -100px;
-    left: 20%;
-}
-
-.arrow-svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-}
-
-.arrow-path {
-    stroke-dasharray: 8 4;
-    stroke-dashoffset: 200;
-    animation: dashAnimation 0.5s linear infinite;
-    /* NO transition - JavaScript sets strokeDashoffset directly */
-}
-
-/* Animate the dashes to create "flowing" effect */
-@keyframes dashAnimation {
-    to {
-        stroke-dashoffset: -12;
-    }
-}
-
-.arrow-head {
-    opacity: 0;
-    transform-origin: center;
-    /* NO transition - JavaScript sets opacity directly */
-}
-
-/* SUCCESS BADGE */
-.success-badge {
-    margin-top: 24px;
-    display: flex;
-    justify-content: center;
-}
-
-.success-circle {
-    stroke-dasharray: 176;
-    stroke-dashoffset: 176;
-}
-
-.success-check {
-    stroke-dasharray: 60;
-    stroke-dashoffset: 60;
-}
-
-.flow-step.visible .success-circle {
-    animation: drawCircle 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
-}
-
-.flow-step.visible .success-check {
-    animation: drawCheck 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
-}
-
-@keyframes drawCircle {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes drawCheck {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-/* PROCESS FLOW CTA */
-.process-flow-cta {
-    text-align: center;
-    margin-top: 80px;
-    padding-top: 80px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.process-flow-cta p {
-    font-size: 22px;
-    color: var(--muted);
-    margin-bottom: 32px;
-}
-
-/* PROGRESS BAR */
-.process-progress-bar {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: rgba(43, 183, 218, 0.1);
-    border-radius: 2px;
-    transform: translateX(-50%);
-    overflow: hidden;
-    z-index: 0;
-}
-
-.progress-fill {
-    width: 100%;
-    height: 0%;
-    background: linear-gradient(180deg, var(--cyan), var(--cyan-light));
-    transition: height 0.3s ease-out;
-    box-shadow: 0 0 10px rgba(43, 183, 218, 0.3);
-}
-
-/* RESPONSIVE - PROCESS FLOW */
-@media (max-width: 800px) {
+    /* RESPONSIVE - PROCESS FLOW */
     .process-flow-container {
         padding: 80px 24px;
     }
@@ -1618,6 +1499,34 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .hero-title-line {
+        font-size: 32px;
+    }
+    
+    .hero-arrow {
+        font-size: 28px;
+    }
+    
+    .nav-logo img {
+        height: 52px;
+        max-height: 52px;
+    }
+    
+    .metrics,
+    .values,
+    .feature-grid,
+    .services-grid,
+    .about-grid,
+    .contact-form-section {
+        padding-left: 24px;
+        padding-right: 24px;
+        gap: 24px;
+    }
+    
+    .service-list {
+        grid-template-columns: 1fr;
+    }
+
     .process-flow-intro h2 {
         font-size: 32px;
     }
