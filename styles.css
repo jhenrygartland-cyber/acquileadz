@@ -1479,22 +1479,15 @@ footer {
 }
 
 .arrow-path {
-    stroke-dasharray: 8 4;
-    stroke-dashoffset: 200;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
     /* NO transition - JavaScript sets strokeDashoffset directly */
-}
-
-/* Animate the dashes to create "flowing" effect */
-@keyframes dashAnimation {
-    to {
-        stroke-dashoffset: -12;
-    }
 }
 
 .arrow-head {
     opacity: 0;
     transform-box: fill-box;
-    transform-origin: center;
+    transform-origin: 0 0;
     /* NO transition - JavaScript sets opacity directly */
 }
 
