@@ -294,154 +294,197 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// SCROLL-DRIVEN PROCESS FLOW (APPLE-STYLE)
+// BUTTER SMOOTH SCROLL-DRIVEN ANIMATION
+// Frame-by-frame video-like control
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
     const spiralProcess = document.getElementById('spiralProcess');
-
+    
     if (spiralProcess) {
         const flowSteps = spiralProcess.querySelectorAll('.flow-step');
-        console.log('🎬 Scroll-driven animation initialized. Steps found:', flowSteps.length);
-
-        // Utility to clamp values for smooth scrubbing
-        const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
-
-        // Add a visible scrub bar up front so the first render has something to update
-        const progressBar = document.createElement('div');
-        progressBar.className = 'process-progress-bar';
-        progressBar.innerHTML = '<div class="progress-fill"></div>';
-        spiralProcess.appendChild(progressBar);
-
-        const progressFill = progressBar.querySelector('.progress-fill');
+        console.log('🎬 Ultra-smooth scroll animation initialized. Steps:', flowSteps.length);
+        
+        // Cache arrow path lengths for performance
         const arrowLengthCache = new WeakMap();
-
-        // Make first step visible immediately
+        
+        // Always show first step
         if (flowSteps.length > 0) {
             const firstStep = flowSteps[0];
             firstStep.style.opacity = '1';
             firstStep.style.visibility = 'visible';
             firstStep.style.transform = 'translateY(0) scale(1)';
             
-            // Show first step letters
             const firstLetters = firstStep.querySelectorAll('.letter');
             firstLetters.forEach(letter => {
                 letter.style.opacity = '1';
-                letter.style.transform = 'translateY(0)';
+                letter.style.transform = 'translateY(0) scale(1)';
             });
+        }
+        
+        // Smooth easing functions for natural motion
+        function easeOutQuart(x) {
+            return 1 - Math.pow(1 - x, 4);
+        }
+        
+        function easeInOutCubic(x) {
+            return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
         }
         
         function updateAnimationsOnScroll() {
             const processTop = spiralProcess.offsetTop;
-            const processHeight = spiralProcess.offsetHeight;
             const scrollY = window.scrollY;
             const viewportHeight = window.innerHeight;
-
-            // Map scroll position to a single normalized value for frame-by-frame scrubbing
-            const scrubStart = processTop - viewportHeight * 0.35;
-            const scrubEnd = processTop + processHeight - viewportHeight * 0.25;
-            const scrubProgress = clamp((scrollY - scrubStart) / (scrubEnd - scrubStart));
-
+            
             flowSteps.forEach((step, index) => {
-                const totalSteps = flowSteps.length;
-                const segmentSize = 1 / totalSteps;
-                const segmentStart = segmentSize * index;
-                const stepProgress = clamp((scrubProgress - segmentStart) / segmentSize);
-
-                // First step still reacts to scrub so it feels alive
-                if (index === 0) {
-                    const introReveal = clamp(stepProgress * 1.2);
-                    const introScale = 0.96 + (0.04 * introReveal);
-                    const introY = 12 - (12 * introReveal);
-                    step.style.opacity = '1';
-                    step.style.visibility = 'visible';
-                    step.style.transform = `translateY(${introY}px) scale(${introScale})`;
-
-                    const introLetters = step.querySelectorAll('.letter');
-                    introLetters.forEach((letter, letterIndex) => {
-                        const letterDelay = letterIndex * 0.02;
-                        const letterProgress = clamp((introReveal - letterDelay) / 0.5);
-                        letter.style.opacity = letterProgress;
-                        const letterY = 15 - (15 * letterProgress);
-                        letter.style.transform = `translateY(${letterY}px)`;
-                    });
-                    return;
-                }
-
-                // Previous arrow connects to this step
+                if (index === 0) return; // Skip first step
+                
+                const stepTop = step.offsetTop + processTop;
+                const stepHeight = step.offsetHeight;
+                
+                // Calculate progress through this step's animation zone
+                // Each step gets more scroll space for smoother control
+                const animationStartY = stepTop - (viewportHeight * 0.8);
+                const animationEndY = stepTop - (viewportHeight * 0.2);
+                const animationRange = animationEndY - animationStartY;
+                
+                // Raw progress (0 to 1)
+                const rawProgress = (scrollY - animationStartY) / animationRange;
+                const progress = Math.max(0, Math.min(1, rawProgress));
+                
+                // Get elements
                 const previousStep = flowSteps[index - 1];
-                const arrow = previousStep.querySelector('.arrow-connector');
-
-                // Arrow draws during the first half of the segment
-                const arrowProgress = clamp(stepProgress / 0.55);
-                if (arrow) {
-                    const arrowPath = arrow.querySelector('.arrow-path');
-                    const arrowHead = arrow.querySelector('.arrow-head');
-
-                    if (!arrowLengthCache.has(arrowPath)) {
-                        arrowLengthCache.set(arrowPath, arrowPath.getTotalLength());
-                    }
-
-                    const totalLength = arrowLengthCache.get(arrowPath);
-                    if (arrowProgress > 0) {
-                        arrow.style.opacity = '1';
-                        arrow.style.visibility = 'visible';
-
-                        const drawLength = totalLength * (1 - arrowProgress);
-                        arrowPath.style.strokeDasharray = totalLength;
-                        arrowPath.style.strokeDashoffset = drawLength;
-
-                        const headOpacity = clamp((arrowProgress - 0.65) / 0.35);
-                        arrowHead.style.opacity = headOpacity;
-                    } else {
-                        arrow.style.opacity = '0';
-                        arrow.style.visibility = 'hidden';
-                        arrowPath.style.strokeDashoffset = totalLength;
-                        arrowHead.style.opacity = '0';
-                    }
+                const arrow = previousStep ? previousStep.querySelector('.arrow-connector') : null;
+                
+                if (!arrow) return;
+                
+                const arrowPath = arrow.querySelector('.arrow-path');
+                const arrowHead = arrow.querySelector('.arrow-head');
+                const letters = step.querySelectorAll('.letter');
+                
+                // Cache path length
+                if (!arrowLengthCache.has(arrowPath)) {
+                    arrowLengthCache.set(arrowPath, arrowPath.getTotalLength());
                 }
-
-                // Step fades and scales in after arrow has begun drawing
-                const boxReveal = clamp((stepProgress - 0.25) / 0.75);
-                if (boxReveal > 0) {
-                    const scale = 0.9 + (0.1 * boxReveal);
-                    const translateY = 60 - (60 * boxReveal);
-                    step.style.opacity = boxReveal;
+                const pathLength = arrowLengthCache.get(arrowPath);
+                
+                // PHASE 1: Line Drawing (0% - 50% of progress)
+                const linePhaseProgress = Math.max(0, Math.min(1, progress / 0.5));
+                const lineProgress = easeInOutCubic(linePhaseProgress);
+                
+                // PHASE 2: Arrow Head (45% - 55% of progress)
+                const arrowHeadPhaseStart = 0.45;
+                const arrowHeadPhaseEnd = 0.55;
+                const arrowHeadPhaseProgress = Math.max(0, Math.min(1, 
+                    (progress - arrowHeadPhaseStart) / (arrowHeadPhaseEnd - arrowHeadPhaseStart)
+                ));
+                const arrowHeadProgress = easeOutQuart(arrowHeadPhaseProgress);
+                
+                // PHASE 3: Box Fade (50% - 75% of progress)
+                const boxPhaseStart = 0.5;
+                const boxPhaseEnd = 0.75;
+                const boxPhaseProgress = Math.max(0, Math.min(1,
+                    (progress - boxPhaseStart) / (boxPhaseEnd - boxPhaseStart)
+                ));
+                const boxProgress = easeOutQuart(boxPhaseProgress);
+                
+                // PHASE 4: Letters (60% - 100% of progress)
+                const lettersPhaseStart = 0.6;
+                const lettersPhaseEnd = 1.0;
+                const lettersPhaseProgress = Math.max(0, Math.min(1,
+                    (progress - lettersPhaseStart) / (lettersPhaseEnd - lettersPhaseStart)
+                ));
+                
+                // === APPLY LINE DRAWING ===
+                if (lineProgress > 0) {
+                    arrow.style.opacity = '1';
+                    arrow.style.visibility = 'visible';
+                    
+                    const drawLength = pathLength - (pathLength * lineProgress);
+                    arrowPath.style.strokeDasharray = pathLength;
+                    arrowPath.style.strokeDashoffset = drawLength;
+                } else {
+                    arrow.style.opacity = '0';
+                    arrow.style.visibility = 'hidden';
+                }
+                
+                // === APPLY ARROW HEAD ===
+                if (arrowHeadProgress > 0) {
+                    arrowHead.style.opacity = arrowHeadProgress;
+                    arrowHead.style.transform = `scale(${0.5 + (0.5 * arrowHeadProgress)})`;
+                } else {
+                    arrowHead.style.opacity = '0';
+                    arrowHead.style.transform = 'scale(0.5)';
+                }
+                
+                // === APPLY BOX FADE ===
+                if (boxProgress > 0) {
+                    step.style.opacity = boxProgress;
                     step.style.visibility = 'visible';
+                    
+                    const scale = 0.92 + (0.08 * boxProgress);
+                    const translateY = 40 - (40 * boxProgress);
                     step.style.transform = `translateY(${translateY}px) scale(${scale})`;
-                    step.classList.toggle('active', boxReveal > 0.55);
-
-                    // Animate letters like a type-on tied to scroll speed
-                    const letters = step.querySelectorAll('.letter');
-                    letters.forEach((letter, letterIndex) => {
-                        const letterDelay = letterIndex * 0.02;
-                        const letterProgress = clamp((boxReveal - letterDelay) / 0.45);
-                        letter.style.opacity = letterProgress;
-                        const letterY = 15 - (15 * letterProgress);
-                        letter.style.transform = `translateY(${letterY}px)`;
-                    });
+                    
+                    // Add active class for special effects
+                    if (boxProgress > 0.6) {
+                        step.classList.add('active');
+                    } else {
+                        step.classList.remove('active');
+                    }
                 } else {
                     step.style.opacity = '0';
                     step.style.visibility = 'hidden';
-                    step.style.transform = 'translateY(60px) scale(0.9)';
+                    step.style.transform = 'translateY(40px) scale(0.92)';
                     step.classList.remove('active');
-
-                    const letters = step.querySelectorAll('.letter');
+                }
+                
+                // === APPLY LETTERS ===
+                if (lettersPhaseProgress > 0) {
+                    letters.forEach((letter, letterIndex) => {
+                        // Stagger letters
+                        const letterDelay = (letterIndex / letters.length) * 0.4;
+                        const letterProgress = Math.max(0, Math.min(1,
+                            (lettersPhaseProgress - letterDelay) / 0.6
+                        ));
+                        const easedLetterProgress = easeOutQuart(letterProgress);
+                        
+                        if (easedLetterProgress > 0) {
+                            letter.style.opacity = easedLetterProgress;
+                            const letterY = 12 - (12 * easedLetterProgress);
+                            const letterScale = 0.8 + (0.2 * easedLetterProgress);
+                            letter.style.transform = `translateY(${letterY}px) scale(${letterScale})`;
+                        } else {
+                            letter.style.opacity = '0';
+                            letter.style.transform = 'translateY(12px) scale(0.8)';
+                        }
+                    });
+                } else {
                     letters.forEach(letter => {
                         letter.style.opacity = '0';
-                        letter.style.transform = 'translateY(15px)';
+                        letter.style.transform = 'translateY(12px) scale(0.8)';
                     });
                 }
             });
-
+            
+            // Update progress bar
+            const progressFill = spiralProcess.querySelector('.progress-fill');
             if (progressFill) {
-                progressFill.style.height = `${scrubProgress * 100}%`;
+                const processHeight = spiralProcess.offsetHeight;
+                const progress = Math.max(0, Math.min(1,
+                    (scrollY - processTop + viewportHeight / 2) / processHeight
+                ));
+                progressFill.style.height = `${progress * 100}%`;
             }
         }
         
-        // Use requestAnimationFrame for smooth 60fps updates
+        // High-performance scroll handler with requestAnimationFrame
         let ticking = false;
+        let lastKnownScrollPosition = 0;
+        
         window.addEventListener('scroll', () => {
+            lastKnownScrollPosition = window.scrollY;
+            
             if (!ticking) {
                 window.requestAnimationFrame(() => {
                     updateAnimationsOnScroll();
@@ -451,60 +494,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
         
+        // Also update on resize
+        window.addEventListener('resize', () => {
+            updateAnimationsOnScroll();
+        }, { passive: true });
+        
+        // Create progress bar
+        const progressBar = document.createElement('div');
+        progressBar.className = 'process-progress-bar';
+        progressBar.innerHTML = '<div class="progress-fill"></div>';
+        spiralProcess.appendChild(progressBar);
+        
         // Initial render
         setTimeout(() => {
             updateAnimationsOnScroll();
-            console.log('✅ Initial animation update complete');
+            console.log('✅ Ultra-smooth animation ready!');
         }, 100);
-        
-        console.log('✅ Scroll-driven animation setup complete');
-    } else {
-        console.error('❌ Could not find #spiralProcess element');
     }
 });
-
-// ===== LETTER ANIMATION ENHANCEMENT =====
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedTexts = document.querySelectorAll('.animated-text');
-    
-    animatedTexts.forEach(text => {
-        const letters = text.querySelectorAll('.letter');
-        
-        // Add hover effect - letters bounce on hover
-        text.addEventListener('mouseenter', () => {
-            letters.forEach((letter, index) => {
-                setTimeout(() => {
-                    letter.style.animation = 'letterBounce 0.4s ease';
-                }, index * 30);
-            });
-        });
-        
-        text.addEventListener('mouseleave', () => {
-            letters.forEach(letter => {
-                letter.style.animation = '';
-            });
-        });
-    });
-    
-    // Add bounce animation to CSS dynamically
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes letterBounce {
-            0%, 100% { transform: translateY(0) rotateX(0deg); }
-            50% { transform: translateY(-8px) rotateX(10deg); }
-        }
-    `;
-    document.head.appendChild(style);
-});
-
-// ===== MOBILE TOUCH OPTIMIZATION =====
-if ('ontouchstart' in window) {
-    document.addEventListener('DOMContentLoaded', () => {
-        const flowSteps = document.querySelectorAll('.flow-step');
-        
-        flowSteps.forEach(step => {
-            // Reduce motion for better mobile performance
-            step.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-        });
-    });
-}
