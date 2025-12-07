@@ -299,11 +299,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const spiralProcess = document.getElementById('spiralProcess');
-    
+
     if (spiralProcess) {
         const flowSteps = spiralProcess.querySelectorAll('.flow-step');
         console.log('🎬 Scroll-driven animation initialized. Steps found:', flowSteps.length);
-        
+
+        // Utility to clamp values for smooth scrubbing
+        const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+
+        // Add a visible scrub bar up front so the first render has something to update
+        const progressBar = document.createElement('div');
+        progressBar.className = 'process-progress-bar';
+        progressBar.innerHTML = '<div class="progress-fill"></div>';
+        spiralProcess.appendChild(progressBar);
+
+        const progressFill = progressBar.querySelector('.progress-fill');
+        const arrowLengthCache = new WeakMap();
+
         // Make first step visible immediately
         if (flowSteps.length > 0) {
             const firstStep = flowSteps[0];
@@ -320,92 +332,100 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         function updateAnimationsOnScroll() {
-            const processRect = spiralProcess.getBoundingClientRect();
             const processTop = spiralProcess.offsetTop;
             const processHeight = spiralProcess.offsetHeight;
             const scrollY = window.scrollY;
             const viewportHeight = window.innerHeight;
-            
+
+            // Map scroll position to a single normalized value for frame-by-frame scrubbing
+            const scrubStart = processTop - viewportHeight * 0.35;
+            const scrubEnd = processTop + processHeight - viewportHeight * 0.25;
+            const scrubProgress = clamp((scrollY - scrubStart) / (scrubEnd - scrubStart));
+
             flowSteps.forEach((step, index) => {
-                // Skip first step - always visible
-                if (index === 0) return;
-                
-                const stepRect = step.getBoundingClientRect();
-                const stepTop = step.offsetTop + processTop;
-                const stepHeight = step.offsetHeight;
-                
-                // Calculate how far through this step we've scrolled
-                // Range: step enters bottom of viewport (0) to step exits top of viewport (1)
-                const stepProgress = (scrollY + viewportHeight - stepTop) / (viewportHeight + stepHeight);
-                const clampedProgress = Math.max(0, Math.min(1, stepProgress));
-                
-                // Get the arrow (from previous step pointing to this step)
-                const previousStep = index > 0 ? flowSteps[index - 1] : null;
-                const arrow = previousStep ? previousStep.querySelector('.arrow-connector') : null;
-                
-                // Calculate separate progress for arrow and step
-                // Arrow draws first (0-0.4), then step fades in (0.4-1)
-                const arrowProgress = Math.max(0, Math.min(1, (clampedProgress - 0) / 0.4));
-                const stepFadeProgress = Math.max(0, Math.min(1, (clampedProgress - 0.3) / 0.5));
-                
-                // Apply arrow drawing progress
-                if (arrow && index > 0) {
+                const totalSteps = flowSteps.length;
+                const segmentSize = 1 / totalSteps;
+                const segmentStart = segmentSize * index;
+                const stepProgress = clamp((scrubProgress - segmentStart) / segmentSize);
+
+                // First step still reacts to scrub so it feels alive
+                if (index === 0) {
+                    const introReveal = clamp(stepProgress * 1.2);
+                    const introScale = 0.96 + (0.04 * introReveal);
+                    const introY = 12 - (12 * introReveal);
+                    step.style.opacity = '1';
+                    step.style.visibility = 'visible';
+                    step.style.transform = `translateY(${introY}px) scale(${introScale})`;
+
+                    const introLetters = step.querySelectorAll('.letter');
+                    introLetters.forEach((letter, letterIndex) => {
+                        const letterDelay = letterIndex * 0.02;
+                        const letterProgress = clamp((introReveal - letterDelay) / 0.5);
+                        letter.style.opacity = letterProgress;
+                        const letterY = 15 - (15 * letterProgress);
+                        letter.style.transform = `translateY(${letterY}px)`;
+                    });
+                    return;
+                }
+
+                // Previous arrow connects to this step
+                const previousStep = flowSteps[index - 1];
+                const arrow = previousStep.querySelector('.arrow-connector');
+
+                // Arrow draws during the first half of the segment
+                const arrowProgress = clamp(stepProgress / 0.55);
+                if (arrow) {
                     const arrowPath = arrow.querySelector('.arrow-path');
                     const arrowHead = arrow.querySelector('.arrow-head');
-                    
+
+                    if (!arrowLengthCache.has(arrowPath)) {
+                        arrowLengthCache.set(arrowPath, arrowPath.getTotalLength());
+                    }
+
+                    const totalLength = arrowLengthCache.get(arrowPath);
                     if (arrowProgress > 0) {
                         arrow.style.opacity = '1';
                         arrow.style.visibility = 'visible';
-                        
-                        // Draw the line based on scroll position
-                        const drawLength = 200 - (200 * arrowProgress);
+
+                        const drawLength = totalLength * (1 - arrowProgress);
+                        arrowPath.style.strokeDasharray = totalLength;
                         arrowPath.style.strokeDashoffset = drawLength;
-                        
-                        // Show arrow head when line is 70% drawn
-                        if (arrowProgress > 0.7) {
-                            arrowHead.style.opacity = (arrowProgress - 0.7) / 0.3;
-                        } else {
-                            arrowHead.style.opacity = '0';
-                        }
+
+                        const headOpacity = clamp((arrowProgress - 0.65) / 0.35);
+                        arrowHead.style.opacity = headOpacity;
                     } else {
                         arrow.style.opacity = '0';
                         arrow.style.visibility = 'hidden';
-                        arrowPath.style.strokeDashoffset = '200';
+                        arrowPath.style.strokeDashoffset = totalLength;
                         arrowHead.style.opacity = '0';
                     }
                 }
-                
-                // Apply step fade-in progress
-                if (stepFadeProgress > 0) {
-                    step.style.opacity = stepFadeProgress;
+
+                // Step fades and scales in after arrow has begun drawing
+                const boxReveal = clamp((stepProgress - 0.25) / 0.75);
+                if (boxReveal > 0) {
+                    const scale = 0.9 + (0.1 * boxReveal);
+                    const translateY = 60 - (60 * boxReveal);
+                    step.style.opacity = boxReveal;
                     step.style.visibility = 'visible';
-                    
-                    // Scale and translate based on progress
-                    const scale = 0.9 + (0.1 * stepFadeProgress);
-                    const translateY = 60 - (60 * stepFadeProgress);
                     step.style.transform = `translateY(${translateY}px) scale(${scale})`;
-                    
-                    // Animate letters based on step progress
+                    step.classList.toggle('active', boxReveal > 0.55);
+
+                    // Animate letters like a type-on tied to scroll speed
                     const letters = step.querySelectorAll('.letter');
                     letters.forEach((letter, letterIndex) => {
-                        const letterDelay = letterIndex * 0.02; // Stagger
-                        const letterProgress = Math.max(0, Math.min(1, (stepFadeProgress - letterDelay) / 0.3));
-                        
-                        if (letterProgress > 0) {
-                            letter.style.opacity = letterProgress;
-                            const letterY = 15 - (15 * letterProgress);
-                            letter.style.transform = `translateY(${letterY}px)`;
-                        } else {
-                            letter.style.opacity = '0';
-                            letter.style.transform = 'translateY(15px)';
-                        }
+                        const letterDelay = letterIndex * 0.02;
+                        const letterProgress = clamp((boxReveal - letterDelay) / 0.45);
+                        letter.style.opacity = letterProgress;
+                        const letterY = 15 - (15 * letterProgress);
+                        letter.style.transform = `translateY(${letterY}px)`;
                     });
                 } else {
                     step.style.opacity = '0';
                     step.style.visibility = 'hidden';
                     step.style.transform = 'translateY(60px) scale(0.9)';
-                    
-                    // Reset letters
+                    step.classList.remove('active');
+
                     const letters = step.querySelectorAll('.letter');
                     letters.forEach(letter => {
                         letter.style.opacity = '0';
@@ -413,14 +433,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-            
-            // Update progress bar
-            const progressFill = spiralProcess.querySelector('.progress-fill');
+
             if (progressFill) {
-                const progress = Math.max(0, Math.min(1, 
-                    (scrollY - processTop + viewportHeight / 2) / processHeight
-                ));
-                progressFill.style.height = `${progress * 100}%`;
+                progressFill.style.height = `${scrubProgress * 100}%`;
             }
         }
         
@@ -441,12 +456,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateAnimationsOnScroll();
             console.log('✅ Initial animation update complete');
         }, 100);
-        
-        // Create progress bar
-        const progressBar = document.createElement('div');
-        progressBar.className = 'process-progress-bar';
-        progressBar.innerHTML = '<div class="progress-fill"></div>';
-        spiralProcess.appendChild(progressBar);
         
         console.log('✅ Scroll-driven animation setup complete');
     } else {

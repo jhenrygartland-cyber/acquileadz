@@ -1378,6 +1378,12 @@ footer {
     box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(43, 183, 218, 0.3);
 }
 
+.flow-step.active .step-box {
+    border-color: rgba(43, 183, 218, 0.65);
+    box-shadow: 0 28px 84px rgba(0,0,0,0.55), 0 0 48px rgba(43, 183, 218, 0.35);
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.18) 0%, rgba(43, 183, 218, 0.08) 100%);
+}
+
 .step-box::before {
     content: '';
     position: absolute;
