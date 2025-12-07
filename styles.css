@@ -1317,26 +1317,29 @@ footer {
     padding: 40px 20px 80px;
 }
 
-/* FLOW STEPS */
+/* FLOW STEPS - Controlled by JavaScript */
 .flow-step {
     position: relative;
     margin-bottom: 120px;
     opacity: 0;
-    transform: translateY(80px) scale(0.9);
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+    transform: translateY(60px) scale(0.9);
+    /* NO transitions - scroll controls everything directly */
 }
 
-.flow-step.visible {
+/* First step is always visible */
+.flow-step[data-step="1"] {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0) scale(1);
 }
 
-/* When removing visible class (scrolling up), animate back down */
-.flow-step:not(.visible) {
-    opacity: 0;
-    transform: translateY(80px) scale(0.9);
+.flow-step[data-step="1"] .letter {
+    opacity: 1;
+    transform: translateY(0);
 }
+
+/* States set by JavaScript based on scroll position */
 
 /* Alternating pattern - zigzag */
 .flow-step[data-step="1"],
@@ -1415,7 +1418,7 @@ footer {
     border: 3px solid var(--navy);
 }
 
-/* ANIMATED TEXT - Letter by letter */
+/* ANIMATED TEXT - Controlled by JavaScript */
 .animated-text {
     font-size: 28px;
     font-weight: 700;
@@ -1431,40 +1434,8 @@ footer {
 .animated-text .letter {
     display: inline-block;
     opacity: 0;
-    transform: translateY(20px) rotateX(-90deg);
-    animation: letterDrop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Stagger the letter animations */
-.flow-step.visible .letter:nth-child(1) { animation-delay: 0.05s; }
-.flow-step.visible .letter:nth-child(2) { animation-delay: 0.1s; }
-.flow-step.visible .letter:nth-child(3) { animation-delay: 0.15s; }
-.flow-step.visible .letter:nth-child(4) { animation-delay: 0.2s; }
-.flow-step.visible .letter:nth-child(5) { animation-delay: 0.25s; }
-.flow-step.visible .letter:nth-child(6) { animation-delay: 0.3s; }
-.flow-step.visible .letter:nth-child(7) { animation-delay: 0.35s; }
-.flow-step.visible .letter:nth-child(8) { animation-delay: 0.4s; }
-.flow-step.visible .letter:nth-child(9) { animation-delay: 0.45s; }
-.flow-step.visible .letter:nth-child(10) { animation-delay: 0.5s; }
-.flow-step.visible .letter:nth-child(11) { animation-delay: 0.55s; }
-.flow-step.visible .letter:nth-child(12) { animation-delay: 0.6s; }
-.flow-step.visible .letter:nth-child(13) { animation-delay: 0.65s; }
-.flow-step.visible .letter:nth-child(14) { animation-delay: 0.7s; }
-.flow-step.visible .letter:nth-child(15) { animation-delay: 0.75s; }
-.flow-step.visible .letter:nth-child(16) { animation-delay: 0.8s; }
-
-@keyframes letterDrop {
-    0% {
-        opacity: 0;
-        transform: translateY(20px) rotateX(-90deg);
-    }
-    50% {
-        transform: translateY(-5px) rotateX(0deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) rotateX(0deg);
-    }
+    transform: translateY(15px);
+    /* NO animation or transition - scroll controls each letter */
 }
 
 .step-box p {
@@ -1474,18 +1445,15 @@ footer {
     margin: 0;
 }
 
-/* ARROW CONNECTORS */
+/* ARROW CONNECTORS - Controlled by JavaScript */
 .arrow-connector {
     position: absolute;
     width: 120px;
     height: 120px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.arrow-connector.visible {
-    opacity: 1;
+    visibility: hidden;
+    /* NO transitions - scroll controls everything */
 }
 
 .arrow-down-right {
@@ -1505,46 +1473,23 @@ footer {
 }
 
 .arrow-path {
-    stroke-dasharray: 200;
+    stroke-dasharray: 8 4;
     stroke-dashoffset: 200;
-    transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: dashAnimation 0.5s linear infinite;
+    /* NO transition - JavaScript sets strokeDashoffset directly */
+}
+
+/* Animate the dashes to create "flowing" effect */
+@keyframes dashAnimation {
+    to {
+        stroke-dashoffset: -12;
+    }
 }
 
 .arrow-head {
     opacity: 0;
     transform-origin: center;
-    transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
-}
-
-/* Animate arrows when visible */
-.arrow-connector.visible .arrow-path {
-    stroke-dashoffset: 0;
-}
-
-.arrow-connector.visible .arrow-head {
-    opacity: 1;
-    animation: arrowPulse 2s ease-in-out infinite;
-}
-
-/* Reset arrows when not visible */
-.arrow-connector:not(.visible) .arrow-path {
-    stroke-dashoffset: 200;
-}
-
-.arrow-connector:not(.visible) .arrow-head {
-    opacity: 0;
-    animation: none;
-}
-
-@keyframes arrowPulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 0.7;
-    }
+    /* NO transition - JavaScript sets opacity directly */
 }
 
 /* SUCCESS BADGE */
@@ -1604,8 +1549,8 @@ footer {
     left: 50%;
     top: 0;
     bottom: 0;
-    width: 4px;
-    background: rgba(43, 183, 218, 0.2);
+    width: 2px;
+    background: rgba(43, 183, 218, 0.1);
     border-radius: 2px;
     transform: translateX(-50%);
     overflow: hidden;
@@ -1617,7 +1562,7 @@ footer {
     height: 0%;
     background: linear-gradient(180deg, var(--cyan), var(--cyan-light));
     transition: height 0.3s ease-out;
-    box-shadow: 0 0 20px rgba(43, 183, 218, 0.6);
+    box-shadow: 0 0 10px rgba(43, 183, 218, 0.3);
 }
 
 /* RESPONSIVE - PROCESS FLOW */
