@@ -1,4 +1,4 @@
-// Acquileadz Website JavaScript
+// Acquileadz Website JavaScript - OPTIMIZED
 console.log('Acquileadz site loaded successfully');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== SCROLL REVEAL ANIMATIONS =====
     const animatedElements = document.querySelectorAll(
-        'section, h1, h2, h3, h4, h5, p, .card, .service-card, .service-detail, .value-box, .feature-card, .process-step, .step, .metric, .cta-strip, .about-card, .contact-form input, .contact-form textarea, .contact-form button'
+        'section:not(.process-flow-container), h1, h2, h3, h4, h5, p:not(.process-flow-container p), .card, .service-card, .service-detail, .value-box, .feature-card, .metric, .cta-strip, .about-card, .contact-form input, .contact-form textarea, .contact-form button'
     );
 
     animatedElements.forEach(element => {
@@ -68,18 +68,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== NAV SCROLL EFFECT =====
     let lastScroll = 0;
+    let navTicking = false;
+    
     window.addEventListener('scroll', () => {
-        const nav = document.querySelector('.nav');
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
+        if (!navTicking) {
+            window.requestAnimationFrame(() => {
+                const nav = document.querySelector('.nav');
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                lastScroll = currentScroll;
+                navTicking = false;
+            });
+            navTicking = true;
         }
-        
-        lastScroll = currentScroll;
-    });
+    }, { passive: true });
 });
 
 // ===== PAGE LOAD ANIMATION =====
@@ -134,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             heroSection.addEventListener('mousemove', (e) => {
                 const now = Date.now();
-                if (now - lastMouseMove < 50) return; // Throttle to every 50ms
+                if (now - lastMouseMove < 50) return;
                 lastMouseMove = now;
                 
                 if (!mouseTicking) {
@@ -168,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ===== CONTACT FORM VALIDATION & ENHANCEMENT =====
+// ===== CONTACT FORM VALIDATION & ENHANCEMENT (only on contact page) =====
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form');
     
@@ -294,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// BUTTER SMOOTH SCROLL-DRIVEN ANIMATION
-// Frame-by-frame video-like control
+// ULTRA-SMOOTH SCROLL-DRIVEN ANIMATION
+// Frame-by-frame control - OPTIMIZED & FIXED
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -305,10 +313,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const flowSteps = spiralProcess.querySelectorAll('.flow-step');
         console.log('🎬 Ultra-smooth scroll animation initialized. Steps:', flowSteps.length);
         
-        // Cache arrow path lengths for performance
-        const arrowLengthCache = new WeakMap();
+        // Cache arrow path lengths and elements for performance
+        const stepCache = new Map();
         
-        // Always show first step
+        // Initialize cache
+        flowSteps.forEach((step, index) => {
+            if (index === 0) return; // Skip first step
+            
+            const previousStep = flowSteps[index - 1];
+            const arrow = previousStep ? previousStep.querySelector('.arrow-connector') : null;
+            
+            if (arrow) {
+                const arrowPath = arrow.querySelector('.arrow-path');
+                const arrowHead = arrow.querySelector('.arrow-head');
+                const letters = step.querySelectorAll('.letter');
+                
+                if (arrowPath) {
+                    const pathLength = arrowPath.getTotalLength();
+                    
+                    stepCache.set(index, {
+                        step,
+                        arrow,
+                        arrowPath,
+                        arrowHead,
+                        letters,
+                        pathLength
+                    });
+                    
+                    // Initialize SVG path for drawing
+                    arrowPath.style.strokeDasharray = pathLength;
+                    arrowPath.style.strokeDashoffset = pathLength;
+                }
+            }
+        });
+        
+        // Always show first step fully
         if (flowSteps.length > 0) {
             const firstStep = flowSteps[0];
             firstStep.style.opacity = '1';
@@ -322,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        // Smooth easing functions for natural motion
+        // Smooth easing functions
         function easeOutQuart(x) {
             return 1 - Math.pow(1 - x, 4);
         }
@@ -336,14 +375,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrollY = window.scrollY;
             const viewportHeight = window.innerHeight;
             
-            flowSteps.forEach((step, index) => {
-                if (index === 0) return; // Skip first step
+            stepCache.forEach((cache, index) => {
+                const { step, arrow, arrowPath, arrowHead, letters, pathLength } = cache;
                 
                 const stepTop = step.offsetTop + processTop;
-                const stepHeight = step.offsetHeight;
                 
                 // Calculate progress through this step's animation zone
-                // Each step gets more scroll space for smoother control
                 const animationStartY = stepTop - (viewportHeight * 0.8);
                 const animationEndY = stepTop - (viewportHeight * 0.2);
                 const animationRange = animationEndY - animationStartY;
@@ -351,22 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Raw progress (0 to 1)
                 const rawProgress = (scrollY - animationStartY) / animationRange;
                 const progress = Math.max(0, Math.min(1, rawProgress));
-                
-                // Get elements
-                const previousStep = flowSteps[index - 1];
-                const arrow = previousStep ? previousStep.querySelector('.arrow-connector') : null;
-                
-                if (!arrow) return;
-                
-                const arrowPath = arrow.querySelector('.arrow-path');
-                const arrowHead = arrow.querySelector('.arrow-head');
-                const letters = step.querySelectorAll('.letter');
-                
-                // Cache path length
-                if (!arrowLengthCache.has(arrowPath)) {
-                    arrowLengthCache.set(arrowPath, arrowPath.getTotalLength());
-                }
-                const pathLength = arrowLengthCache.get(arrowPath);
                 
                 // PHASE 1: Line Drawing (0% - 50% of progress)
                 const linePhaseProgress = Math.max(0, Math.min(1, progress / 0.5));
@@ -401,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     arrow.style.visibility = 'visible';
                     
                     const drawLength = pathLength - (pathLength * lineProgress);
-                    arrowPath.style.strokeDasharray = pathLength;
                     arrowPath.style.strokeDashoffset = drawLength;
                 } else {
                     arrow.style.opacity = '0';
@@ -440,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 // === APPLY LETTERS ===
-                if (lettersPhaseProgress > 0) {
+                if (lettersPhaseProgress > 0 && letters.length > 0) {
                     letters.forEach((letter, letterIndex) => {
                         // Stagger letters
                         const letterDelay = (letterIndex / letters.length) * 0.4;
@@ -459,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             letter.style.transform = 'translateY(12px) scale(0.8)';
                         }
                     });
-                } else {
+                } else if (letters.length > 0) {
                     letters.forEach(letter => {
                         letter.style.opacity = '0';
                         letter.style.transform = 'translateY(12px) scale(0.8)';
@@ -479,24 +499,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // High-performance scroll handler with requestAnimationFrame
-        let ticking = false;
-        let lastKnownScrollPosition = 0;
+        let processTicking = false;
         
         window.addEventListener('scroll', () => {
-            lastKnownScrollPosition = window.scrollY;
-            
-            if (!ticking) {
+            if (!processTicking) {
                 window.requestAnimationFrame(() => {
                     updateAnimationsOnScroll();
-                    ticking = false;
+                    processTicking = false;
                 });
-                ticking = true;
+                processTicking = true;
             }
         }, { passive: true });
         
         // Also update on resize
+        let resizeTicking = false;
         window.addEventListener('resize', () => {
-            updateAnimationsOnScroll();
+            if (!resizeTicking) {
+                window.requestAnimationFrame(() => {
+                    // Recalculate cache on resize
+                    stepCache.forEach((cache) => {
+                        if (cache.arrowPath) {
+                            cache.pathLength = cache.arrowPath.getTotalLength();
+                            cache.arrowPath.style.strokeDasharray = cache.pathLength;
+                        }
+                    });
+                    updateAnimationsOnScroll();
+                    resizeTicking = false;
+                });
+                resizeTicking = true;
+            }
         }, { passive: true });
         
         // Create progress bar
