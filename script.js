@@ -1,5 +1,7 @@
-// Acquileadz Website JavaScript with GSAP ScrollTrigger
-console.log('Acquileadz site loaded successfully');
+// Acquileadz Website JavaScript
+// Scroll animations using Intersection Observer (works in all browsers)
+
+console.log('Acquileadz site loaded');
 
 document.addEventListener('DOMContentLoaded', () => {
     // ===== MOBILE MENU TOGGLE =====
@@ -27,17 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== SMOOTH SCROLL =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-
     // ===== NAV SCROLL EFFECT =====
     let navTicking = false;
     window.addEventListener('scroll', () => {
@@ -54,39 +45,173 @@ document.addEventListener('DOMContentLoaded', () => {
             navTicking = true;
         }
     }, { passive: true });
-});
 
-// ===== PAGE LOAD ANIMATION =====
-window.addEventListener('load', function() {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.3s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// ===== 3D DASHBOARD MOUSE ANIMATION =====
-document.addEventListener('DOMContentLoaded', () => {
+    // ===== 3D DASHBOARD MOUSE EFFECT =====
     const dashboard = document.getElementById('dashboard3d');
-    if (!dashboard) return;
-    
     const heroSection = document.querySelector('.hero');
     
-    heroSection.addEventListener('mousemove', (e) => {
-        const rect = heroSection.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        dashboard.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg) translateZ(15px)`;
-    });
-    
-    heroSection.addEventListener('mouseleave', () => {
-        dashboard.style.transition = 'transform 0.3s ease';
-        dashboard.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        setTimeout(() => { dashboard.style.transition = ''; }, 300);
-    });
+    if (dashboard && heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            dashboard.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg) translateZ(15px)`;
+        });
+        
+        heroSection.addEventListener('mouseleave', () => {
+            dashboard.style.transition = 'transform 0.3s ease';
+            dashboard.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+            setTimeout(() => { dashboard.style.transition = ''; }, 300);
+        });
+    }
+
+    // ===== SCROLL ANIMATIONS =====
+    initScrollAnimations();
 });
 
-// ===== CONTACT FORM =====
+// ===== SCROLL ANIMATION SYSTEM =====
+function initScrollAnimations() {
+    // Elements to animate on scroll
+    const animatedSelectors = [
+        '.metric',
+        '.value-box',
+        '.feature-card',
+        '.service-card',
+        '.service-detail',
+        '.about-card',
+        '.flow-step'
+    ];
+
+    // Set initial states for all animated elements
+    animatedSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+    });
+
+    // Create intersection observer for fade-in animations
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all animated elements
+    animatedSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            fadeObserver.observe(el);
+        });
+    });
+
+    // Initialize process flow arrows
+    initArrowAnimations();
+    
+    // Initialize success badge
+    initSuccessBadge();
+}
+
+// ===== ARROW ANIMATIONS =====
+function initArrowAnimations() {
+    const arrowPaths = document.querySelectorAll('.arrow-path');
+    const arrowHeads = document.querySelectorAll('.arrow-head');
+    
+    // Initialize arrow paths with stroke dash
+    arrowPaths.forEach(path => {
+        const length = path.getTotalLength ? path.getTotalLength() : 150;
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
+        path.style.transition = 'stroke-dashoffset 0.8s ease-out';
+    });
+    
+    // Initialize arrow heads (hidden)
+    arrowHeads.forEach(head => {
+        head.style.opacity = '0';
+        head.style.transition = 'opacity 0.4s ease-out 0.6s';
+    });
+    
+    // Create observer for arrows
+    const arrowObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const connector = entry.target;
+            const path = connector.querySelector('.arrow-path');
+            const head = connector.querySelector('.arrow-head');
+            
+            if (entry.isIntersecting) {
+                if (path) {
+                    path.style.strokeDashoffset = '0';
+                }
+                if (head) {
+                    head.style.opacity = '1';
+                }
+            } else {
+                // Reset when out of view for re-animation
+                if (path) {
+                    const length = path.getTotalLength ? path.getTotalLength() : 150;
+                    path.style.strokeDashoffset = length;
+                }
+                if (head) {
+                    head.style.opacity = '0';
+                }
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    // Observe all arrow connectors
+    document.querySelectorAll('.arrow-connector').forEach(connector => {
+        arrowObserver.observe(connector);
+    });
+}
+
+// ===== SUCCESS BADGE ANIMATION =====
+function initSuccessBadge() {
+    const successCircle = document.querySelector('.success-circle');
+    const successCheck = document.querySelector('.success-check');
+    
+    if (successCircle) {
+        successCircle.style.strokeDasharray = '176';
+        successCircle.style.strokeDashoffset = '176';
+        successCircle.style.transition = 'stroke-dashoffset 0.8s ease-out';
+    }
+    
+    if (successCheck) {
+        successCheck.style.strokeDasharray = '60';
+        successCheck.style.strokeDashoffset = '60';
+        successCheck.style.transition = 'stroke-dashoffset 0.5s ease-out 0.5s';
+    }
+    
+    const badge = document.querySelector('.success-badge');
+    if (badge) {
+        const badgeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (successCircle) successCircle.style.strokeDashoffset = '0';
+                    if (successCheck) successCheck.style.strokeDashoffset = '0';
+                } else {
+                    if (successCircle) successCircle.style.strokeDashoffset = '176';
+                    if (successCheck) successCheck.style.strokeDashoffset = '60';
+                }
+            });
+        }, {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        badgeObserver.observe(badge);
+    }
+}
+
+// ===== CONTACT FORM (only on contact page) =====
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form');
     if (!form) return;
@@ -161,278 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonText;
             setTimeout(() => { result.style.display = "none"; }, 5000);
-        });
-    });
-});
-
-// ============================================
-// GSAP SCROLL-TRIGGERED PROCESS ANIMATION
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if GSAP and ScrollTrigger are loaded
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        console.warn('GSAP or ScrollTrigger not loaded');
-        return;
-    }
-    
-    // Register ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
-    
-    const container = document.getElementById('spiralProcess');
-    if (!container) return;
-    
-    const steps = container.querySelectorAll('.flow-step');
-    console.log('🎬 GSAP ScrollTrigger initialized. Steps:', steps.length);
-    
-    // Set initial states
-    gsap.set(steps, {
-        opacity: 0,
-        y: 60,
-        scale: 0.9
-    });
-    
-    // Set initial state for arrows
-    steps.forEach(step => {
-        const path = step.querySelector('.arrow-path');
-        const head = step.querySelector('.arrow-head');
-        
-        if (path) {
-            const length = path.getTotalLength();
-            gsap.set(path, {
-                strokeDasharray: length,
-                strokeDashoffset: length
-            });
-        }
-        
-        if (head) {
-            gsap.set(head, { opacity: 0, scale: 0.5 });
-        }
-    });
-    
-    // Make first step visible immediately
-    gsap.set(steps[0], { opacity: 1, y: 0, scale: 1 });
-    
-    // Animate first step's arrow when scrolling starts
-    const firstArrowPath = steps[0].querySelector('.arrow-path');
-    const firstArrowHead = steps[0].querySelector('.arrow-head');
-    
-    if (firstArrowPath) {
-        const firstLength = firstArrowPath.getTotalLength();
-        
-        gsap.to(firstArrowPath, {
-            strokeDashoffset: 0,
-            ease: "none",
-            scrollTrigger: {
-                trigger: steps[1],
-                start: "top 90%",
-                end: "top 50%",
-                scrub: 1
-            }
-        });
-        
-        if (firstArrowHead) {
-            gsap.to(firstArrowHead, {
-                opacity: 1,
-                scale: 1,
-                ease: "back.out(1.7)",
-                scrollTrigger: {
-                    trigger: steps[1],
-                    start: "top 60%",
-                    end: "top 50%",
-                    scrub: 1
-                }
-            });
-        }
-    }
-    
-    // Animate each step (starting from step 2)
-    steps.forEach((step, index) => {
-        if (index === 0) return; // Skip first step
-        
-        const stepBox = step.querySelector('.step-box');
-        const title = step.querySelector('.animated-text');
-        const description = step.querySelector('.step-box p');
-        const arrowPath = step.querySelector('.arrow-path');
-        const arrowHead = step.querySelector('.arrow-head');
-        
-        // Create timeline for this step
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: step,
-                start: "top 85%",
-                end: "top 25%",
-                scrub: 1,
-                // markers: true // Uncomment to debug
-            }
-        });
-        
-        // Step box fades in and scales up
-        tl.to(step, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.4,
-            ease: "power2.out"
-        });
-        
-        // Title animates
-        if (title) {
-            tl.from(title, {
-                opacity: 0,
-                y: 20,
-                duration: 0.3,
-                ease: "power2.out"
-            }, "-=0.2");
-        }
-        
-        // Description fades in
-        if (description) {
-            tl.from(description, {
-                opacity: 0,
-                y: 10,
-                duration: 0.3,
-                ease: "power2.out"
-            }, "-=0.2");
-        }
-        
-        // Arrow draws (if not last step)
-        if (arrowPath && index < steps.length - 1) {
-            const pathLength = arrowPath.getTotalLength();
-            
-            tl.to(arrowPath, {
-                strokeDashoffset: 0,
-                duration: 0.4,
-                ease: "none"
-            }, "-=0.1");
-            
-            if (arrowHead) {
-                tl.to(arrowHead, {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.2,
-                    ease: "back.out(1.7)"
-                }, "-=0.1");
-            }
-        }
-        
-        // Special animation for final step's success badge
-        if (index === steps.length - 1) {
-            const successCircle = step.querySelector('.success-circle');
-            const successCheck = step.querySelector('.success-check');
-            
-            if (successCircle) {
-                gsap.set(successCircle, {
-                    strokeDasharray: 176,
-                    strokeDashoffset: 176
-                });
-                
-                tl.to(successCircle, {
-                    strokeDashoffset: 0,
-                    duration: 0.5,
-                    ease: "power2.out"
-                }, "-=0.1");
-            }
-            
-            if (successCheck) {
-                gsap.set(successCheck, {
-                    strokeDasharray: 60,
-                    strokeDashoffset: 60
-                });
-                
-                tl.to(successCheck, {
-                    strokeDashoffset: 0,
-                    duration: 0.3,
-                    ease: "power2.out"
-                }, "-=0.2");
-            }
-        }
-    });
-    
-    // Add active class on scroll for visual effects
-    steps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active', 'visible');
-            return;
-        }
-        
-        ScrollTrigger.create({
-            trigger: step,
-            start: "top 60%",
-            end: "top 30%",
-            onEnter: () => {
-                step.classList.add('active', 'visible');
-            },
-            onLeaveBack: () => {
-                step.classList.remove('active');
-            }
-        });
-    });
-    
-    console.log('✅ GSAP Process animation ready!');
-});
-
-// ===== GENERAL SCROLL REVEAL (for other sections) =====
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof gsap === 'undefined') return;
-    
-    // Fade in metrics
-    gsap.utils.toArray('.metric').forEach((metric, i) => {
-        gsap.from(metric, {
-            opacity: 0,
-            y: 40,
-            duration: 0.6,
-            delay: i * 0.1,
-            scrollTrigger: {
-                trigger: metric,
-                start: "top 85%",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-    
-    // Fade in value boxes
-    gsap.utils.toArray('.value-box').forEach((box, i) => {
-        gsap.from(box, {
-            opacity: 0,
-            y: 40,
-            duration: 0.6,
-            delay: i * 0.1,
-            scrollTrigger: {
-                trigger: box,
-                start: "top 85%",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-    
-    // Fade in feature cards
-    gsap.utils.toArray('.feature-card').forEach((card, i) => {
-        gsap.from(card, {
-            opacity: 0,
-            y: 40,
-            duration: 0.6,
-            delay: i * 0.1,
-            scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-    
-    // Fade in service cards
-    gsap.utils.toArray('.service-card').forEach((card, i) => {
-        gsap.from(card, {
-            opacity: 0,
-            y: 30,
-            duration: 0.5,
-            delay: i * 0.08,
-            scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                toggleActions: "play none none none"
-            }
         });
     });
 });
