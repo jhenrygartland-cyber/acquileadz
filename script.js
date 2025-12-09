@@ -303,243 +303,293 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ============================================
 // ULTRA-SMOOTH SCROLL-DRIVEN ANIMATION
-// Frame-by-frame control - OPTIMIZED & FIXED
+// Frame-by-frame control - FIXED VERSION
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
     const spiralProcess = document.getElementById('spiralProcess');
     
-    if (spiralProcess) {
-        const flowSteps = spiralProcess.querySelectorAll('.flow-step');
-        console.log('🎬 Ultra-smooth scroll animation initialized. Steps:', flowSteps.length);
+    if (!spiralProcess) return;
+    
+    const flowSteps = spiralProcess.querySelectorAll('.flow-step');
+    console.log('🎬 Ultra-smooth scroll animation initialized. Steps:', flowSteps.length);
+    
+    // Cache arrow path lengths and elements for performance
+    const stepCache = new Map();
+    
+    // Initialize cache for ALL steps (including first step's arrow)
+    flowSteps.forEach((step, index) => {
+        const arrow = step.querySelector('.arrow-connector');
+        const letters = step.querySelectorAll('.letter');
         
-        // Cache arrow path lengths and elements for performance
-        const stepCache = new Map();
+        const cacheEntry = {
+            step,
+            arrow: null,
+            arrowPath: null,
+            arrowHead: null,
+            letters,
+            pathLength: 0
+        };
         
-        // Initialize cache
-        flowSteps.forEach((step, index) => {
-            if (index === 0) return; // Skip first step
+        if (arrow) {
+            const arrowPath = arrow.querySelector('.arrow-path');
+            const arrowHead = arrow.querySelector('.arrow-head');
             
-            const previousStep = flowSteps[index - 1];
-            const arrow = previousStep ? previousStep.querySelector('.arrow-connector') : null;
-            
-            if (arrow) {
-                const arrowPath = arrow.querySelector('.arrow-path');
-                const arrowHead = arrow.querySelector('.arrow-head');
-                const letters = step.querySelectorAll('.letter');
+            if (arrowPath) {
+                const pathLength = arrowPath.getTotalLength();
                 
-                if (arrowPath) {
-                    const pathLength = arrowPath.getTotalLength();
-                    
-                    stepCache.set(index, {
-                        step,
-                        arrow,
-                        arrowPath,
-                        arrowHead,
-                        letters,
-                        pathLength
-                    });
-                    
-                    // Initialize SVG path for drawing
-                    arrowPath.style.strokeDasharray = pathLength;
-                    arrowPath.style.strokeDashoffset = pathLength;
-                }
+                cacheEntry.arrow = arrow;
+                cacheEntry.arrowPath = arrowPath;
+                cacheEntry.arrowHead = arrowHead;
+                cacheEntry.pathLength = pathLength;
+                
+                // Initialize SVG path for drawing
+                arrowPath.style.strokeDasharray = pathLength;
+                arrowPath.style.strokeDashoffset = pathLength;
             }
+        }
+        
+        stepCache.set(index, cacheEntry);
+    });
+    
+    // Always show first step fully
+    if (flowSteps.length > 0) {
+        const firstStep = flowSteps[0];
+        firstStep.style.opacity = '1';
+        firstStep.style.visibility = 'visible';
+        firstStep.style.transform = 'translateY(0) scale(1)';
+        firstStep.classList.add('visible');
+        
+        const firstLetters = firstStep.querySelectorAll('.letter');
+        firstLetters.forEach(letter => {
+            letter.style.opacity = '1';
+            letter.style.transform = 'translateY(0) scale(1)';
         });
+    }
+    
+    // Smooth easing functions
+    function easeOutQuart(x) {
+        return 1 - Math.pow(1 - x, 4);
+    }
+    
+    function easeInOutCubic(x) {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    }
+    
+    function updateAnimationsOnScroll() {
+        const processRect = spiralProcess.getBoundingClientRect();
+        const processTop = spiralProcess.offsetTop;
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
         
-        // Always show first step fully
-        if (flowSteps.length > 0) {
-            const firstStep = flowSteps[0];
-            firstStep.style.opacity = '1';
-            firstStep.style.visibility = 'visible';
-            firstStep.style.transform = 'translateY(0) scale(1)';
+        flowSteps.forEach((step, index) => {
+            const cache = stepCache.get(index);
+            if (!cache) return;
             
-            const firstLetters = firstStep.querySelectorAll('.letter');
-            firstLetters.forEach(letter => {
-                letter.style.opacity = '1';
-                letter.style.transform = 'translateY(0) scale(1)';
-            });
-        }
-        
-        // Smooth easing functions
-        function easeOutQuart(x) {
-            return 1 - Math.pow(1 - x, 4);
-        }
-        
-        function easeInOutCubic(x) {
-            return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-        }
-        
-        function updateAnimationsOnScroll() {
-            const processTop = spiralProcess.offsetTop;
-            const scrollY = window.scrollY;
-            const viewportHeight = window.innerHeight;
+            const { arrow, arrowPath, arrowHead, letters, pathLength } = cache;
             
-            stepCache.forEach((cache, index) => {
-                const { step, arrow, arrowPath, arrowHead, letters, pathLength } = cache;
+            // Skip first step - it's always visible
+            if (index === 0) {
+                // But still animate its arrow when scrolling toward step 2
+                if (arrow && arrowPath && pathLength > 0) {
+                    const nextStep = flowSteps[1];
+                    if (nextStep) {
+                        const nextStepTop = nextStep.offsetTop + processTop;
+                        const arrowStartY = nextStepTop - (viewportHeight * 1.0);
+                        const arrowEndY = nextStepTop - (viewportHeight * 0.5);
+                        const arrowRange = arrowEndY - arrowStartY;
+                        
+                        const arrowRawProgress = (scrollY - arrowStartY) / arrowRange;
+                        const arrowProgress = Math.max(0, Math.min(1, arrowRawProgress));
+                        const lineProgress = easeInOutCubic(arrowProgress);
+                        
+                        if (lineProgress > 0) {
+                            arrow.style.opacity = '1';
+                            arrow.style.visibility = 'visible';
+                            const drawLength = pathLength - (pathLength * lineProgress);
+                            arrowPath.style.strokeDashoffset = drawLength;
+                            
+                            // Arrow head appears near end of line draw
+                            if (arrowHead && lineProgress > 0.8) {
+                                const headProgress = (lineProgress - 0.8) / 0.2;
+                                arrowHead.style.opacity = headProgress;
+                                arrowHead.style.transform = `scale(${0.5 + (0.5 * headProgress)})`;
+                            } else if (arrowHead) {
+                                arrowHead.style.opacity = '0';
+                            }
+                        } else {
+                            arrow.style.opacity = '0';
+                            arrow.style.visibility = 'hidden';
+                        }
+                    }
+                }
+                return;
+            }
+            
+            const stepTop = step.offsetTop + processTop;
+            
+            // Calculate progress through this step's animation zone
+            const animationStartY = stepTop - (viewportHeight * 0.85);
+            const animationEndY = stepTop - (viewportHeight * 0.15);
+            const animationRange = animationEndY - animationStartY;
+            
+            // Raw progress (0 to 1)
+            const rawProgress = (scrollY - animationStartY) / animationRange;
+            const progress = Math.max(0, Math.min(1, rawProgress));
+            
+            // PHASE 1: Box Fade (0% - 40% of progress)
+            const boxPhaseEnd = 0.4;
+            const boxPhaseProgress = Math.max(0, Math.min(1, progress / boxPhaseEnd));
+            const boxProgress = easeOutQuart(boxPhaseProgress);
+            
+            // PHASE 2: Letters (30% - 70% of progress)
+            const lettersPhaseStart = 0.3;
+            const lettersPhaseEnd = 0.7;
+            const lettersPhaseProgress = Math.max(0, Math.min(1,
+                (progress - lettersPhaseStart) / (lettersPhaseEnd - lettersPhaseStart)
+            ));
+            
+            // PHASE 3: Arrow Drawing (60% - 100% of progress)
+            const arrowPhaseStart = 0.6;
+            const arrowPhaseProgress = Math.max(0, Math.min(1,
+                (progress - arrowPhaseStart) / (1 - arrowPhaseStart)
+            ));
+            const lineProgress = easeInOutCubic(arrowPhaseProgress);
+            
+            // === APPLY BOX FADE ===
+            if (boxProgress > 0) {
+                step.style.opacity = boxProgress;
+                step.style.visibility = 'visible';
                 
-                const stepTop = step.offsetTop + processTop;
+                const scale = 0.92 + (0.08 * boxProgress);
+                const translateY = 40 - (40 * boxProgress);
+                step.style.transform = `translateY(${translateY}px) scale(${scale})`;
                 
-                // Calculate progress through this step's animation zone
-                const animationStartY = stepTop - (viewportHeight * 0.8);
-                const animationEndY = stepTop - (viewportHeight * 0.2);
-                const animationRange = animationEndY - animationStartY;
-                
-                // Raw progress (0 to 1)
-                const rawProgress = (scrollY - animationStartY) / animationRange;
-                const progress = Math.max(0, Math.min(1, rawProgress));
-                
-                // PHASE 1: Line Drawing (0% - 50% of progress)
-                const linePhaseProgress = Math.max(0, Math.min(1, progress / 0.5));
-                const lineProgress = easeInOutCubic(linePhaseProgress);
-                
-                // PHASE 2: Arrow Head (45% - 55% of progress)
-                const arrowHeadPhaseStart = 0.45;
-                const arrowHeadPhaseEnd = 0.55;
-                const arrowHeadPhaseProgress = Math.max(0, Math.min(1, 
-                    (progress - arrowHeadPhaseStart) / (arrowHeadPhaseEnd - arrowHeadPhaseStart)
-                ));
-                const arrowHeadProgress = easeOutQuart(arrowHeadPhaseProgress);
-                
-                // PHASE 3: Box Fade (50% - 75% of progress)
-                const boxPhaseStart = 0.5;
-                const boxPhaseEnd = 0.75;
-                const boxPhaseProgress = Math.max(0, Math.min(1,
-                    (progress - boxPhaseStart) / (boxPhaseEnd - boxPhaseStart)
-                ));
-                const boxProgress = easeOutQuart(boxPhaseProgress);
-                
-                // PHASE 4: Letters (60% - 100% of progress)
-                const lettersPhaseStart = 0.6;
-                const lettersPhaseEnd = 1.0;
-                const lettersPhaseProgress = Math.max(0, Math.min(1,
-                    (progress - lettersPhaseStart) / (lettersPhaseEnd - lettersPhaseStart)
-                ));
-                
-                // === APPLY LINE DRAWING ===
+                // Add active/visible class for special effects
+                if (boxProgress > 0.8) {
+                    step.classList.add('active');
+                    step.classList.add('visible');
+                } else {
+                    step.classList.remove('active');
+                }
+            } else {
+                step.style.opacity = '0';
+                step.style.visibility = 'hidden';
+                step.style.transform = 'translateY(40px) scale(0.92)';
+                step.classList.remove('active');
+                step.classList.remove('visible');
+            }
+            
+            // === APPLY LETTERS ===
+            if (lettersPhaseProgress > 0 && letters.length > 0) {
+                letters.forEach((letter, letterIndex) => {
+                    // Stagger letters
+                    const letterDelay = (letterIndex / letters.length) * 0.5;
+                    const letterProgress = Math.max(0, Math.min(1,
+                        (lettersPhaseProgress - letterDelay) / 0.5
+                    ));
+                    const easedLetterProgress = easeOutQuart(letterProgress);
+                    
+                    if (easedLetterProgress > 0) {
+                        letter.style.opacity = easedLetterProgress;
+                        const letterY = 12 - (12 * easedLetterProgress);
+                        const letterScale = 0.8 + (0.2 * easedLetterProgress);
+                        letter.style.transform = `translateY(${letterY}px) scale(${letterScale})`;
+                    } else {
+                        letter.style.opacity = '0';
+                        letter.style.transform = 'translateY(12px) scale(0.8)';
+                    }
+                });
+            } else if (letters.length > 0) {
+                letters.forEach(letter => {
+                    letter.style.opacity = '0';
+                    letter.style.transform = 'translateY(12px) scale(0.8)';
+                });
+            }
+            
+            // === APPLY ARROW DRAWING (for this step's arrow, leading to next step) ===
+            if (arrow && arrowPath && pathLength > 0) {
                 if (lineProgress > 0) {
                     arrow.style.opacity = '1';
                     arrow.style.visibility = 'visible';
                     
                     const drawLength = pathLength - (pathLength * lineProgress);
                     arrowPath.style.strokeDashoffset = drawLength;
+                    
+                    // Arrow head appears at end of line draw
+                    if (arrowHead && lineProgress > 0.85) {
+                        const headProgress = (lineProgress - 0.85) / 0.15;
+                        const easedHeadProgress = easeOutQuart(headProgress);
+                        arrowHead.style.opacity = easedHeadProgress;
+                        arrowHead.style.transform = `scale(${0.5 + (0.5 * easedHeadProgress)})`;
+                    } else if (arrowHead) {
+                        arrowHead.style.opacity = '0';
+                        arrowHead.style.transform = 'scale(0.5)';
+                    }
                 } else {
                     arrow.style.opacity = '0';
                     arrow.style.visibility = 'hidden';
-                }
-                
-                // === APPLY ARROW HEAD ===
-                if (arrowHeadProgress > 0) {
-                    arrowHead.style.opacity = arrowHeadProgress;
-                    arrowHead.style.transform = `scale(${0.5 + (0.5 * arrowHeadProgress)})`;
-                } else {
-                    arrowHead.style.opacity = '0';
-                    arrowHead.style.transform = 'scale(0.5)';
-                }
-                
-                // === APPLY BOX FADE ===
-                if (boxProgress > 0) {
-                    step.style.opacity = boxProgress;
-                    step.style.visibility = 'visible';
-                    
-                    const scale = 0.92 + (0.08 * boxProgress);
-                    const translateY = 40 - (40 * boxProgress);
-                    step.style.transform = `translateY(${translateY}px) scale(${scale})`;
-                    
-                    // Add active class for special effects
-                    if (boxProgress > 0.6) {
-                        step.classList.add('active');
-                    } else {
-                        step.classList.remove('active');
+                    if (arrowHead) {
+                        arrowHead.style.opacity = '0';
                     }
-                } else {
-                    step.style.opacity = '0';
-                    step.style.visibility = 'hidden';
-                    step.style.transform = 'translateY(40px) scale(0.92)';
-                    step.classList.remove('active');
                 }
-                
-                // === APPLY LETTERS ===
-                if (lettersPhaseProgress > 0 && letters.length > 0) {
-                    letters.forEach((letter, letterIndex) => {
-                        // Stagger letters
-                        const letterDelay = (letterIndex / letters.length) * 0.4;
-                        const letterProgress = Math.max(0, Math.min(1,
-                            (lettersPhaseProgress - letterDelay) / 0.6
-                        ));
-                        const easedLetterProgress = easeOutQuart(letterProgress);
-                        
-                        if (easedLetterProgress > 0) {
-                            letter.style.opacity = easedLetterProgress;
-                            const letterY = 12 - (12 * easedLetterProgress);
-                            const letterScale = 0.8 + (0.2 * easedLetterProgress);
-                            letter.style.transform = `translateY(${letterY}px) scale(${letterScale})`;
-                        } else {
-                            letter.style.opacity = '0';
-                            letter.style.transform = 'translateY(12px) scale(0.8)';
-                        }
-                    });
-                } else if (letters.length > 0) {
-                    letters.forEach(letter => {
-                        letter.style.opacity = '0';
-                        letter.style.transform = 'translateY(12px) scale(0.8)';
-                    });
-                }
-            });
-            
-            // Update progress bar
-            const progressFill = spiralProcess.querySelector('.progress-fill');
-            if (progressFill) {
-                const processHeight = spiralProcess.offsetHeight;
-                const progress = Math.max(0, Math.min(1,
-                    (scrollY - processTop + viewportHeight / 2) / processHeight
-                ));
-                progressFill.style.height = `${progress * 100}%`;
             }
+        });
+        
+        // Update progress bar
+        const progressFill = spiralProcess.querySelector('.progress-fill');
+        if (progressFill) {
+            const processHeight = spiralProcess.offsetHeight;
+            const progress = Math.max(0, Math.min(1,
+                (scrollY - processTop + viewportHeight * 0.5) / processHeight
+            ));
+            progressFill.style.height = `${progress * 100}%`;
         }
-        
-        // High-performance scroll handler with requestAnimationFrame
-        let processTicking = false;
-        
-        window.addEventListener('scroll', () => {
-            if (!processTicking) {
-                window.requestAnimationFrame(() => {
-                    updateAnimationsOnScroll();
-                    processTicking = false;
+    }
+    
+    // High-performance scroll handler with requestAnimationFrame
+    let processTicking = false;
+    
+    window.addEventListener('scroll', () => {
+        if (!processTicking) {
+            window.requestAnimationFrame(() => {
+                updateAnimationsOnScroll();
+                processTicking = false;
+            });
+            processTicking = true;
+        }
+    }, { passive: true });
+    
+    // Also update on resize
+    let resizeTicking = false;
+    window.addEventListener('resize', () => {
+        if (!resizeTicking) {
+            window.requestAnimationFrame(() => {
+                // Recalculate path lengths on resize
+                stepCache.forEach((cache, index) => {
+                    if (cache.arrowPath) {
+                        cache.pathLength = cache.arrowPath.getTotalLength();
+                        cache.arrowPath.style.strokeDasharray = cache.pathLength;
+                    }
                 });
-                processTicking = true;
-            }
-        }, { passive: true });
-        
-        // Also update on resize
-        let resizeTicking = false;
-        window.addEventListener('resize', () => {
-            if (!resizeTicking) {
-                window.requestAnimationFrame(() => {
-                    // Recalculate cache on resize
-                    stepCache.forEach((cache) => {
-                        if (cache.arrowPath) {
-                            cache.pathLength = cache.arrowPath.getTotalLength();
-                            cache.arrowPath.style.strokeDasharray = cache.pathLength;
-                        }
-                    });
-                    updateAnimationsOnScroll();
-                    resizeTicking = false;
-                });
-                resizeTicking = true;
-            }
-        }, { passive: true });
-        
-        // Create progress bar
+                updateAnimationsOnScroll();
+                resizeTicking = false;
+            });
+            resizeTicking = true;
+        }
+    }, { passive: true });
+    
+    // Create progress bar if it doesn't exist
+    if (!spiralProcess.querySelector('.process-progress-bar')) {
         const progressBar = document.createElement('div');
         progressBar.className = 'process-progress-bar';
         progressBar.innerHTML = '<div class="progress-fill"></div>';
         spiralProcess.appendChild(progressBar);
-        
-        // Initial render
-        setTimeout(() => {
-            updateAnimationsOnScroll();
-            console.log('✅ Ultra-smooth animation ready!');
-        }, 100);
     }
+    
+    // Initial render
+    setTimeout(() => {
+        updateAnimationsOnScroll();
+        console.log('✅ Ultra-smooth animation ready!');
+    }, 100);
 });
