@@ -46,22 +46,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // ===== 3D DASHBOARD MOUSE EFFECT =====
+    // ===== 3D DASHBOARD MOUSE EFFECT (full page width) =====
     const dashboard = document.getElementById('dashboard3d');
-    const heroSection = document.querySelector('.hero');
     
-    if (dashboard && heroSection) {
-        heroSection.addEventListener('mousemove', (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            dashboard.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg) translateZ(15px)`;
+    if (dashboard) {
+        // Track mouse across entire document for smooth effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            
+            // Subtle rotation that follows cursor anywhere on page
+            const rotateX = y * -6;
+            const rotateY = x * 8;
+            
+            dashboard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
         });
         
-        heroSection.addEventListener('mouseleave', () => {
-            dashboard.style.transition = 'transform 0.3s ease';
+        // Smooth reset when mouse leaves window
+        document.addEventListener('mouseleave', () => {
+            dashboard.style.transition = 'transform 0.5s ease-out';
             dashboard.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-            setTimeout(() => { dashboard.style.transition = ''; }, 300);
+            setTimeout(() => { dashboard.style.transition = ''; }, 500);
         });
     }
 
@@ -205,6 +210,51 @@ function initGSAPAnimations() {
             }
         );
     });
+
+    // ===== WHY US ITEMS =====
+    gsap.utils.toArray('.why-us-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                x: -30 
+            },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== FINAL CTA =====
+    const finalCta = document.querySelector('.final-cta-content');
+    if (finalCta) {
+        gsap.fromTo(finalCta,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: finalCta,
+                    start: 'top 80%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    }
 
     // ===== PROCESS FLOW STEPS =====
     initProcessFlowAnimations();
