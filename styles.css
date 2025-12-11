@@ -870,10 +870,10 @@ p {
     font-weight: 700;
 }
 
-/* FINAL CTA - Clean problem/solution/action */
+/* FINAL CTA - Clean problem/solution/action with animated background */
 .final-cta {
     padding: 120px 80px;
-    background: linear-gradient(180deg, var(--navy-deep) 0%, #030810 100%);
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.15) 0%, rgba(10, 25, 39, 0.95) 50%, rgba(6, 16, 26, 1) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -881,13 +881,17 @@ p {
 .final-cta::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(43, 183, 218, 0.08) 0%, transparent 60%);
-    pointer-events: none;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(43, 183, 218, 0.12) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .final-cta-content {
@@ -916,6 +920,42 @@ p {
 .final-cta .cta-btn-large {
     font-size: 18px;
     padding: 20px 48px;
+}
+
+.cta-proof {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.proof-item {
+    text-align: center;
+}
+
+.proof-item strong {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--cyan);
+    font-family: var(--font-alt);
+    margin-bottom: 4px;
+}
+
+.proof-item span {
+    font-size: 13px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.proof-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
 }
 
 /* ============================================
@@ -1619,6 +1659,16 @@ footer {
 
     .cta-solution {
         font-size: 16px;
+    }
+
+    .cta-proof {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .proof-divider {
+        width: 60px;
+        height: 1px;
     }
 }
 
