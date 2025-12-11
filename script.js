@@ -145,8 +145,8 @@ function initGSAPAnimations() {
         );
     });
 
-    // ===== SERVICE CARDS =====
-    gsap.utils.toArray('.service-card').forEach((card, i) => {
+    // ===== TESTIMONIAL CARDS =====
+    gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
         gsap.fromTo(card,
             { 
                 opacity: 0, 
