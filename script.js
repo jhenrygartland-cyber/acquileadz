@@ -1,5 +1,5 @@
 // Acquileadz Website JavaScript
-// Scroll animations using Intersection Observer (works in all browsers)
+// GSAP ScrollTrigger for scroll-linked animations
 
 console.log('Acquileadz site loaded');
 
@@ -65,150 +65,265 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== SCROLL ANIMATIONS =====
-    initScrollAnimations();
+    // ===== GSAP SCROLL ANIMATIONS =====
+    initGSAPAnimations();
 });
 
-// ===== SCROLL ANIMATION SYSTEM =====
-function initScrollAnimations() {
-    // Elements to animate on scroll
-    const animatedSelectors = [
-        '.metric',
-        '.value-box',
-        '.feature-card',
-        '.service-card',
-        '.service-detail',
-        '.about-card',
-        '.flow-step'
-    ];
+// ===== GSAP SCROLL ANIMATION SYSTEM =====
+function initGSAPAnimations() {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
 
-    // Set initial states for all animated elements
-    animatedSelectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(40px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        });
-    });
-
-    // Create intersection observer for fade-in animations
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    // Observe all animated elements
-    animatedSelectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(el => {
-            fadeObserver.observe(el);
-        });
-    });
-
-    // Initialize process flow arrows
-    initArrowAnimations();
-    
-    // Initialize success badge
-    initSuccessBadge();
-}
-
-// ===== ARROW ANIMATIONS =====
-function initArrowAnimations() {
-    const arrowPaths = document.querySelectorAll('.arrow-path');
-    const arrowHeads = document.querySelectorAll('.arrow-head');
-    
-    // Initialize arrow paths with stroke dash
-    arrowPaths.forEach(path => {
-        const length = path.getTotalLength ? path.getTotalLength() : 150;
-        path.style.strokeDasharray = length;
-        path.style.strokeDashoffset = length;
-        path.style.transition = 'stroke-dashoffset 0.8s ease-out';
-    });
-    
-    // Initialize arrow heads (hidden)
-    arrowHeads.forEach(head => {
-        head.style.opacity = '0';
-        head.style.transition = 'opacity 0.4s ease-out 0.6s';
-    });
-    
-    // Create observer for arrows
-    const arrowObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const connector = entry.target;
-            const path = connector.querySelector('.arrow-path');
-            const head = connector.querySelector('.arrow-head');
-            
-            if (entry.isIntersecting) {
-                if (path) {
-                    path.style.strokeDashoffset = '0';
-                }
-                if (head) {
-                    head.style.opacity = '1';
-                }
-            } else {
-                // Reset when out of view for re-animation
-                if (path) {
-                    const length = path.getTotalLength ? path.getTotalLength() : 150;
-                    path.style.strokeDashoffset = length;
-                }
-                if (head) {
-                    head.style.opacity = '0';
+    // ===== METRICS SECTION =====
+    gsap.utils.toArray('.metric').forEach((metric, i) => {
+        gsap.fromTo(metric, 
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: metric,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
                 }
             }
-        });
-    }, {
-        threshold: 0.3,
-        rootMargin: '0px 0px -100px 0px'
+        );
     });
-    
-    // Observe all arrow connectors
-    document.querySelectorAll('.arrow-connector').forEach(connector => {
-        arrowObserver.observe(connector);
+
+    // ===== VALUE BOXES =====
+    gsap.utils.toArray('.value-box').forEach((box, i) => {
+        gsap.fromTo(box,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: box,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
     });
+
+    // ===== FEATURE CARDS =====
+    gsap.utils.toArray('.feature-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== SERVICE CARDS =====
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== SERVICE DETAIL CARDS (services page) =====
+    gsap.utils.toArray('.service-detail').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== ABOUT CARDS =====
+    gsap.utils.toArray('.about-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PROCESS FLOW STEPS =====
+    initProcessFlowAnimations();
 }
 
-// ===== SUCCESS BADGE ANIMATION =====
-function initSuccessBadge() {
-    const successCircle = document.querySelector('.success-circle');
-    const successCheck = document.querySelector('.success-check');
+// ===== PROCESS FLOW ANIMATIONS =====
+function initProcessFlowAnimations() {
+    const flowSteps = document.querySelectorAll('.flow-step');
     
-    if (successCircle) {
-        successCircle.style.strokeDasharray = '176';
-        successCircle.style.strokeDashoffset = '176';
-        successCircle.style.transition = 'stroke-dashoffset 0.8s ease-out';
-    }
-    
-    if (successCheck) {
-        successCheck.style.strokeDasharray = '60';
-        successCheck.style.strokeDashoffset = '60';
-        successCheck.style.transition = 'stroke-dashoffset 0.5s ease-out 0.5s';
-    }
-    
-    const badge = document.querySelector('.success-badge');
-    if (badge) {
-        const badgeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (successCircle) successCircle.style.strokeDashoffset = '0';
-                    if (successCheck) successCheck.style.strokeDashoffset = '0';
-                } else {
-                    if (successCircle) successCircle.style.strokeDashoffset = '176';
-                    if (successCheck) successCheck.style.strokeDashoffset = '60';
-                }
+    if (flowSteps.length === 0) return;
+
+    flowSteps.forEach((step, index) => {
+        const stepBox = step.querySelector('.step-box');
+        const title = step.querySelector('.animated-text');
+        const description = step.querySelector('.step-box p');
+        const arrowConnector = step.querySelector('.arrow-connector');
+        const arrowPath = step.querySelector('.arrow-path');
+        const arrowHead = step.querySelector('.arrow-head');
+        const successBadge = step.querySelector('.success-badge');
+
+        // Create timeline for this step
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: step,
+                start: 'top 80%',
+                end: 'top 30%',
+                scrub: 1
+            }
+        });
+
+        // Animate step box
+        if (stepBox) {
+            gsap.set(stepBox, { opacity: 0, y: 60, scale: 0.95 });
+            tl.to(stepBox, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.5,
+                ease: 'power2.out'
+            }, 0);
+        }
+
+        // Animate title
+        if (title) {
+            gsap.set(title, { opacity: 0, y: 20 });
+            tl.to(title, {
+                opacity: 1,
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            }, 0.1);
+        }
+
+        // Animate description
+        if (description) {
+            gsap.set(description, { opacity: 0, y: 15 });
+            tl.to(description, {
+                opacity: 1,
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            }, 0.2);
+        }
+
+        // Animate arrow path (draw effect)
+        if (arrowPath) {
+            const pathLength = arrowPath.getTotalLength ? arrowPath.getTotalLength() : 150;
+            gsap.set(arrowPath, { 
+                strokeDasharray: pathLength,
+                strokeDashoffset: pathLength 
             });
-        }, {
-            threshold: 0.5,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        badgeObserver.observe(badge);
-    }
+            tl.to(arrowPath, {
+                strokeDashoffset: 0,
+                duration: 0.4,
+                ease: 'none'
+            }, 0.3);
+        }
+
+        // Animate arrow head
+        if (arrowHead) {
+            gsap.set(arrowHead, { opacity: 0, scale: 0.5 });
+            tl.to(arrowHead, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.2,
+                ease: 'back.out(1.7)'
+            }, 0.6);
+        }
+
+        // Success badge animation (only on final step)
+        if (successBadge) {
+            const circle = successBadge.querySelector('.success-circle');
+            const check = successBadge.querySelector('.success-check');
+
+            if (circle) {
+                gsap.set(circle, { 
+                    strokeDasharray: 176,
+                    strokeDashoffset: 176 
+                });
+                tl.to(circle, {
+                    strokeDashoffset: 0,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                }, 0.4);
+            }
+
+            if (check) {
+                gsap.set(check, { 
+                    strokeDasharray: 60,
+                    strokeDashoffset: 60 
+                });
+                tl.to(check, {
+                    strokeDashoffset: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                }, 0.6);
+            }
+        }
+    });
 }
 
 // ===== CONTACT FORM (only on contact page) =====
