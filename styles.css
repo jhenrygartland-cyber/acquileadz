@@ -447,6 +447,66 @@ p {
     margin-top: 8px;
 }
 
+/* Q&A SECTION HEADERS */
+.qa-section {
+    position: relative;
+}
+
+.qa-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.qa-label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.qa-header h2 {
+    font-size: 38px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    color: var(--white);
+    font-style: italic;
+}
+
+.qa-header-light h2 {
+    color: var(--navy);
+}
+
+.qa-header-light .qa-label {
+    color: var(--cyan);
+}
+
+/* Proof section specific */
+.proof-section {
+    padding-top: 80px;
+}
+
+.proof-section .qa-header {
+    margin-bottom: 60px;
+}
+
+.proof-section .metrics {
+    padding-top: 0;
+}
+
+/* Offer section specific */
+.offer-section .qa-header {
+    margin-bottom: 48px;
+    padding: 0 80px;
+}
+
+.offer-section .values {
+    padding-top: 0;
+}
+
 /* VALUE PROPS */
 .values {
     display: grid;
@@ -651,14 +711,14 @@ p {
     line-height: 1.6;
 }
 
-/* WHY US SECTION - Clean, minimal */
-.why-us-section {
+/* DIFFERENTIATOR SECTION - Us vs Them */
+.differentiator-section {
     padding: 100px 80px;
     background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
     position: relative;
 }
 
-.why-us-section::before {
+.differentiator-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -668,53 +728,88 @@ p {
     background: linear-gradient(90deg, transparent, rgba(43, 183, 218, 0.3), transparent);
 }
 
-.why-us-content {
-    max-width: 900px;
+.differentiator-content {
+    max-width: 1000px;
     margin: 0 auto;
 }
 
-.why-us-content h2 {
-    font-size: 36px;
-    font-weight: 700;
-    font-family: var(--font-alt);
-    color: var(--white);
-    margin-bottom: 48px;
-    text-align: center;
-}
-
-.why-us-grid {
+.differentiator-grid {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-}
-
-.why-us-item {
-    display: flex;
-    align-items: flex-start;
     gap: 20px;
-    padding: 24px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.why-us-item:last-child {
-    border-bottom: none;
+.diff-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 32px;
+    transition: all 0.3s ease;
 }
 
-.why-us-number {
-    font-size: 14px;
+.diff-card:hover {
+    border-color: rgba(43, 183, 218, 0.3);
+    background: rgba(255,255,255,0.05);
+}
+
+.diff-comparison {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.diff-them, .diff-us {
+    padding: 16px 20px;
+    border-radius: 12px;
+}
+
+.diff-them {
+    background: rgba(255, 95, 87, 0.08);
+    border: 1px solid rgba(255, 95, 87, 0.2);
+}
+
+.diff-us {
+    background: rgba(43, 183, 218, 0.1);
+    border: 1px solid rgba(43, 183, 218, 0.3);
+}
+
+.diff-label {
+    display: block;
+    font-size: 11px;
     font-weight: 700;
-    color: var(--cyan);
-    background: rgba(43, 183, 218, 0.15);
-    padding: 6px 12px;
-    border-radius: 6px;
-    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
 }
 
-.why-us-item p {
-    font-size: 18px;
-    color: var(--muted);
-    line-height: 1.6;
+.diff-them .diff-label {
+    color: rgba(255, 95, 87, 0.8);
+}
+
+.diff-us .diff-label {
+    color: var(--cyan);
+}
+
+.diff-them p, .diff-us p {
+    font-size: 15px;
+    line-height: 1.5;
     margin: 0;
+}
+
+.diff-them p {
+    color: var(--gray);
+}
+
+.diff-us p {
+    color: var(--white);
+    font-weight: 500;
+}
+
+.diff-arrow {
+    font-size: 24px;
+    color: var(--cyan);
+    font-weight: 700;
 }
 
 /* FINAL CTA - Conversion focused */
@@ -738,40 +833,34 @@ p {
 }
 
 .final-cta-content {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
     text-align: center;
     position: relative;
     z-index: 1;
 }
 
-.cta-eyebrow {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--cyan);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 20px;
-    background: rgba(43, 183, 218, 0.1);
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1px solid rgba(43, 183, 218, 0.3);
+.final-cta .qa-header {
+    margin-bottom: 24px;
 }
 
-.final-cta h2 {
-    font-size: 44px;
-    font-weight: 800;
-    font-family: var(--font-alt);
-    color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 20px;
+.final-cta .qa-header h2 {
+    font-size: 38px;
+    font-style: italic;
 }
 
 .cta-subtext {
-    font-size: 20px;
+    font-size: 18px;
     color: var(--muted);
     margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.cta-urgency {
+    font-size: 20px;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 16px;
     line-height: 1.5;
 }
 
@@ -849,20 +938,18 @@ p {
 
 .process-flow-intro {
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     position: relative;
     z-index: 2;
 }
 
-.process-flow-intro h2 {
-    font-size: 52px;
-    font-weight: 800;
-    font-family: var(--font-alt);
-    background: linear-gradient(135deg, var(--white) 0%, var(--cyan-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.process-flow-intro .qa-header {
     margin-bottom: 16px;
+}
+
+.process-flow-intro .qa-header h2 {
+    font-size: 38px;
+    margin-bottom: 0;
 }
 
 .process-flow-intro .subtext {
@@ -1446,8 +1533,8 @@ footer {
         padding: 80px 24px;
     }
 
-    .process-flow-intro h2 {
-        font-size: 38px;
+    .process-flow-intro .qa-header h2 {
+        font-size: 32px;
     }
 
     .spiral-process {
@@ -1481,18 +1568,32 @@ footer {
         display: none;
     }
 
-    /* RESPONSIVE - WHY US */
-    .why-us-section {
-        padding: 80px 40px;
-    }
-
-    .why-us-content h2 {
+    /* RESPONSIVE - Q&A HEADERS */
+    .qa-header h2 {
         font-size: 28px;
     }
 
-    .why-us-item {
-        flex-direction: column;
+    .qa-label {
+        font-size: 12px;
+    }
+
+    .offer-section .qa-header {
+        padding: 0 40px;
+    }
+
+    /* RESPONSIVE - DIFFERENTIATOR */
+    .differentiator-section {
+        padding: 80px 40px;
+    }
+
+    .diff-comparison {
+        grid-template-columns: 1fr;
         gap: 12px;
+    }
+
+    .diff-arrow {
+        transform: rotate(90deg);
+        justify-self: center;
     }
 
     /* RESPONSIVE - FINAL CTA */
