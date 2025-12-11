@@ -211,20 +211,20 @@ function initGSAPAnimations() {
         );
     });
 
-    // ===== WHY US ITEMS =====
-    gsap.utils.toArray('.why-us-item').forEach((item, i) => {
-        gsap.fromTo(item,
+    // ===== DIFFERENTIATOR CARDS =====
+    gsap.utils.toArray('.diff-card').forEach((card, i) => {
+        gsap.fromTo(card,
             { 
                 opacity: 0, 
-                x: -30 
+                y: 30 
             },
             {
                 opacity: 1,
-                x: 0,
+                y: 0,
                 duration: 1,
                 ease: 'power2.out',
                 scrollTrigger: {
-                    trigger: item,
+                    trigger: card,
                     start: 'top 85%',
                     end: 'top 60%',
                     scrub: 1
