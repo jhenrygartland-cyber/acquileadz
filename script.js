@@ -321,6 +321,94 @@ function initGSAPAnimations() {
         );
     });
 
+    // ===== VALUE ITEMS (about page) =====
+    gsap.utils.toArray('.value-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== TRAIT ITEMS (about page) =====
+    gsap.utils.toArray('.trait-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                x: -20 
+            },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 70%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PROOF STATS (about page) =====
+    gsap.utils.toArray('.proof-stat').forEach((stat, i) => {
+        gsap.fromTo(stat,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: stat,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== TEAM CARDS (about page) =====
+    gsap.utils.toArray('.team-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 55%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
     // ===== ABOUT CARDS =====
     gsap.utils.toArray('.about-card').forEach((card, i) => {
         gsap.fromTo(card,
