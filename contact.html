@@ -17,7 +17,7 @@
                 <img src="assets/logo-dark.png" alt="Acquileadz Logo">
             </a>
         </div>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
@@ -46,15 +46,38 @@
             <input type="tel" name="phone" placeholder="Phone" required>
             <textarea name="message" placeholder="How can we help?" required></textarea>
             
+            <div class="privacy-note">We use your details only to respond to your inquiry. You can request deletion anytime.</div>
+
             <div id="result" style="display: none; padding: 14px; border-radius: 6px; margin-bottom: 10px;"></div>
-            
+
             <button type="submit" class="cta-btn-large">Send Message</button>
+            <p class="form-legal">By submitting, you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
         </form>
     </section>
 
     <footer>
-        <p>© 2025 Acquileadz. All rights reserved.</p>
+        <div class="footer-content">
+            <p>© 2025 Acquileadz. All rights reserved.</p>
+            <div class="footer-links" aria-label="Legal and policy links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookies.html">Cookie Policy</a>
+                <a href="mailto:privacy@acquileadz.com">privacy@acquileadz.com</a>
+            </div>
+        </div>
     </footer>
+
+    <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+        <div class="cookie-content">
+            <p class="cookie-title">Cookie Choice</p>
+            <p class="cookie-copy">We use essential cookies to keep the site running and process forms. Optional analytics stay off until you consent.</p>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-accept">Accept all cookies</button>
+                <button class="cookie-btn ghost cookie-decline">Essential only</button>
+            </div>
+            <a class="cookie-link" href="cookies.html">Review Cookie Policy</a>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
