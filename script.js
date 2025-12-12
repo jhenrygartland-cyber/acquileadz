@@ -189,6 +189,138 @@ function initGSAPAnimations() {
         );
     });
 
+    // ===== PROBLEM ITEMS (services page) =====
+    gsap.utils.toArray('.problem-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                x: -30 
+            },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== BENEFIT ITEMS (services page) =====
+    gsap.utils.toArray('.benefit-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 20 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 70%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== OFFERING CARDS (services page) =====
+    gsap.utils.toArray('.offering-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 55%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PROCESS STEPS (services page) =====
+    gsap.utils.toArray('.process-step').forEach((step, i) => {
+        gsap.fromTo(step,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: step,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== FAQ ITEMS (services page) =====
+    gsap.utils.toArray('.faq-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 65%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PRICING ITEMS (services page) =====
+    gsap.utils.toArray('.pricing-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 20 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 70%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
     // ===== ABOUT CARDS =====
     gsap.utils.toArray('.about-card').forEach((card, i) => {
         gsap.fromTo(card,
