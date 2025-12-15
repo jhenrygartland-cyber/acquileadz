@@ -2336,13 +2336,96 @@ p {
 
 /* FOOTER */
 footer {
-    text-align: center;
-    padding: 60px 40px;
+    padding: 48px 60px 32px;
     background: linear-gradient(180deg, rgba(6,16,26,0.98) 0%, rgba(6,16,26,1) 100%);
     color: var(--muted);
     border-top: 1px solid rgba(255,255,255,0.08);
-    letter-spacing: 0.01em;
-    font-size: 15px;
+}
+
+.footer-main {
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.footer-brand {
+    flex-shrink: 0;
+}
+
+.footer-logo {
+    height: 56px;
+    width: auto;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+}
+
+.footer-disclaimer {
+    flex: 1;
+    max-width: 600px;
+}
+
+.footer-disclaimer p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-copy {
+    font-size: 14px;
+    color: var(--gray);
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+/* Legacy footer-content for other pages */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
 }
 
 /* 3D DASHBOARD */
@@ -2522,6 +2605,30 @@ footer {
 
     .offer-section .section-header {
         padding: 0 40px;
+    }
+
+    /* RESPONSIVE - FOOTER */
+    .footer-main {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+    }
+
+    .footer-brand {
+        margin: 0 auto;
+    }
+
+    .footer-disclaimer {
+        max-width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
     }
 
     /* RESPONSIVE - TESTIMONIALS */
