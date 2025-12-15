@@ -4,26 +4,20 @@
 console.log('Acquileadz site loaded');
 
 document.addEventListener('DOMContentLoaded', () => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
     // ===== MOBILE MENU TOGGLE =====
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-
+    
     if (mobileMenuToggle) {
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
         mobileMenuToggle.addEventListener('click', () => {
             mobileMenuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
-            const expanded = mobileMenuToggle.classList.contains('active');
-            mobileMenuToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         });
         
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             });
         });
         
@@ -31,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             }
         });
     }
@@ -55,20 +48,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== 3D DASHBOARD MOUSE EFFECT (full page width) =====
     const dashboard = document.getElementById('dashboard3d');
-
-    if (dashboard && !prefersReducedMotion.matches) {
+    
+    if (dashboard) {
         // Track mouse across entire document for smooth effect
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth) - 0.5;
             const y = (e.clientY / window.innerHeight) - 0.5;
-
+            
             // Subtle rotation that follows cursor anywhere on page
             const rotateX = y * -6;
             const rotateY = x * 8;
-
+            
             dashboard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
         });
-
+        
         // Smooth reset when mouse leaves window
         document.addEventListener('mouseleave', () => {
             dashboard.style.transition = 'transform 0.5s ease-out';
@@ -77,51 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== Cookie Consent Banner =====
-    const cookieBanner = document.querySelector('.cookie-banner');
-    if (cookieBanner) {
-        const acceptBtn = cookieBanner.querySelector('.cookie-accept');
-        const declineBtn = cookieBanner.querySelector('.cookie-decline');
-        const consent = localStorage.getItem('cookieConsent');
-
-        const hideBanner = () => {
-            cookieBanner.setAttribute('hidden', 'true');
-            cookieBanner.classList.remove('visible');
-        };
-
-        const showBanner = () => {
-            cookieBanner.removeAttribute('hidden');
-            cookieBanner.classList.add('visible');
-        };
-
-        if (!consent) {
-            showBanner();
-        }
-
-        if (acceptBtn) {
-            acceptBtn.addEventListener('click', () => {
-                localStorage.setItem('cookieConsent', 'accepted');
-                hideBanner();
-            });
-        }
-
-        if (declineBtn) {
-            declineBtn.addEventListener('click', () => {
-                localStorage.setItem('cookieConsent', 'essential');
-                hideBanner();
-            });
-        }
-    }
-
     // ===== GSAP SCROLL ANIMATIONS =====
-    if (!prefersReducedMotion.matches && hasGSAP) {
-        initGSAPAnimations();
-    }
+    initGSAPAnimations();
 });
 
 // ===== GSAP SCROLL ANIMATION SYSTEM =====
 function initGSAPAnimations() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    // Check if GSAP and ScrollTrigger are available
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.log('GSAP not loaded - skipping animations');
+        return;
+    }
+    
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
 
