@@ -2769,6 +2769,11 @@ footer {
         gap: 20px;
     }
 
+    .social-proof {
+        padding: 28px 40px;
+        gap: 20px;
+    }
+
     /* RESPONSIVE - PROCESS FLOW */
     .process-flow-container {
         padding: 80px 24px;
