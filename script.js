@@ -4,20 +4,26 @@
 console.log('Acquileadz site loaded');
 
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
     // ===== MOBILE MENU TOGGLE =====
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    
+
     if (mobileMenuToggle) {
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
         mobileMenuToggle.addEventListener('click', () => {
             mobileMenuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
+            const expanded = mobileMenuToggle.classList.contains('active');
+            mobileMenuToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         });
         
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             });
         });
         
@@ -25,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             }
         });
     }

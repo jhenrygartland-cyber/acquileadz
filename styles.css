@@ -272,6 +272,27 @@ p {
     line-height: 1.6;
 }
 
+.hero-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+    padding: 0;
+    width: 100%;
+    max-width: 560px;
+}
+
+.hero-bullets li {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: var(--white);
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
 .hero-visual {
     position: relative;
     z-index: 1;
@@ -474,6 +495,18 @@ p {
     font-family: var(--font-alt);
     color: var(--white);
     font-style: italic;
+}
+
+.micro-case-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: var(--cyan);
+    text-decoration: none;
+}
+
+.micro-case-link:hover {
+    text-decoration: underline;
 }
 
 /* Standard section headers (non-question) */
@@ -2543,7 +2576,11 @@ footer {
     .hero-content p {
         font-size: 18px;
     }
-    
+
+    .hero-bullets li {
+        font-size: 16px;
+    }
+
     .metrics,
     .values,
     .feature-grid,
@@ -2563,6 +2600,11 @@ footer {
     
     .metric h4 {
         font-size: 42px;
+    }
+
+    .social-proof {
+        padding: 28px 40px;
+        gap: 20px;
     }
 
     .social-proof {
