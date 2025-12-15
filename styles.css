@@ -510,6 +510,13 @@ p {
     font-size: 16px;
 }
 
+.proof-answer {
+    color: var(--muted);
+    font-size: 20px;
+    margin-top: 16px;
+    font-weight: 500;
+}
+
 .proof-section .metrics {
     padding-top: 0;
 }
@@ -2336,26 +2343,28 @@ p {
 
 /* FOOTER */
 footer {
-    padding: 48px 60px 32px;
+    padding: 60px 80px 40px;
     background: linear-gradient(180deg, rgba(6,16,26,0.98) 0%, rgba(6,16,26,1) 100%);
     color: var(--muted);
     border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 80px;
 }
 
 .footer-main {
     max-width: 1200px;
-    margin: 0 auto 32px;
-    display: flex;
-    align-items: flex-start;
-    gap: 40px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 60px;
 }
 
 .footer-brand {
-    flex-shrink: 0;
+    justify-self: start;
 }
 
 .footer-logo {
-    height: 56px;
+    height: 60px;
     width: auto;
     opacity: 0.9;
     transition: opacity 0.2s ease;
@@ -2366,27 +2375,32 @@ footer {
 }
 
 .footer-disclaimer {
-    flex: 1;
-    max-width: 600px;
+    text-align: center;
+    max-width: 500px;
+    justify-self: center;
 }
 
 .footer-disclaimer p {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--gray);
     line-height: 1.6;
     margin: 0;
 }
 
+.footer-spacer {
+    width: 60px;
+}
+
 .footer-bottom {
     max-width: 1200px;
     margin: 0 auto;
-    padding-top: 24px;
+    padding-top: 32px;
     border-top: 1px solid rgba(255,255,255,0.06);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 20px;
 }
 
 .footer-copy {
@@ -2397,12 +2411,13 @@ footer {
 
 .footer-links {
     display: flex;
-    gap: 24px;
+    gap: 28px;
+    flex-wrap: wrap;
 }
 
 .footer-links a {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     text-decoration: none;
     transition: color 0.2s ease;
@@ -2412,7 +2427,7 @@ footer {
     color: var(--white);
 }
 
-/* Legacy footer-content for other pages */
+/* Legacy footer-content for simpler pages */
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -2426,6 +2441,11 @@ footer {
 .footer-content p {
     margin: 0;
     font-size: 14px;
+}
+
+/* Final CTA spacing */
+.final-cta-spaced {
+    margin-bottom: 0;
 }
 
 /* 3D DASHBOARD */
@@ -2608,18 +2628,26 @@ footer {
     }
 
     /* RESPONSIVE - FOOTER */
+    footer {
+        padding: 48px 40px 32px;
+    }
+
     .footer-main {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 24px;
         text-align: center;
     }
 
     .footer-brand {
-        margin: 0 auto;
+        justify-self: center;
     }
 
     .footer-disclaimer {
         max-width: 100%;
+    }
+
+    .footer-spacer {
+        display: none;
     }
 
     .footer-bottom {
@@ -2629,6 +2657,7 @@ footer {
 
     .footer-links {
         justify-content: center;
+        gap: 16px;
     }
 
     /* RESPONSIVE - TESTIMONIALS */
