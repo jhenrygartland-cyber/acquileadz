@@ -18,7 +18,7 @@
                 <img src="assets/logo-dark.png" alt="Acquileadz Logo">
             </a>
         </div>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
@@ -104,21 +104,21 @@
         </div>
     </section>
 
-    <!-- SOCIAL PROOF -->
+    <!-- TRANSPARENCY NOTE -->
     <section class="about-proof">
         <div class="proof-content">
             <div class="proof-stats">
                 <div class="proof-stat">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Contractors Served</span>
+                    <span class="stat-number">New in 2025</span>
+                    <span class="stat-label">Currently onboarding first contractors</span>
                 </div>
                 <div class="proof-stat">
-                    <span class="stat-number">74%</span>
-                    <span class="stat-label">Avg. Lift in Booked Jobs</span>
+                    <span class="stat-number">No fake metrics</span>
+                    <span class="stat-label">We publish results only after client approval</span>
                 </div>
                 <div class="proof-stat">
-                    <span class="stat-number">4.6x</span>
-                    <span class="stat-label">Avg. Return on Ad Spend</span>
+                    <span class="stat-number">Pilot spots</span>
+                    <span class="stat-label">Looking for partners willing to co-build a case study</span>
                 </div>
             </div>
         </div>
@@ -160,8 +160,50 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2025 Acquileadz. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/logo-dark.png" alt="Acquileadz logo" class="footer-logo">
+                <div>
+                    <p class="footer-brand-name">Acquileadz</p>
+                    <p class="footer-copy">© 2025 Acquileadz. All rights reserved.</p>
+                </div>
+            </div>
+            <div class="footer-links" aria-label="Legal and policy links">
+                <a href="mailto:privacy@acquileadz.com">privacy@acquileadz.com</a>
+                <a href="mailto:hello@acquileadz.com">hello@acquileadz.com</a>
+            </div>
+        </div>
+        <div class="footer-policies" aria-label="Policies and disclosures">
+            <details>
+                <summary>Privacy Policy</summary>
+                <p>We collect only the data needed to respond to your inquiry, do not sell personal info, and honor access, correction, and deletion requests at privacy@acquileadz.com.</p>
+            </details>
+            <details>
+                <summary>Do Not Sell My Personal Information</summary>
+                <p>We do not sell personal data. If you want to opt out of any data sharing for advertising or analytics, email privacy@acquileadz.com and we will confirm within 45 days.</p>
+            </details>
+            <details>
+                <summary>Terms of Service</summary>
+                <p>Use this site for informational purposes only; offers are subject to written agreements. By contacting us, you consent to follow-up via the channels you provide.</p>
+            </details>
+            <details>
+                <summary>DMCA Policy</summary>
+                <p>If you believe content here infringes your copyright, send a notice to dmca@acquileadz.com with your contact details, the work claimed infringed, the URL, and a good-faith statement under penalty of perjury.</p>
+            </details>
+        </div>
     </footer>
+
+    <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+        <div class="cookie-content">
+            <p class="cookie-title">Cookie Choice</p>
+            <p class="cookie-copy">We use essential cookies to keep the site running and process forms. Optional analytics stay off until you consent.</p>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-accept">Accept all cookies</button>
+                <button class="cookie-btn ghost cookie-decline">Essential only</button>
+            </div>
+            <a class="cookie-link" href="cookies.html">Review Cookie Policy</a>
+        </div>
+    </div>
 
     <!-- GSAP and ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
