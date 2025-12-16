@@ -4,26 +4,62 @@
 console.log('Acquileadz site loaded');
 
 document.addEventListener('DOMContentLoaded', () => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+    // ===== COOKIE CONSENT BANNER =====
+    const cookieBanner = document.querySelector('.cookie-banner');
+    const cookieAccept = document.querySelector('.cookie-accept');
+    const cookieDecline = document.querySelector('.cookie-decline');
+    
+    if (cookieBanner) {
+        // Check if user has already made a choice
+        const cookieChoice = localStorage.getItem('acquileadz_cookies');
+        
+        if (!cookieChoice) {
+            // Show banner for fresh visits
+            setTimeout(() => {
+                cookieBanner.removeAttribute('hidden');
+                cookieBanner.classList.add('visible');
+            }, 1000); // Delay slightly for better UX
+        }
+        
+        if (cookieAccept) {
+            cookieAccept.addEventListener('click', () => {
+                localStorage.setItem('acquileadz_cookies', 'all');
+                hideCookieBanner();
+                // Here you would initialize analytics if needed
+                console.log('All cookies accepted');
+            });
+        }
+        
+        if (cookieDecline) {
+            cookieDecline.addEventListener('click', () => {
+                localStorage.setItem('acquileadz_cookies', 'essential');
+                hideCookieBanner();
+                console.log('Essential cookies only');
+            });
+        }
+        
+        function hideCookieBanner() {
+            cookieBanner.classList.remove('visible');
+            setTimeout(() => {
+                cookieBanner.setAttribute('hidden', '');
+            }, 300);
+        }
+    }
+
     // ===== MOBILE MENU TOGGLE =====
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-
+    
     if (mobileMenuToggle) {
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
         mobileMenuToggle.addEventListener('click', () => {
             mobileMenuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
-            const expanded = mobileMenuToggle.classList.contains('active');
-            mobileMenuToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         });
         
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             });
         });
         
@@ -31,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             }
         });
     }
