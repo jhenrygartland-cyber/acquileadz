@@ -291,7 +291,7 @@ p {
     min-height: 90vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 80px;
     align-items: center;
     padding: 120px 8vw 100px;
     width: 100%;
@@ -333,9 +333,10 @@ p {
 .hero-content h1 {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: center;
+    gap: 0;
     margin-bottom: 24px;
+    width: 100%;
 }
 
 .hero-title-line {
@@ -348,13 +349,18 @@ p {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: center;
+    width: 100%;
 }
 
 .hero-arrow {
     font-size: 40px;
     color: var(--cyan);
-    margin: -8px 0;
+    margin: 4px 0;
     animation: bounce 2s ease-in-out infinite;
+    display: block;
+    text-align: center;
+    width: 100%;
 }
 
 @keyframes bounce {
@@ -365,9 +371,15 @@ p {
 .hero-content p {
     font-size: 22px;
     max-width: 540px;
-    margin-bottom: 40px;
+    margin: 0 auto 40px auto;
     color: var(--muted);
     line-height: 1.6;
+    text-align: center;
+    width: 100%;
+}
+
+.hero-content .cta-btn-large {
+    margin: 0 auto;
 }
 
 .hero-visual {
@@ -2322,28 +2334,46 @@ p {
     border-color: rgba(43, 183, 218, 0.3);
 }
 
+/* TEAM SECTION - UPDATED WITH IMAGE PLACEHOLDER */
 .team-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--cyan), var(--cyan-light));
-    color: var(--navy-deep);
+    width: 140px;
+    height: 140px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.15), rgba(43, 183, 218, 0.05));
+    color: var(--cyan);
     font-weight: 800;
     font-size: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 8px 24px rgba(43, 183, 218, 0.3);
+    box-shadow: 0 12px 32px rgba(43, 183, 218, 0.2);
     overflow: hidden;
+    border: 3px solid rgba(43, 183, 218, 0.3);
+    position: relative;
+}
+
+/* Add subtle gradient overlay for depth */
+.team-photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+    pointer-events: none;
 }
 
 .team-photo.has-image {
     width: 140px;
     height: 140px;
-    background: none;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-    border: 4px solid var(--cyan);
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.1), rgba(10, 25, 39, 0.05));
+    box-shadow: 
+        0 12px 32px rgba(43, 183, 218, 0.25),
+        inset 0 2px 4px rgba(255,255,255,0.1);
+    border: 3px solid var(--cyan);
+    overflow: hidden;
 }
 
 .team-photo img {
@@ -2351,6 +2381,19 @@ p {
     height: 100%;
     object-fit: cover;
     object-position: center 20%;
+}
+
+/* Hover effects for team cards */
+.team-card:hover .team-photo.has-image {
+    box-shadow: 
+        0 16px 48px rgba(43, 183, 218, 0.35),
+        inset 0 2px 6px rgba(255,255,255,0.15);
+    border-color: var(--cyan-light);
+}
+
+.team-card:hover .team-photo:not(.has-image) {
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.25), rgba(43, 183, 218, 0.1));
+    box-shadow: 0 16px 40px rgba(43, 183, 218, 0.3);
 }
 
 .team-info h3 {
@@ -3392,3 +3435,4 @@ footer {
         padding: 12px 5vw;
     }
    }
+
