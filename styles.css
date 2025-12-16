@@ -3749,3 +3749,111 @@ footer {
     font-size: 15px;
     line-height: 1.5;
 }
+
+/* About - Our Approach */
+.about-approach {
+    padding: 90px 0;
+    background: linear-gradient(180deg, #0A1927 0%, #0F2A3C 100%);
+}
+
+.approach-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    color: #f1f5f9;
+}
+
+.approach-content h2 {
+    font-size: clamp(32px, 3vw, 40px);
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.approach-intro {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    color: #cbd5e1;
+}
+
+.approach-pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.pillar-item {
+    padding: 22px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+.pillar-item h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.pillar-item p {
+    color: #dbeafe;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+/* Services - Pricing Exclusions */
+.pricing-exclusions {
+    max-width: 820px;
+    margin: 0 auto 60px;
+    padding: 24px;
+    background: rgba(43, 183, 218, 0.06);
+    border: 1px solid rgba(43, 183, 218, 0.2);
+    border-radius: 14px;
+}
+
+.pricing-exclusions h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: var(--navy);
+}
+
+.pricing-exclusions ul {
+    list-style: disc;
+    padding-left: 20px;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.pricing-exclusions li {
+    margin-bottom: 8px;
+}
+
+/* Contact - Calendly Option */
+.calendar-option {
+    max-width: 600px;
+    margin: 20px auto 0;
+    text-align: center;
+    padding: 18px;
+    background: rgba(43, 183, 218, 0.08);
+    border: 1px solid rgba(43, 183, 218, 0.2);
+    border-radius: 12px;
+}
+
+.calendar-option p {
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.calendar-link {
+    color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.calendar-link:hover,
+.calendar-link:focus-visible {
+    color: var(--cyan);
+    text-decoration: underline;
+}
