@@ -44,6 +44,18 @@ body {
     overflow-x: hidden;
 }
 
+/* GLOBAL PAGE WIDTH CONTAINER */
+.page-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* GLOBAL SECTION SPACING */
+section {
+    padding: 80px 0;
+}
+
 p {
     color: var(--muted);
     font-size: 18px;
@@ -2403,11 +2415,11 @@ footer {
     margin: 0 auto 40px;
     display: flex;
     align-items: center;
-    gap: 40px;
+    justify-content: space-between;
 }
 
 .footer-brand {
-    flex-shrink: 0;
+    flex: 0 0 auto;
 }
 
 .footer-logo {
@@ -2424,7 +2436,8 @@ footer {
 .footer-disclaimer {
     flex: 1;
     text-align: center;
-    padding: 0 20px;
+    padding: 0 60px;
+    max-width: 600px;
 }
 
 .footer-disclaimer p {
@@ -2436,8 +2449,7 @@ footer {
 }
 
 .footer-spacer {
-    width: 60px;
-    flex-shrink: 0;
+    flex: 0 0 60px;
 }
 
 .footer-bottom {
@@ -2448,20 +2460,20 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
 }
 
 .footer-copy {
     font-size: 14px;
     color: var(--gray);
     margin: 0;
+    flex-shrink: 0;
 }
 
 .footer-links {
     display: flex;
-    gap: 24px;
+    gap: 32px;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .footer-links a {
