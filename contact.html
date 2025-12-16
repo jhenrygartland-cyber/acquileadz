@@ -46,12 +46,15 @@
             <input type="tel" name="phone" placeholder="Phone" required>
             <textarea name="message" placeholder="How can we help?" required></textarea>
             
-            <p class="privacy-note">We use your details only to respond to your inquiry. You can request deletion anytime.</p>
+            <div class="form-consent-box">
+                <p class="privacy-note">We use your details only to respond to your inquiry. By providing your phone number, you consent to receive calls and SMS messages about your inquiry. Reply STOP to opt out anytime.</p>
+                <p class="privacy-note">We use essential cookies only. <a href="cookies.html">Manage preferences</a> · <a href="accessibility.html">Accessibility</a></p>
+            </div>
 
             <div id="result" style="display: none; padding: 14px; border-radius: 6px; margin-bottom: 10px;"></div>
 
             <button type="submit" class="cta-btn-large">Send Message</button>
-            <p class="form-legal">By submitting, you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+            <p class="form-legal">By submitting, you agree to our <a href="terms.html">Terms</a>, <a href="privacy.html">Privacy Policy</a>, and consent to SMS/calls.</p>
         </form>
     </section>
 
