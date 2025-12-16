@@ -1,6 +1,6 @@
 /* ============================================
    ACQUILEADZ PREMIUM BRAND STYLING
-   Scroll animations handled by JavaScript
+   Cross-browser compatible
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@600;700;800&display=swap');
@@ -16,19 +16,24 @@
     --gray: #94A6B8;
     --muted: #B8C4D3;
     --surface: rgba(255,255,255,0.04);
-    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    --font-alt: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    --font-alt: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-/* GLOBAL RESET */
-* {
+/* COMPREHENSIVE RESET - Cross-browser */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -42,6 +47,70 @@ body {
     line-height: 1.65;
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* iOS Safari fixes */
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Firefox scrollbar styling */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--cyan) var(--navy-deep);
+}
+
+/* Webkit scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--navy-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--cyan);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan-light);
+}
+
+/* Remove tap highlight on mobile */
+a, button, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure images are responsive by default */
+img, video, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Remove default button styles */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Remove default list styles */
+ul, ol {
+    list-style: none;
+}
+
+/* Ensure links inherit color */
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
 /* GLOBAL PAGE WIDTH CONTAINER - Full width with max content areas */
@@ -2265,6 +2334,20 @@ p {
     justify-content: center;
     flex-shrink: 0;
     box-shadow: 0 8px 24px rgba(43, 183, 218, 0.3);
+    overflow: hidden;
+}
+
+.team-photo.has-image {
+    background: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 3px solid var(--cyan);
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
 }
 
 .team-info h3 {
@@ -3083,5 +3166,226 @@ footer {
         margin-left: 0;
         margin-top: 8px;
         display: block;
+    }
+}
+
+/* ============================================
+   COMPREHENSIVE MOBILE OPTIMIZATION
+   ============================================ */
+
+/* Small phones (320px - 480px) */
+@media screen and (max-width: 480px) {
+    /* Footer link compression */
+    .footer-links {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px 12px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-links a {
+        font-size: 12px;
+        padding: 8px 4px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 6px;
+    }
+
+    .footer-main {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-brand {
+        margin: 0 auto;
+    }
+
+    .footer-disclaimer {
+        padding: 0;
+    }
+
+    .footer-disclaimer p {
+        font-size: 11px;
+    }
+
+    .footer-spacer {
+        display: none;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-copy {
+        font-size: 12px;
+    }
+
+    /* Hero adjustments */
+    .hero {
+        min-height: auto;
+        padding: 100px 5vw 60px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    /* Section padding reduction */
+    section {
+        padding: 60px 5vw;
+    }
+
+    .qa-section {
+        padding: 60px 5vw;
+    }
+
+    /* CTA buttons */
+    .cta-btn-large {
+        padding: 16px 28px;
+        font-size: 15px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Tablets and small laptops */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+    .footer-links {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-main {
+        gap: 30px;
+    }
+}
+
+/* ============================================
+   BROWSER-SPECIFIC FIXES
+   ============================================ */
+
+/* Safari flexbox fix */
+@supports (-webkit-appearance: none) {
+    .footer-main,
+    .footer-bottom,
+    .nav,
+    .hero {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+    }
+}
+
+/* Firefox smooth scroll fix */
+@-moz-document url-prefix() {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* IE11 and Edge Legacy fallbacks */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .hero {
+        display: -ms-grid;
+        -ms-grid-columns: 1fr 1fr;
+    }
+
+    .values {
+        display: -ms-grid;
+        -ms-grid-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --cyan: #00d4ff;
+        --muted: #ffffff;
+    }
+
+    .cta-btn,
+    .cta-btn-large {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode already default - light mode override if needed */
+@media (prefers-color-scheme: light) {
+    /* Site is already dark themed, no changes needed */
+}
+
+/* Print styles */
+@media print {
+    .nav,
+    .cookie-banner,
+    .cta-btn,
+    .cta-btn-large {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    .footer-links a::after {
+        content: " (" attr(href) ")";
+        font-size: 10px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    .nav-links a,
+    .footer-links a,
+    .cta-btn,
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Remove hover effects on touch */
+    .value-box:hover,
+    .team-card:hover,
+    .cta-btn:hover {
+        transform: none;
+    }
+}
+
+/* Landscape phone orientation */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding-top: 80px;
+        padding-bottom: 40px;
+    }
+
+    .cookie-banner {
+        padding: 12px;
+    }
+
+    .cookie-content {
+        padding: 12px 5vw;
     }
 }
