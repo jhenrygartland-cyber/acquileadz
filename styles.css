@@ -3927,3 +3927,106 @@ footer {
     box-shadow: 0 8px 24px rgba(43, 183, 218, 0.4);
     color: var(--navy-deep);
 }
+
+/* FIX: Pricing Exclusions - Subtle, not a sore thumb */
+.pricing-exclusions {
+    max-width: 820px;
+    margin: -20px auto 60px;
+    padding: 24px 28px;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    border-radius: 0;
+}
+
+.pricing-exclusions h3 {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--font-alt);
+    margin-bottom: 14px;
+    color: #475569;
+}
+
+.pricing-exclusions ul {
+    list-style: none;
+    padding-left: 0;
+    color: #64748b;
+    line-height: 1.7;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+}
+
+.pricing-exclusions li {
+    margin-bottom: 0;
+    font-size: 14px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.pricing-exclusions li::before {
+    content: '×';
+    position: absolute;
+    left: 0;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+
+/* FIX: Calendar Option - Simple text link, not a box */
+.calendar-option {
+    max-width: 600px;
+    margin: 32px auto 0;
+    text-align: center;
+    padding: 20px 0 0 0;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    border-radius: 0;
+}
+
+.calendar-option p {
+    margin-bottom: 8px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.calendar-link {
+    display: inline-block;
+    color: var(--cyan);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    transition: color 0.2s ease;
+}
+
+.calendar-link:hover,
+.calendar-link:focus-visible {
+    color: #1a9bb8;
+    text-decoration: underline;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* FIX: Guarantee Icon - Proper checkmark rendering */
+.guarantee-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #28C840 0%, #22b339 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    font-weight: 400;
+    box-shadow: 0 6px 24px rgba(40, 200, 64, 0.3);
+    line-height: 1;
+    font-family: system-ui, -apple-system, sans-serif;
+}
