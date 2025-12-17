@@ -112,9 +112,141 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ===== EXIT INTENT POPUP (Contact Page Only) =====
+    initExitIntentPopup();
+
     // ===== GSAP SCROLL ANIMATIONS =====
     initGSAPAnimations();
 });
+
+// ===== EXIT INTENT POPUP SYSTEM =====
+function initExitIntentPopup() {
+    const exitPopup = document.getElementById('exitPopup');
+    if (!exitPopup) return; // Only run on pages with the popup
+    
+    const closeBtn = exitPopup.querySelector('.exit-popup-close');
+    const dismissBtn = exitPopup.querySelector('.exit-popup-dismiss');
+    const ctaBtn = exitPopup.querySelector('.exit-popup-cta');
+    
+    let popupShown = false;
+    let formSubmitted = false;
+    
+    // Check if popup was already shown this session
+    const popupDismissed = sessionStorage.getItem('exitPopupDismissed');
+    
+    // Check if form was submitted
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', () => {
+            formSubmitted = true;
+            sessionStorage.setItem('exitPopupDismissed', 'true');
+        });
+    }
+    
+    // Function to show popup
+    function showPopup() {
+        if (popupShown || popupDismissed || formSubmitted) return;
+        popupShown = true;
+        exitPopup.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Function to hide popup
+    function hidePopup() {
+        exitPopup.classList.remove('visible');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('exitPopupDismissed', 'true');
+    }
+    
+    // EXIT INTENT DETECTION
+    // Method 1: Mouse leaves viewport (desktop)
+    document.addEventListener('mouseout', (e) => {
+        // Check if mouse is leaving through the top of the page
+        if (e.clientY <= 0 && e.relatedTarget === null) {
+            showPopup();
+        }
+    });
+    
+    // Method 2: Rapid mouse movement toward top (more aggressive exit intent)
+    let lastY = 0;
+    let velocity = 0;
+    document.addEventListener('mousemove', (e) => {
+        velocity = lastY - e.clientY;
+        lastY = e.clientY;
+        
+        // If mouse is moving up fast and near top of viewport
+        if (velocity > 50 && e.clientY < 100) {
+            showPopup();
+        }
+    });
+    
+    // Method 3: Back button / beforeunload (works on both desktop and mobile)
+    window.addEventListener('beforeunload', (e) => {
+        if (!popupShown && !popupDismissed && !formSubmitted) {
+            // Can't actually show popup here, but we tried
+            // This is mainly for analytics tracking
+        }
+    });
+    
+    // Method 4: Visibility change (tab switching on mobile/desktop)
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            // User is leaving - could track this
+        }
+    });
+    
+    // Method 5: Mobile - scroll up quickly at top of page (suggests leaving)
+    let touchStartY = 0;
+    document.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // If at top of page and swiping down (pull to refresh gesture = leaving)
+        if (scrollTop < 50 && touchEndY - touchStartY > 100) {
+            showPopup();
+        }
+    }, { passive: true });
+    
+    // Method 6: Time-based fallback (show after 45 seconds if still on page)
+    setTimeout(() => {
+        showPopup();
+    }, 45000);
+    
+    // Close handlers
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hidePopup);
+    }
+    
+    if (dismissBtn) {
+        dismissBtn.addEventListener('click', hidePopup);
+    }
+    
+    // Close on overlay click
+    exitPopup.addEventListener('click', (e) => {
+        if (e.target === exitPopup) {
+            hidePopup();
+        }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && exitPopup.classList.contains('visible')) {
+            hidePopup();
+        }
+    });
+    
+    // Track CTA click
+    if (ctaBtn) {
+        ctaBtn.addEventListener('click', () => {
+            sessionStorage.setItem('exitPopupDismissed', 'true');
+            // Don't hide immediately - let them click through
+        });
+    }
+}
 
 // ===== GSAP SCROLL ANIMATION SYSTEM =====
 function initGSAPAnimations() {
@@ -704,6 +836,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 result.style.backgroundColor = "#d4edda";
                 result.style.color = "#155724";
                 form.reset();
+                // Mark form as submitted for exit popup
+                sessionStorage.setItem('exitPopupDismissed', 'true');
             } else {
                 result.innerHTML = data.message || "Something went wrong.";
                 result.style.backgroundColor = "#f8d7da";
