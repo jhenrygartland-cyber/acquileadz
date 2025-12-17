@@ -3828,6 +3828,7 @@ footer {
     color: #4a5568;
 }
 
+
 .form-success-next-steps li {
     margin-bottom: 8px;
     font-size: 15px;
@@ -3887,58 +3888,513 @@ footer {
     font-size: 15px;
 }
 
-/* Services - Pricing Exclusions */
 .pricing-exclusions {
-    max-width: 960px;
-    margin: -10px auto 80px;
-    padding: 28px clamp(20px, 4vw, 40px);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 16px;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+    max-width: 820px;
+    margin: 0 auto 60px;
+    padding: 28px 32px;
+    background: #ffffff;
+    border: 2px solid #e4e8ef;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .pricing-exclusions h3 {
     font-size: 22px;
-    margin-bottom: 12px;
-    color: var(--white);
+    font-weight: 700;
+    font-family: var(--font-alt);
+    margin-bottom: 16px;
+    color: var(--navy);
 }
 
 .pricing-exclusions ul {
     list-style: disc;
-    padding-left: 20px;
-    color: var(--muted);
+    padding-left: 24px;
+    color: #4a5568;
     line-height: 1.7;
+    margin: 0;
 }
 
 .pricing-exclusions li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
-/* Contact - Calendly Option */
 .calendar-option {
     max-width: 600px;
-    margin: 20px auto 0;
+    margin: 32px auto 0;
     text-align: center;
-    padding: 18px;
-    background: rgba(43, 183, 218, 0.08);
-    border: 1px solid rgba(43, 183, 218, 0.2);
+    padding: 24px 28px;
+    background: #ffffff;
+    border: 2px dashed #cbd5e1;
     border-radius: 12px;
 }
 
 .calendar-option p {
-    margin-bottom: 10px;
-    color: #1f2937;
+    margin-bottom: 14px;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .calendar-link {
-    color: var(--navy);
+    display: inline-block;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-light) 100%);
+    color: var(--navy-deep);
     font-weight: 700;
+    border-radius: 10px;
     text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(43, 183, 218, 0.3);
+}
+
+.calendar-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(43, 183, 218, 0.4);
+    color: var(--navy-deep);
+}
+
+/* FIX: Pricing Exclusions - Subtle, not a sore thumb */
+.pricing-exclusions {
+    max-width: 820px;
+    margin: -20px auto 60px;
+    padding: 24px 28px;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    border-radius: 0;
+}
+
+.pricing-exclusions h3 {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--font-alt);
+    margin-bottom: 14px;
+    color: #475569;
+}
+
+.pricing-exclusions ul {
+    list-style: none;
+    padding-left: 0;
+    color: #64748b;
+    line-height: 1.7;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+}
+
+.pricing-exclusions li {
+    margin-bottom: 0;
+    font-size: 14px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.pricing-exclusions li::before {
+    content: '×';
+    position: absolute;
+    left: 0;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+
+/* FIX: Calendar Option - Simple text link, not a box */
+.calendar-option {
+    max-width: 600px;
+    margin: 32px auto 0;
+    text-align: center;
+    padding: 20px 0 0 0;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    border-radius: 0;
+}
+
+.calendar-option p {
+    margin-bottom: 8px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.calendar-link {
+    display: inline-block;
+    color: var(--cyan);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    transition: color 0.2s ease;
 }
 
 .calendar-link:hover,
 .calendar-link:focus-visible {
-    color: var(--cyan);
+    color: #1a9bb8;
     text-decoration: underline;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* FIX: Guarantee Icon - Proper checkmark rendering */
+.guarantee-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #28C840 0%, #22b339 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    font-weight: 400;
+    box-shadow: 0 6px 24px rgba(40, 200, 64, 0.3);
+    line-height: 1;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* ============================================
+   EXIT INTENT POPUP
+   ============================================ */
+
+.exit-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(6, 16, 26, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.exit-popup-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.exit-popup {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fb 100%);
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(43, 183, 218, 0.2);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(43, 183, 218, 0.2);
+}
+
+.exit-popup-overlay.visible .exit-popup {
+    transform: scale(1) translateY(0);
+}
+
+.exit-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    font-size: 24px;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.exit-popup-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #0A1927;
+}
+
+.exit-popup-content {
+    text-align: center;
+}
+
+.exit-popup-icon {
+    font-size: 56px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.exit-popup-content h3 {
+    font-size: 28px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    color: var(--navy);
+    margin-bottom: 12px;
+}
+
+.exit-popup-content p {
+    font-size: 16px;
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.exit-popup-cta {
+    display: inline-block;
+    width: 100%;
+    padding: 18px 32px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-light) 100%);
+    color: var(--navy-deep);
+    font-weight: 800;
+    font-size: 17px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(43, 183, 218, 0.35);
+    margin-bottom: 16px;
+}
+
+.exit-popup-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(43, 183, 218, 0.45);
+}
+
+.exit-popup-dismiss {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: color 0.2s ease;
+}
+
+.exit-popup-dismiss:hover {
+    color: var(--navy);
+}
+
+/* Mobile popup adjustments */
+@media (max-width: 600px) {
+    .exit-popup {
+        padding: 36px 24px;
+        margin: 16px;
+    }
+    
+    .exit-popup-icon {
+        font-size: 48px;
+    }
+    
+    .exit-popup-content h3 {
+        font-size: 24px;
+    }
+    
+    .exit-popup-content p {
+        font-size: 15px;
+    }
+    
+    .exit-popup-cta {
+        font-size: 16px;
+        padding: 16px 24px;
+    }
+}
+
+
+/* ============================================
+   GUARANTEE BOX - CLEAN VERSION (NO ICON)
+   ============================================ */
+
+.guarantee-section {
+    padding: 100px 8vw;
+    background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+    position: relative;
+}
+
+.guarantee-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(43, 183, 218, 0.3), transparent);
+}
+
+.guarantee-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.guarantee-box {
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.12) 0%, rgba(43, 183, 218, 0.06) 100%);
+    border: 2px solid rgba(43, 183, 218, 0.25);
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.guarantee-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+}
+
+/* Remove the icon completely */
+.guarantee-icon {
+    display: none !important;
+}
+
+.guarantee-box h3 {
+    font-size: 28px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.guarantee-box p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.guarantee-fine-print {
+    font-size: 13px !important;
+    color: var(--gray) !important;
+    font-style: italic;
+    margin-top: 24px !important;
+    margin-bottom: 0 !important;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Responsive guarantee */
+@media (max-width: 800px) {
+    .guarantee-section {
+        padding: 80px 40px;
+    }
+    
+    .guarantee-box {
+        padding: 36px 28px;
+    }
+    
+    .guarantee-box h3 {
+        font-size: 24px;
+    }
+    
+    .guarantee-box p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .guarantee-box h3 {
+        font-size: 22px;
+    }
+    
+    .guarantee-box p {
+        font-size: 15px;
+    }
+}
+
+
+/* ============================================
+   PRICING EXCLUSIONS - CLEAN INLINE VERSION
+   ============================================ */
+
+.pricing-exclusions {
+    max-width: 800px;
+    margin: -40px auto 80px;
+    padding: 0;
+    text-align: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.pricing-exclusions h3 {
+    display: none; /* Hide the old header */
+}
+
+.pricing-exclusions ul {
+    display: none; /* Hide the old list */
+}
+
+.exclusions-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.exclusions-list {
+    font-size: 14px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+
+/* ============================================
+   CALENDAR OPTION - REMOVED (Now Exit Popup)
+   ============================================ */
+
+.calendar-option {
+    display: none !important;
+}
+
+
+/* ============================================
+   SITE-WIDE CLEANUP - Remove Cheap-Looking Elements
+   ============================================ */
+
+/* Cleaner section headers without the label */
+.qa-label {
+    display: none;
+}
+
+/* Proof section - remove the "You're wondering..." text */
+.proof-section {
+    display: none;
+}
+
+/* Remove excessive shadows on hover - more subtle */
+.value-box:hover,
+.team-card:hover,
+.service-detail:hover,
+.offering-card:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+/* Cleaner footer disclaimer - less wordy */
+.footer-disclaimer p:first-child {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+/* Remove the "All service claims are based on..." - redundant */
+.footer-disclaimer p:first-child::after {
+    content: none;
 }
