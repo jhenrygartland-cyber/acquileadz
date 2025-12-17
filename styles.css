@@ -774,6 +774,23 @@ p {
     font-style: normal;
 }
 
+/* Policy & legal pages */
+.policy-section {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.policy-section a {
+    color: var(--cyan);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.policy-section a:hover,
+.policy-section a:focus-visible {
+    color: var(--white);
+}
+
 /* VALUE PROPS */
 .values {
     display: grid;
@@ -2568,10 +2585,13 @@ footer {
 
 .footer-main {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 40px;
-    gap: 4vw;
+    margin: 0 auto 40px;
+    gap: clamp(20px, 4vw, 48px);
+    max-width: 1200px;
+    padding: 0 12px;
+    flex-wrap: wrap;
 }
 
 .footer-brand {
@@ -2589,10 +2609,12 @@ footer {
     opacity: 1;
 }
 
+
 .footer-disclaimer {
     flex: 1;
-    text-align: center;
-    padding: 0 4vw;
+    text-align: left;
+    padding: 0;
+    max-width: 760px;
 }
 
 .footer-disclaimer p {
@@ -2613,6 +2635,9 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 12px 0;
 }
 
 .footer-copy {
@@ -2867,9 +2892,10 @@ footer {
     }
 
     .footer-main {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 24px;
         text-align: center;
+        align-items: center;
     }
 
     .footer-brand {
@@ -2878,6 +2904,7 @@ footer {
 
     .footer-disclaimer {
         max-width: 100%;
+        text-align: center;
     }
 
     .footer-spacer {
