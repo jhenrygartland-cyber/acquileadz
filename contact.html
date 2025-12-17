@@ -62,10 +62,19 @@
                 <p class="form-legal">By submitting, you agree to our <a href="terms.html">Terms</a>, <a href="privacy.html">Privacy Policy</a>, and consent to SMS/calls.</p>
             </form>
         </section>
+    </div>
 
-        <div class="calendar-option">
-            <p>Prefer to skip the form and book directly?</p>
-            <a href="YOUR_CALENDLY_LINK_HERE" class="calendar-link" target="_blank">Schedule on Our Calendar →</a>
+    <!-- EXIT INTENT POPUP -->
+    <div class="exit-popup-overlay" id="exitPopup">
+        <div class="exit-popup">
+            <button class="exit-popup-close" aria-label="Close popup">&times;</button>
+            <div class="exit-popup-content">
+                <div class="exit-popup-icon">📅</div>
+                <h3>Prefer to Book Directly?</h3>
+                <p>Skip the form and schedule a time that works for you. We'll call you at your scheduled time.</p>
+                <a href="YOUR_CALENDLY_LINK_HERE" class="exit-popup-cta" target="_blank">Schedule on Our Calendar</a>
+                <button class="exit-popup-dismiss">No thanks, I'll use the form</button>
+            </div>
         </div>
     </div>
 
