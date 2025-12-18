@@ -779,6 +779,7 @@ p {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 32px 80px;
 }
 
 .policy-section a {
@@ -794,8 +795,9 @@ p {
 
 /* Policy & legal pages */
 .policy-section {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 32px 80px;
 }
 
 .policy-section a {
@@ -2630,7 +2632,7 @@ footer {
 
 .footer-disclaimer {
     flex: 1;
-    text-align: left;
+    text-align: center;
     padding: 0;
     max-width: 760px;
 }
@@ -4358,8 +4360,8 @@ footer {
 
 .pricing-exclusions {
     max-width: 800px;
-    margin: -40px auto 80px;
-    padding: 0;
+    margin: 0 auto 80px;
+    padding: 24px 0;
     text-align: center;
     background: transparent !important;
     border: none !important;
