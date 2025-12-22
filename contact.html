@@ -75,8 +75,16 @@
 
         <section class="contact-form-section">
             <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <!--
+                    SECURITY NOTE: Web3Forms access key is visible client-side by design.
+                    For better security, consider implementing:
+                    1. Server-side form handling with your own API
+                    2. reCAPTCHA v3 for spam protection
+                    3. Rate limiting on your server
+                    Web3Forms provides basic spam protection via botcheck field below.
+                -->
                 <input type="hidden" name="access_key" value="1b112abb-70d7-4e79-a0af-5d0b3e425015">
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off">
 
                 <label for="contact-name">
                     Your Name
@@ -124,7 +132,7 @@
                 <div class="exit-popup-icon">📅</div>
                 <h3>Prefer to Book Directly?</h3>
                 <p>Skip the form and schedule a time that works for you. We'll call you at your scheduled time.</p>
-                <a href="YOUR_CALENDLY_LINK_HERE" class="exit-popup-cta" target="_blank">Schedule on Our Calendar</a>
+                <a href="contact.html" class="exit-popup-cta">Use Contact Form Instead</a>
                 <button class="exit-popup-dismiss">No thanks, I'll use the form</button>
             </div>
         </div>

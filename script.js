@@ -1,8 +1,6 @@
 // Acquileadz Website JavaScript
 // GSAP ScrollTrigger for scroll-linked animations
 
-console.log('Acquileadz site loaded');
-
 document.addEventListener('DOMContentLoaded', () => {
     // ===== COOKIE CONSENT BANNER =====
     const cookieBanner = document.querySelector('.cookie-banner');
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('acquileadz_cookies', 'all');
                 hideCookieBanner();
                 // Here you would initialize analytics if needed
-                console.log('All cookies accepted');
             });
         }
         
@@ -34,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             cookieDecline.addEventListener('click', () => {
                 localStorage.setItem('acquileadz_cookies', 'essential');
                 hideCookieBanner();
-                console.log('Essential cookies only');
             });
         }
         
@@ -120,3 +116,111 @@ document.addEventListener('DOMContentLoaded', () => {
     initGSAPAnimations();
 });
 
+
+// ===== CONTACT FORM (only on contact page) =====
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.contact-form');
+    if (!form) return;
+
+    const result = document.getElementById('result');
+    const emailInput = form.querySelector('input[name="email"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
+
+    // Email validation
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Phone validation
+    function isValidPhone(phone) {
+        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+        const digitsOnly = phone.replace(/\D/g, '');
+        return phoneRegex.test(phone) && digitsOnly.length >= 10;
+    }
+
+    // Show message to user
+    function showMessage(message, type) {
+        if (!result) return;
+        result.textContent = message;
+        result.style.display = 'block';
+
+        if (type === 'success') {
+            result.style.backgroundColor = '#d4edda';
+            result.style.color = '#155724';
+            result.style.border = '1px solid #c3e6cb';
+        } else if (type === 'error') {
+            result.style.backgroundColor = '#f8d7da';
+            result.style.color = '#721c24';
+            result.style.border = '1px solid #f5c6cb';
+        } else {
+            result.style.backgroundColor = '#d1ecf1';
+            result.style.color = '#0c5460';
+            result.style.border = '1px solid #bee5eb';
+        }
+    }
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Client-side validation
+        if (!isValidEmail(emailInput.value)) {
+            showMessage('Please enter a valid email address.', 'error');
+            emailInput.focus();
+            return;
+        }
+
+        if (!isValidPhone(phoneInput.value)) {
+            showMessage('Please enter a valid phone number (at least 10 digits).', 'error');
+            phoneInput.focus();
+            return;
+        }
+
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton?.innerHTML || 'Send Message';
+
+        try {
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'Sending...';
+            }
+
+            showMessage('Sending your message...', 'info');
+
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(Object.fromEntries(formData))
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                showMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
+                form.reset();
+                // Mark form as submitted for exit popup
+                if (typeof sessionStorage !== 'undefined') {
+                    sessionStorage.setItem('exitPopupDismissed', 'true');
+                }
+            } else {
+                throw new Error(data.message || 'Form submission failed');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showMessage('Something went wrong. Please try again or email us directly at hello@acquileadz.com', 'error');
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
+            // Auto-hide message after 8 seconds
+            setTimeout(() => {
+                if (result) result.style.display = 'none';
+            }, 8000);
+        }
+    });
+});
