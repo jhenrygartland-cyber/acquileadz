@@ -4,16 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initExitIntentPopup() {
+    // Configuration constants
+    const EXIT_INTENT_CONFIG = {
+        MOUSE_VELOCITY_THRESHOLD: 50,        // Pixels per mousemove event
+        MOUSE_TOP_POSITION_PX: 100,          // Top area of viewport to trigger
+        MOBILE_SWIPE_THRESHOLD_PX: 100,      // Swipe down distance to trigger
+        SCROLL_TOP_THRESHOLD_PX: 50,         // Consider "at top" if scrollTop < this
+        AUTO_SHOW_DELAY_MS: 45000            // Show after 45 seconds on page
+    };
+
     const exitPopup = document.getElementById('exitPopup');
     if (!exitPopup) return;
-    
+
     const closeBtn = exitPopup.querySelector('.exit-popup-close');
     const dismissBtn = exitPopup.querySelector('.exit-popup-dismiss');
     const ctaBtn = exitPopup.querySelector('.exit-popup-cta');
-    
+
     let popupShown = false;
     let formSubmitted = false;
-    
+
     const popupDismissed = sessionStorage.getItem('exitPopupDismissed');
     
     const contactForm = document.querySelector('.contact-form');
@@ -48,8 +57,10 @@ function initExitIntentPopup() {
     document.addEventListener('mousemove', (e) => {
         velocity = lastY - e.clientY;
         lastY = e.clientY;
-        
-        if (velocity > 50 && e.clientY < 100) {
+
+        // Trigger if mouse moves up quickly and is near top of viewport
+        if (velocity > EXIT_INTENT_CONFIG.MOUSE_VELOCITY_THRESHOLD &&
+            e.clientY < EXIT_INTENT_CONFIG.MOUSE_TOP_POSITION_PX) {
             showPopup();
         }
     });
@@ -62,15 +73,18 @@ function initExitIntentPopup() {
     document.addEventListener('touchend', (e) => {
         const touchEndY = e.changedTouches[0].clientY;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop < 50 && touchEndY - touchStartY > 100) {
+
+        // Trigger if at top of page and swiping down (pull-to-refresh gesture)
+        if (scrollTop < EXIT_INTENT_CONFIG.SCROLL_TOP_THRESHOLD_PX &&
+            touchEndY - touchStartY > EXIT_INTENT_CONFIG.MOBILE_SWIPE_THRESHOLD_PX) {
             showPopup();
         }
     }, { passive: true });
-    
+
+    // Time-based fallback - show after user has been on page for a while
     setTimeout(() => {
         showPopup();
-    }, 45000);
+    }, EXIT_INTENT_CONFIG.AUTO_SHOW_DELAY_MS);
     
     if (closeBtn) {
         closeBtn.addEventListener('click', hidePopup);
