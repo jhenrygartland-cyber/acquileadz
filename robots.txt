@@ -1,3 +1,11 @@
+# Acquileadz Robots.txt
+# https://acquileadz.com/robots.txt
+
 User-agent: *
 Allow: /
+
+# Disallow backup files
+Disallow: /index-backup.html
+
+# Sitemap
 Sitemap: https://acquileadz.com/sitemap.xml
