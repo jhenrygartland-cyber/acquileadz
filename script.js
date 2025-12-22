@@ -116,8 +116,535 @@ document.addEventListener('DOMContentLoaded', () => {
     initGSAPAnimations();
 });
 
+function initGSAPAnimations() {
+    // Check if GSAP and ScrollTrigger are available
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.log('GSAP not loaded - skipping animations');
+        return;
+    }
+    
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
 
-// ===== CONTACT FORM (only on contact page) =====
+    // ===== METRICS SECTION =====
+    gsap.utils.toArray('.metric').forEach((metric, i) => {
+        gsap.fromTo(metric, 
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: metric,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== VALUE BOXES =====
+    gsap.utils.toArray('.value-box').forEach((box, i) => {
+        gsap.fromTo(box,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: box,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== FEATURE CARDS =====
+    gsap.utils.toArray('.feature-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== TESTIMONIAL CARDS =====
+    gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== SERVICE DETAIL CARDS (services page) =====
+    gsap.utils.toArray('.service-detail').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PROBLEM ITEMS (services page) =====
+    gsap.utils.toArray('.problem-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                x: -30 
+            },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== BENEFIT ITEMS (services page) =====
+    gsap.utils.toArray('.benefit-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 20 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 70%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== OFFERING CARDS (services page) =====
+    gsap.utils.toArray('.offering-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 55%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PROCESS STEPS (services page) =====
+    gsap.utils.toArray('.process-step').forEach((step, i) => {
+        gsap.fromTo(step,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: step,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== FAQ ITEMS (services page) =====
+    gsap.utils.toArray('.faq-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 65%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PRICING ITEMS (services page) =====
+    gsap.utils.toArray('.pricing-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 20 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 70%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== VALUE ITEMS (about page) =====
+    gsap.utils.toArray('.value-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== TRAIT ITEMS (about page) =====
+    gsap.utils.toArray('.trait-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                x: -20 
+            },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'top 70%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== PROOF STATS (about page) =====
+    gsap.utils.toArray('.proof-stat').forEach((stat, i) => {
+        gsap.fromTo(stat,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: stat,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== TEAM CARDS (about page) =====
+    gsap.utils.toArray('.team-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 55%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== ABOUT CARDS =====
+    gsap.utils.toArray('.about-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 50 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== DIFFERENTIATOR CARDS =====
+    gsap.utils.toArray('.diff-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // ===== FINAL CTA =====
+    const finalCta = document.querySelector('.final-cta-content');
+    if (finalCta) {
+        gsap.fromTo(finalCta,
+            { 
+                opacity: 0, 
+                y: 40 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: finalCta,
+                    start: 'top 80%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    }
+
+    // ===== PROCESS FLOW STEPS =====
+    initProcessFlowAnimations();
+}
+
+// ===== PROCESS FLOW ANIMATIONS =====
+function initProcessFlowAnimations() {
+    const flowSteps = document.querySelectorAll('.flow-step');
+    
+    if (flowSteps.length === 0) return;
+
+    flowSteps.forEach((step, index) => {
+        const stepBox = step.querySelector('.step-box');
+        const title = step.querySelector('.animated-text');
+        const description = step.querySelector('.step-box p');
+        const arrowConnector = step.querySelector('.arrow-connector');
+        const arrowPath = step.querySelector('.arrow-path');
+        const arrowHead = step.querySelector('.arrow-head');
+        const successBadge = step.querySelector('.success-badge');
+
+        // Create timeline for this step
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: step,
+                start: 'top 80%',
+                end: 'top 30%',
+                scrub: 1
+            }
+        });
+
+        // Animate step box
+        if (stepBox) {
+            gsap.set(stepBox, { opacity: 0, y: 60, scale: 0.95 });
+            tl.to(stepBox, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.5,
+                ease: 'power2.out'
+            }, 0);
+        }
+
+        // Animate title
+        if (title) {
+            gsap.set(title, { opacity: 0, y: 20 });
+            tl.to(title, {
+                opacity: 1,
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            }, 0.1);
+        }
+
+        // Animate description
+        if (description) {
+            gsap.set(description, { opacity: 0, y: 15 });
+            tl.to(description, {
+                opacity: 1,
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            }, 0.2);
+        }
+
+        // Animate arrow path (draw effect)
+        if (arrowPath) {
+            const pathLength = arrowPath.getTotalLength ? arrowPath.getTotalLength() : 150;
+            gsap.set(arrowPath, { 
+                strokeDasharray: pathLength,
+                strokeDashoffset: pathLength 
+            });
+            tl.to(arrowPath, {
+                strokeDashoffset: 0,
+                duration: 0.4,
+                ease: 'none'
+            }, 0.3);
+        }
+
+        // Animate arrow head
+        if (arrowHead) {
+            gsap.set(arrowHead, { opacity: 0, scale: 0.5 });
+            tl.to(arrowHead, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.2,
+                ease: 'back.out(1.7)'
+            }, 0.6);
+        }
+
+        // Success badge animation (only on final step)
+        if (successBadge) {
+            const circle = successBadge.querySelector('.success-circle');
+            const check = successBadge.querySelector('.success-check');
+
+            if (circle) {
+                gsap.set(circle, { 
+                    strokeDasharray: 176,
+                    strokeDashoffset: 176 
+                });
+                tl.to(circle, {
+                    strokeDashoffset: 0,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                }, 0.4);
+            }
+
+            if (check) {
+                gsap.set(check, { 
+                    strokeDasharray: 60,
+                    strokeDashoffset: 60 
+                });
+                tl.to(check, {
+                    strokeDashoffset: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                }, 0.6);
+            }
+        }
+    });
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form');
     if (!form) return;
