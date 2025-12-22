@@ -126,17 +126,85 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailInput = form.querySelector('input[name="email"]');
     const phoneInput = form.querySelector('input[name="phone"]');
 
-    // Email validation
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+    // Rate limiting configuration
+    const RATE_LIMIT = {
+        MAX_SUBMISSIONS: 3,
+        TIME_WINDOW_MS: 60000, // 1 minute
+        STORAGE_KEY: 'form_submissions'
+    };
+
+    // Check rate limit
+    function checkRateLimit() {
+        try {
+            const submissions = JSON.parse(localStorage.getItem(RATE_LIMIT.STORAGE_KEY) || '[]');
+            const now = Date.now();
+
+            // Filter out old submissions outside time window
+            const recentSubmissions = submissions.filter(time => now - time < RATE_LIMIT.TIME_WINDOW_MS);
+
+            if (recentSubmissions.length >= RATE_LIMIT.MAX_SUBMISSIONS) {
+                const oldestSubmission = Math.min(...recentSubmissions);
+                const waitTime = Math.ceil((RATE_LIMIT.TIME_WINDOW_MS - (now - oldestSubmission)) / 1000);
+                return { allowed: false, waitTime };
+            }
+
+            return { allowed: true };
+        } catch (e) {
+            return { allowed: true }; // Fail open if localStorage unavailable
+        }
     }
 
-    // Phone validation
+    // Record submission
+    function recordSubmission() {
+        try {
+            const submissions = JSON.parse(localStorage.getItem(RATE_LIMIT.STORAGE_KEY) || '[]');
+            const now = Date.now();
+            submissions.push(now);
+
+            // Keep only recent submissions
+            const recentSubmissions = submissions.filter(time => now - time < RATE_LIMIT.TIME_WINDOW_MS);
+            localStorage.setItem(RATE_LIMIT.STORAGE_KEY, JSON.stringify(recentSubmissions));
+        } catch (e) {
+            // Silently fail if localStorage unavailable
+        }
+    }
+
+    // Enhanced email validation (RFC 5322 compliant)
+    function isValidEmail(email) {
+        // Check length
+        if (!email || email.length > 320) return false;
+
+        // More robust email regex
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+        if (!emailRegex.test(email)) return false;
+
+        // Check for suspicious patterns
+        const suspiciousPatterns = [
+            /\.\./,  // consecutive dots
+            /^\./, // starts with dot
+            /\.$/, // ends with dot
+            /@\./,  // @ followed by dot
+            /\.@/   // dot followed by @
+        ];
+
+        return !suspiciousPatterns.some(pattern => pattern.test(email));
+    }
+
+    // Enhanced phone validation
     function isValidPhone(phone) {
-        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+        if (!phone) return false;
+
+        // Remove all non-digit characters
         const digitsOnly = phone.replace(/\D/g, '');
-        return phoneRegex.test(phone) && digitsOnly.length >= 10;
+
+        // Must be between 10 and 15 digits (international format)
+        if (digitsOnly.length < 10 || digitsOnly.length > 15) return false;
+
+        // Check for suspicious patterns (all same digit)
+        if (/^(.)\1+$/.test(digitsOnly)) return false;
+
+        return true;
     }
 
     // Show message to user
@@ -162,6 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
+
+        // Check rate limit
+        const rateLimitCheck = checkRateLimit();
+        if (!rateLimitCheck.allowed) {
+            showMessage(`Too many submissions. Please wait ${rateLimitCheck.waitTime} seconds before trying again.`, 'error');
+            return;
+        }
 
         // Client-side validation
         if (!isValidEmail(emailInput.value)) {
@@ -202,6 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok && data.success) {
                 showMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
                 form.reset();
+                // Record successful submission for rate limiting
+                recordSubmission();
                 // Mark form as submitted for exit popup
                 if (typeof sessionStorage !== 'undefined') {
                     sessionStorage.setItem('exitPopupDismissed', 'true');
