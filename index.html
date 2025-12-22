@@ -72,6 +72,9 @@
 </head>
 
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
     <!-- NAVIGATION -->
     <nav class="nav">
         <div class="nav-logo">
@@ -92,7 +95,7 @@
         </div>
     </nav>
 
-    <div class="page-container">
+    <div class="page-container" id="main-content">
         <!-- HERO SECTION -->
         <section class="hero">
             <div class="hero-content">
@@ -429,11 +432,11 @@
         </div>
     </footer>
 
-    <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+    <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" aria-describedby="cookie-description" hidden>
         <div class="cookie-content">
             <div class="cookie-text">
                 <p class="cookie-title">🍪 Cookie Preferences</p>
-                <p class="cookie-copy">We use essential cookies to keep the site running. Optional analytics help us improve but stay off until you consent.</p>
+                <p class="cookie-copy" id="cookie-description">We use essential cookies to keep the site running. Optional analytics help us improve but stay off until you consent.</p>
             </div>
             <div class="cookie-actions">
                 <button class="cookie-btn cookie-accept">Accept All</button>

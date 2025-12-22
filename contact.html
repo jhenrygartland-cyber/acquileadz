@@ -45,6 +45,9 @@
 </head>
 
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
     <nav class="nav">
         <div class="nav-logo">
             <a href="index.html" aria-label="Go to homepage">
@@ -64,7 +67,7 @@
         </div>
     </nav>
 
-    <div class="page-container">
+    <div class="page-container" id="main-content">
         <section class="contact-header">
             <h1>Get In Touch</h1>
             <p>Let's talk about getting you more booked jobs.</p>
@@ -74,12 +77,31 @@
             <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="1b112abb-70d7-4e79-a0af-5d0b3e425015">
                 <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="text" name="company" placeholder="Business Name">
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="tel" name="phone" placeholder="Phone" required>
-                <textarea name="message" placeholder="How can we help?" required></textarea>
+
+                <label for="contact-name">
+                    Your Name
+                    <input type="text" id="contact-name" name="name" placeholder="Your Name" required>
+                </label>
+
+                <label for="contact-company">
+                    Business Name
+                    <input type="text" id="contact-company" name="company" placeholder="Business Name">
+                </label>
+
+                <label for="contact-email">
+                    Email
+                    <input type="email" id="contact-email" name="email" placeholder="Email" required>
+                </label>
+
+                <label for="contact-phone">
+                    Phone
+                    <input type="tel" id="contact-phone" name="phone" placeholder="Phone" required>
+                </label>
+
+                <label for="contact-message">
+                    Message
+                    <textarea id="contact-message" name="message" placeholder="How can we help?" required></textarea>
+                </label>
                 
                 <div class="form-consent-box">
                     <p class="privacy-note">We use your details only to respond to your inquiry. By providing your phone number, you consent to receive calls and SMS messages from Acquileadz about your inquiry and our services. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not required to purchase our services.</p>
