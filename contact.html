@@ -39,7 +39,7 @@
     }
     </script>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.min.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
@@ -135,7 +135,7 @@
         <div class="footer-main">
             <div class="footer-brand">
                 <a href="index.html" aria-label="Go to homepage">
-                    <img src="assets/logo-dark.png" alt="Acquileadz Logo" class="footer-logo">
+                    <img src="assets/logo-dark.png" alt="Acquileadz Logo" class="footer-logo" loading="lazy">
                 </a>
             </div>
             <div class="footer-disclaimer">
@@ -171,6 +171,8 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
+    <!-- Exit intent popup - contact page only -->
+    <script defer src="exit-intent.js"></script>
 </body>
 </html>
