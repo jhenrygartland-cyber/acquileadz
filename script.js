@@ -848,16 +848,11 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'John Gartland',
             role: 'Founder & Operations',
             email: 'john@acquileadz.com',
-            bio: `<p>John founded Acquileadz with a singular mission: help contractors stop guessing and start growing. With over a decade of experience in operations and client management, he's built systems that turn chaos into consistency.</p>
-                  <p>Before Acquileadz, John managed operations for multiple service businesses, witnessing firsthand how contractors struggled with lead management and follow-up. He realized that most weren't losing because of bad service—they were losing because they didn't have systems.</p>
+            bio: `<p>John founded Acquileadz with a singular mission: help contractors stop guessing and start growing. With extensive experience in outreach, copywriting, and digital marketing across multiple online businesses, he's built systems that turn chaos into consistency.</p>
+                  <p>Before Acquileadz, John worked hands-on with online-based businesses, managing everything from mass outreach campaigns to social media marketing. He built websites, managed sales pipelines, and crafted copy that converted—skills that now power every contractor system at Acquileadz.</p>
                   <p>Now, John runs the day-to-day operations at Acquileadz, ensuring every client gets a customized system that actually works. He's known for his direct communication style, obsessive attention to detail, and refusal to let leads slip through the cracks.</p>`,
-            skills: ['Client Relations', 'Operations Management', 'System Implementation', 'CRM Strategy', 'Process Optimization', 'Account Management'],
-            achievements: [
-                'Built scalable systems serving 100+ contractor clients nationwide',
-                'Developed proprietary lead management framework used across all client accounts',
-                'Achieved 95% client retention rate through hands-on relationship management',
-                'Created operational playbooks that reduced client onboarding time by 60%'
-            ]
+            skills: ['Digital Marketing', 'Copywriting', 'Client Relations', 'Pipeline Management', 'Website Development', 'Operations Management'],
+            achievements: [] // No achievements section for John
         },
         'Luke McCloskey': {
             photo: 'assets/Luke.png',
