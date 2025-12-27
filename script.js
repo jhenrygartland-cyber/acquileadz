@@ -802,7 +802,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (response.ok && data.success) {
-                showMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
+                showMessage('✓ Message sent successfully! Redirecting...', 'success');
                 form.reset();
                 // Record successful submission for rate limiting
                 recordSubmission();
@@ -810,6 +810,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof sessionStorage !== 'undefined') {
                     sessionStorage.setItem('exitPopupDismissed', 'true');
                 }
+                // Redirect to success page after brief delay
+                setTimeout(() => {
+                    window.location.href = 'success.html';
+                }, 800);
             } else {
                 throw new Error(data.message || 'Form submission failed');
             }
