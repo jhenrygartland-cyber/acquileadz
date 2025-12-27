@@ -10,7 +10,7 @@ function initExitIntentPopup() {
         MOUSE_TOP_POSITION_PX: 100,          // Top area of viewport to trigger
         MOBILE_SWIPE_THRESHOLD_PX: 100,      // Swipe down distance to trigger
         SCROLL_TOP_THRESHOLD_PX: 50,         // Consider "at top" if scrollTop < this
-        AUTO_SHOW_DELAY_MS: 90000            // Show after 90 seconds on page (less annoying)
+        AUTO_SHOW_DELAY_MS: 20000            // Show after 20 seconds (capture contractors before they leave)
     };
 
     const exitPopup = document.getElementById('exitPopup');
