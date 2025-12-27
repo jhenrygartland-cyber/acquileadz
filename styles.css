@@ -2560,6 +2560,259 @@ form label textarea {
     line-height: 1.6;
 }
 
+/* Make team cards clickable */
+.team-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   TEAM MEMBER MODAL
+   ============================================ */
+
+.team-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(6, 16, 26, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.team-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.team-modal {
+    background: var(--white);
+    border-radius: 24px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+}
+
+.team-modal-overlay.active .team-modal {
+    transform: scale(1);
+}
+
+.team-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--navy);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.team-modal-close:hover {
+    background: var(--cyan);
+    color: var(--white);
+    transform: rotate(90deg);
+}
+
+.team-modal-content {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+    padding: 60px;
+}
+
+.team-modal-photo {
+    position: sticky;
+    top: 60px;
+    height: fit-content;
+}
+
+.team-modal-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(43, 183, 218, 0.3);
+}
+
+.team-modal-info h2 {
+    font-size: 36px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    color: var(--navy-deep);
+    margin-bottom: 8px;
+}
+
+.team-modal-role {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cyan);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.team-modal-email {
+    display: inline-block;
+    color: var(--cyan);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 20px;
+    background: rgba(43, 183, 218, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin-bottom: 24px;
+}
+
+.team-modal-email:hover {
+    background: var(--cyan);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.team-modal-bio {
+    margin-bottom: 32px;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
+.team-modal-bio p {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.team-modal-skills h3,
+.team-modal-achievements h3 {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-alt);
+    color: var(--navy-deep);
+    margin-bottom: 16px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.skill-badge {
+    background: linear-gradient(135deg, rgba(43, 183, 218, 0.15), rgba(43, 183, 218, 0.05));
+    border: 1px solid rgba(43, 183, 218, 0.3);
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    transition: all 0.2s ease;
+}
+
+.skill-badge:hover {
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-light));
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(43, 183, 218, 0.4);
+}
+
+.team-modal-achievements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.team-modal-achievements li {
+    padding: 12px 0 12px 32px;
+    position: relative;
+    color: #4a5568;
+    font-size: 15px;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.team-modal-achievements li:last-child {
+    border-bottom: none;
+}
+
+.team-modal-achievements li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #28C840;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* Responsive modal */
+@media (max-width: 768px) {
+    .team-modal-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 24px;
+    }
+
+    .team-modal-photo {
+        position: static;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .team-modal-info h2 {
+        font-size: 28px;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .team-modal-close {
+        top: 16px;
+        right: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-modal {
+        border-radius: 16px;
+    }
+
+    .team-modal-content {
+        padding: 32px 20px;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ABOUT CTA */
 .about-cta {
     padding: 100px 80px;
