@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Content Security Policy - Enhanced security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    <meta name="theme-color" content="#0A1927">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Thank you for contacting Acquileadz! We'll be in touch within 2 hours during business hours.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://acquileadz.com/success.html">
+
+    <title>Success! | Acquileadz</title>
+
+    <link rel="stylesheet" href="styles.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <style>
+        /* Success page specific styles */
+        .success-hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 40px 80px;
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-dark) 100%);
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #28C840 0%, #20A033 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 32px;
+            animation: successPulse 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 48px rgba(40, 200, 64, 0.4);
+        }
+
+        @keyframes successPulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 16px;
+            font-family: var(--font-alt);
+        }
+
+        .success-hero p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+
+        .success-details {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 560px;
+            margin: 0 auto 48px;
+            text-align: left;
+        }
+
+        .success-details h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            font-family: var(--font-alt);
+        }
+
+        .success-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .success-details li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .success-details li::before {
+            content: "✓";
+            color: #28C840;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .success-cta {
+            display: inline-block;
+            padding: 18px 36px;
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-light) 100%);
+            color: var(--navy-deep);
+            font-weight: 700;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 17px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 24px rgba(43, 183, 218, 0.4);
+        }
+
+        .success-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(43, 183, 218, 0.5);
+        }
+
+        .success-cta-secondary {
+            display: inline-block;
+            padding: 18px 36px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--cyan);
+            font-weight: 700;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 17px;
+            border: 1px solid rgba(43, 183, 218, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .success-cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--cyan);
+        }
+
+        .success-social-proof {
+            margin-top: 64px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .success-social-proof h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 24px;
+            font-family: var(--font-alt);
+        }
+
+        .success-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 24px;
+            text-align: center;
+        }
+
+        .success-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .success-stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: var(--font-alt);
+        }
+
+        .success-stat-label {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 600px) {
+            .success-hero {
+                padding: 80px 24px 60px;
+            }
+
+            .success-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 50px;
+            }
+
+            .success-details {
+                padding: 24px;
+            }
+
+            .success-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .success-cta,
+            .success-cta-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .success-social-proof {
+                padding: 24px;
+                margin-top: 48px;
+            }
+
+            .success-stats {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- HEADER / NAVIGATION -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo" aria-label="Go to homepage">
+            <img src="assets/logo-dark.png" alt="Acquileadz Logo">
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="cta-btn">Contact</a>
+        </div>
+    </nav>
+
+    <main class="page-container" id="main-content">
+        <section class="success-hero">
+            <div class="success-icon">✓</div>
+            <h1>Message Received!</h1>
+            <p>Thank you for reaching out. We're excited to help you get more booked jobs and grow your business.</p>
+
+            <div class="success-details">
+                <h2>What Happens Next?</h2>
+                <ul>
+                    <li><strong>Within 2 hours</strong> (during business hours, Mon-Fri 9am-6pm EST), one of our specialists will review your message</li>
+                    <li><strong>We'll reach out</strong> via your preferred contact method to discuss your specific needs</li>
+                    <li><strong>Free consultation</strong> to understand your business and show you exactly how we can help</li>
+                    <li><strong>Custom proposal</strong> tailored to your market, budget, and goals</li>
+                </ul>
+            </div>
+
+            <div class="success-actions">
+                <a href="index.html" class="success-cta">Return to Homepage</a>
+                <a href="services.html" class="success-cta-secondary">Explore Our Services</a>
+            </div>
+
+            <div class="success-social-proof">
+                <h3>Join Hundreds of Contractors Who Are Booked Solid</h3>
+                <div class="success-stats">
+                    <div class="success-stat">
+                        <div class="success-stat-number">2-3x</div>
+                        <div class="success-stat-label">Average ROI Increase</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-number">95%</div>
+                        <div class="success-stat-label">Client Retention Rate</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-number">&lt;2hrs</div>
+                        <div class="success-stat-label">Average Response Time</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-brand">
+                <a href="index.html" aria-label="Go to homepage">
+                    <img src="assets/logo-dark.png" alt="Acquileadz Logo" class="footer-logo" loading="lazy">
+                </a>
+            </div>
+            <div class="footer-disclaimer">
+                <p>Results vary based on market conditions, advertising budget, contractor responsiveness, and other factors outside our control. Past performance does not guarantee future results. All service claims are based on our standard processes and documented client engagements.</p>
+                <p class="footer-contact">Acquileadz operates remotely to serve contractors nationwide. Business correspondence: <a href="mailto:hello@acquileadz.com">hello@acquileadz.com</a></p>
+            </div>
+            <div class="footer-spacer"></div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2025 Acquileadz.com. All rights reserved.</p>
+            <div class="footer-links" aria-label="Legal and policy links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="cookies.html">Cookies</a>
+                <a href="dmca.html">DMCA</a>
+                <a href="do-not-sell.html">Do Not Sell My Info</a>
+                <a href="legal.html">Legal</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <p class="cookie-title">🍪 Cookie Preferences</p>
+                <p class="cookie-copy">We use essential cookies to keep the site running. Optional analytics help us improve but stay off until you consent.</p>
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-accept">Accept All</button>
+                <button class="cookie-btn cookie-decline">Essential Only</button>
+                <a class="cookie-link" href="cookies.html">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="script.min.js"></script>
+</body>
+</html>
