@@ -852,7 +852,13 @@ document.addEventListener('DOMContentLoaded', () => {
                   <p>Before Acquileadz, John worked hands-on with online-based businesses, managing everything from mass outreach campaigns to social media marketing. He built websites, managed sales pipelines, and crafted copy that converted—skills that now power every contractor system at Acquileadz.</p>
                   <p>Now, John runs the day-to-day operations at Acquileadz, ensuring every client gets a customized system that actually works. He's known for his direct communication style, obsessive attention to detail, and refusal to let leads slip through the cracks.</p>`,
             skills: ['Digital Marketing', 'Copywriting', 'Client Relations', 'Pipeline Management', 'Website Development', 'Operations Management'],
-            achievements: [] // No achievements section for John
+            achievements: [
+                'Built and managed high-conversion sales pipelines for multiple online businesses',
+                'Executed mass outreach campaigns generating thousands of qualified leads',
+                'Developed websites and digital systems that streamlined business operations',
+                'Crafted copywriting and marketing content that drove client acquisition',
+                'Managed social media marketing strategies across multiple platforms'
+            ]
         },
         'Luke McCloskey': {
             photo: 'assets/Luke.png',
