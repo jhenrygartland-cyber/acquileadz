@@ -32,26 +32,36 @@ function initExitIntentPopup() {
             sessionStorage.setItem('exitPopupDismissed', 'true');
         });
     }
-    
+
     function showPopup() {
         if (popupShown || popupDismissed || formSubmitted) return;
         popupShown = true;
         exitPopup.classList.add('visible');
         document.body.style.overflow = 'hidden';
     }
-    
+
     function hidePopup() {
         exitPopup.classList.remove('visible');
         document.body.style.overflow = '';
         sessionStorage.setItem('exitPopupDismissed', 'true');
     }
-    
-    document.addEventListener('mouseout', (e) => {
-        if (e.clientY <= 0 && e.relatedTarget === null) {
+
+    // Better exit intent detection - triggers when mouse leaves viewport at top
+    document.addEventListener('mouseleave', (e) => {
+        // Only trigger if mouse is leaving toward the top of the page
+        if (e.clientY <= 0) {
             showPopup();
         }
     });
-    
+
+    // Alternative: detect when mouse moves to very top of page
+    document.addEventListener('mouseout', (e) => {
+        // Check if mouse is leaving the document
+        if (!e.relatedTarget && !e.toElement) {
+            showPopup();
+        }
+    });
+
     let lastY = 0;
     let velocity = 0;
     document.addEventListener('mousemove', (e) => {
