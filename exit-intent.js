@@ -23,7 +23,12 @@ function initExitIntentPopup() {
     let popupShown = false;
     let formSubmitted = false;
 
+    // Check if popup was previously dismissed (clears on browser close)
     const popupDismissed = sessionStorage.getItem('exitPopupDismissed');
+
+    // DEBUG: To test the popup, open browser console and run:
+    // sessionStorage.removeItem('exitPopupDismissed')
+    // Then refresh the page and move mouse to top
     
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
@@ -46,26 +51,22 @@ function initExitIntentPopup() {
         sessionStorage.setItem('exitPopupDismissed', 'true');
     }
 
-    // Better exit intent detection - triggers when mouse leaves viewport at top
-    document.addEventListener('mouseleave', (e) => {
-        // Only trigger if mouse is leaving toward the top of the page
-        if (e.clientY <= 0) {
-            showPopup();
-        }
-    });
-
-    // Alternative: detect when mouse moves to very top of page
+    // Primary exit intent detection - when mouse moves toward top of viewport
     document.addEventListener('mouseout', (e) => {
-        // Check if mouse is leaving the document
-        if (!e.relatedTarget && !e.toElement) {
+        // Detect mouse leaving toward top of page (toward browser controls)
+        // Check if mouse is at/near top AND leaving the page
+        const isNearTop = e.clientY <= 10;
+        const isLeavingPage = !e.relatedTarget || e.relatedTarget.nodeName === 'HTML';
+
+        if (isNearTop && isLeavingPage) {
             showPopup();
         }
     });
 
+    // Backup detection: fast upward movement to top
     let lastY = 0;
-    let velocity = 0;
     document.addEventListener('mousemove', (e) => {
-        velocity = lastY - e.clientY;
+        const velocity = lastY - e.clientY;
         lastY = e.clientY;
 
         // Trigger if mouse moves up quickly and is near top of viewport
