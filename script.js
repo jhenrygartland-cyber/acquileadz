@@ -938,3 +938,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// ============================================
+// FOOTER LEGAL LINKS TOGGLE (Mobile Only)
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const footerToggle = document.querySelector('.footer-links-toggle');
+    const footerLinks = document.querySelector('.footer-links');
+
+    if (footerToggle && footerLinks) {
+        footerToggle.addEventListener('click', () => {
+            const isExpanded = footerToggle.getAttribute('aria-expanded') === 'true';
+
+            // Toggle active class
+            footerToggle.classList.toggle('active');
+            footerLinks.classList.toggle('active');
+
+            // Update ARIA attribute
+            footerToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+    }
+});
