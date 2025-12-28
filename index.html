@@ -41,29 +41,107 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- Structured Data (Schema.org) -->
+    <!-- Structured Data (Schema.org) - LocalBusiness + Organization -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Acquileadz",
-        "description": "Acquisition Management for Contractors. We build and manage the systems that turn leads into booked jobs.",
-        "url": "https://acquileadz.com",
-        "logo": "https://acquileadz.com/assets/logo-dark.png",
-        "email": "hello@acquileadz.com",
-        "areaServed": {
-            "@type": "Country",
-            "name": "United States"
-        },
-        "serviceType": ["Lead Generation", "Lead Management", "Appointment Setting", "CRM Setup"],
-        "audience": {
-            "@type": "Audience",
-            "audienceType": "Contractors"
-        },
-        "offers": {
-            "@type": "Offer",
-            "description": "90-Day Performance Commitment: If we don't deliver at least 10 qualified appointments in your first 90 days, we'll work the next month free."
-        }
+        "@graph": [
+            {
+                "@type": "LocalBusiness",
+                "@id": "https://acquileadz.com/#business",
+                "name": "Acquileadz",
+                "description": "Contractor lead generation and acquisition management. We build and manage complete systems that turn leads into booked jobs.",
+                "url": "https://acquileadz.com",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://acquileadz.com/assets/logo-dark.png"
+                },
+                "image": "https://acquileadz.com/assets/logo-dark.png",
+                "email": "hello@acquileadz.com",
+                "priceRange": "$$",
+                "areaServed": {
+                    "@type": "Country",
+                    "name": "United States"
+                },
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Contractor Marketing Services",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Contractor Lead Generation",
+                                "description": "Complete lead generation system for contractors"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Lead Qualification",
+                                "description": "Automated lead qualification and scoring"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Appointment Setting",
+                                "description": "Done-for-you appointment booking and scheduling"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "CRM Management",
+                                "description": "Complete CRM setup and lead management"
+                            }
+                        }
+                    ]
+                },
+                "makesOffer": {
+                    "@type": "Offer",
+                    "name": "90-Day Performance Commitment",
+                    "description": "If we don't deliver at least 10 qualified appointments in your first 90 days, we'll work the next month free.",
+                    "availability": "https://schema.org/InStock"
+                }
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://acquileadz.com/#organization",
+                "name": "Acquileadz",
+                "url": "https://acquileadz.com",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://acquileadz.com/assets/logo-dark.png",
+                    "width": 600,
+                    "height": 60
+                },
+                "foundingDate": "2024",
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "contactType": "customer support",
+                    "email": "hello@acquileadz.com",
+                    "areaServed": "US"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://acquileadz.com/#website",
+                "url": "https://acquileadz.com",
+                "name": "Acquileadz",
+                "publisher": {
+                    "@id": "https://acquileadz.com/#organization"
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://acquileadz.com/?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            }
+        ]
     }
     </script>
 
