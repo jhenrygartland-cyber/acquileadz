@@ -2095,6 +2095,32 @@ form label textarea {
     color: var(--muted);
 }
 
+.calendly-skip-btn {
+    margin-top: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-light) 100%);
+    color: var(--navy-deep);
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(43, 183, 218, 0.35);
+}
+
+.calendly-skip-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(43, 183, 218, 0.45);
+}
+
+.skip-icon {
+    font-size: 20px;
+}
+
 .contact-form-section {
     padding: 80px 80px 120px;
     background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
@@ -4635,6 +4661,27 @@ footer {
     transform: scale(1) translateY(0);
 }
 
+/* Calendly popup specific styles - larger to accommodate widget */
+.calendly-popup {
+    max-width: 900px;
+    padding: 40px;
+}
+
+.calendly-popup .exit-popup-content {
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.calendly-popup .exit-popup-content h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.calendly-popup .exit-popup-content p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
 .exit-popup-close {
     position: absolute;
     top: 16px;
@@ -4723,6 +4770,22 @@ footer {
     .exit-popup {
         padding: 36px 24px;
         margin: 16px;
+    }
+
+    .calendly-popup {
+        padding: 28px 20px;
+        max-width: 100%;
+    }
+
+    .calendly-popup .calendly-inline-widget {
+        min-width: 100% !important;
+        height: 600px !important;
+    }
+
+    .calendly-skip-btn {
+        font-size: 15px;
+        padding: 14px 24px;
+        width: 100%;
     }
     
     .exit-popup-icon {

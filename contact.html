@@ -85,6 +85,10 @@
         <section class="contact-header">
             <h1>Book Your Free Contractor Marketing Consultation</h1>
             <p>Schedule your contractor marketing consultation and we'll show you exactly how to turn your leads into booked jobs. No fluff, no long-term commitments — just a straight conversation about what's working and what's not.</p>
+            <button class="calendly-skip-btn" id="skipFormBtn" type="button">
+                <span class="skip-icon">📅</span>
+                Skip the form - Book your call in 60 seconds
+            </button>
         </section>
 
         <section class="contact-form-section">
@@ -138,15 +142,17 @@
         </section>
     </div>
 
-    <!-- EXIT INTENT POPUP -->
+    <!-- CALENDLY POPUP -->
     <div class="exit-popup-overlay" id="exitPopup">
-        <div class="exit-popup">
+        <div class="exit-popup calendly-popup">
             <button class="exit-popup-close" aria-label="Close popup">&times;</button>
             <div class="exit-popup-content">
-                <div class="exit-popup-icon">📅</div>
-                <h3>Skip the Form - Book a Call in 60 Seconds</h3>
-                <p>Pick a time that works for you. No back-and-forth emails. No forms. Just click, choose a slot, and we'll call you.</p>
-                <a href="https://calendly.com/acquileadz/discovery-call" target="_blank" rel="noopener noreferrer" class="exit-popup-cta">Schedule Your Free Call Now</a>
+                <h3>Book Your Call - Pick a Time That Works</h3>
+                <p>Choose a time slot below and we'll call you. No back-and-forth emails.</p>
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/john-acquileadz" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                <!-- Calendly inline widget end -->
                 <button class="exit-popup-dismiss">I'll use the form instead</button>
             </div>
         </div>

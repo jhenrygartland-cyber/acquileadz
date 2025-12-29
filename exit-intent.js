@@ -38,8 +38,9 @@ function initExitIntentPopup() {
         });
     }
 
-    function showPopup() {
-        if (popupShown || popupDismissed || formSubmitted) return;
+    function showPopup(manual = false) {
+        // If manually triggered (skip button), always show
+        if (!manual && (popupShown || popupDismissed || formSubmitted)) return;
         popupShown = true;
         exitPopup.classList.add('visible');
         document.body.style.overflow = 'hidden';
@@ -49,6 +50,14 @@ function initExitIntentPopup() {
         exitPopup.classList.remove('visible');
         document.body.style.overflow = '';
         sessionStorage.setItem('exitPopupDismissed', 'true');
+    }
+
+    // Manual trigger - Skip form button
+    const skipFormBtn = document.getElementById('skipFormBtn');
+    if (skipFormBtn) {
+        skipFormBtn.addEventListener('click', () => {
+            showPopup(true); // Manual trigger, bypass checks
+        });
     }
 
     // Primary exit intent detection - when mouse moves toward top of viewport
