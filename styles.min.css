@@ -506,6 +506,45 @@ form label textarea {
     transform: translateY(-10px) scale(1.02);
 }
 
+/* HERO VALUES - Integrated What You Get */
+.hero-values {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+    width: 100%;
+}
+
+.hero-value-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.hero-value-box:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(43, 183, 218, 0.3);
+    transform: translateY(-4px);
+}
+
+.hero-value-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 8px;
+    font-family: var(--font-alt);
+}
+
+.hero-value-box p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* CTA BUTTONS */
 .cta-btn-large {
     display: inline-block;
@@ -3262,6 +3301,25 @@ footer {
         width: 100%;
         max-width: 100%;
         order: 2;
+    }
+
+    .hero-values {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 40px;
+        order: 3;
+    }
+
+    .hero-value-box {
+        padding: 20px;
+    }
+
+    .hero-value-box h3 {
+        font-size: 16px;
+    }
+
+    .hero-value-box p {
+        font-size: 13px;
     }
 
     .hero-image-container {
