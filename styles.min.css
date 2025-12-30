@@ -427,7 +427,7 @@ form label textarea {
 .hero-content h1 {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 0;
     margin-bottom: 24px;
     width: 100%;
@@ -443,7 +443,7 @@ form label textarea {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 
@@ -453,7 +453,7 @@ form label textarea {
     margin: 4px 0;
     animation: bounce 2s ease-in-out infinite;
     display: block;
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 
@@ -465,15 +465,15 @@ form label textarea {
 .hero-content p {
     font-size: 18px;
     max-width: 480px;
-    margin: 0 auto 32px auto;
+    margin: 0 0 32px 0;
     color: var(--muted);
     line-height: 1.6;
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 
 .hero-content .cta-btn-large {
-    margin: 0 auto;
+    margin: 0;
 }
 
 .hero-visual {
