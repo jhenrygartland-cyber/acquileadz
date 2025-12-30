@@ -379,18 +379,24 @@ form label textarea {
 
 /* HERO SECTION -------------------------------------- */
 .hero {
-    min-height: 90vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 60px 80px;
-    align-items: start;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
     padding: 100px 8vw 80px;
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
     position: relative;
     overflow: visible;
+}
+
+.hero-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
 }
 
 .hero::before {
@@ -420,8 +426,6 @@ form label textarea {
     align-items: flex-start;
     justify-content: center;
     text-align: left;
-    grid-column: 1;
-    grid-row: 1;
 }
 
 .hero-content h1 {
@@ -485,8 +489,6 @@ form label textarea {
     width: 100%;
     height: 100%;
     min-height: 600px;
-    grid-column: 2;
-    grid-row: 1;
 }
 
 .hero-image-container {
@@ -513,23 +515,19 @@ form label textarea {
 
 /* HERO VALUES - Integrated What You Get */
 .hero-values-heading {
-    grid-column: 1 / -1;
-    grid-row: 2;
     text-align: center;
     font-size: 36px;
     font-weight: 800;
     font-family: var(--font-alt);
     color: var(--white);
-    margin: 0 0 20px 0;
+    margin: 0 0 32px 0;
+    width: 100%;
 }
 
 .hero-values {
-    grid-column: 1 / -1;
-    grid-row: 3;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin-top: 0;
     width: 100%;
 }
 
@@ -3287,50 +3285,56 @@ footer {
         padding: 72px 32px 56px;
         gap: 40px;
         text-align: center;
+    }
+
+    .hero-top {
         display: flex;
         flex-direction: column;
+        gap: 40px;
     }
 
     .hero-content {
         text-align: center;
         align-items: center;
         gap: 24px;
-        order: 1;
         width: 100%;
     }
 
     .hero-title-line {
         font-size: 40px;
+        text-align: center;
+    }
+
+    .hero-arrow {
+        text-align: center;
     }
 
     .hero-content p {
         font-size: 18px;
         max-width: 90%;
-        margin: 0 auto;
+        margin: 0 auto 32px auto;
+        text-align: center;
     }
 
     .cta-btn-large {
         width: 100%;
         max-width: 320px;
+        margin: 0 auto;
     }
 
     .hero-visual {
         width: 100%;
         max-width: 100%;
-        order: 2;
     }
 
     .hero-values-heading {
         font-size: 28px;
-        margin: 40px 0 16px 0;
-        order: 3;
+        margin: 0 0 20px 0;
     }
 
     .hero-values {
         grid-template-columns: 1fr;
         gap: 16px;
-        margin-top: 0;
-        order: 4;
     }
 
     .hero-value-box {
