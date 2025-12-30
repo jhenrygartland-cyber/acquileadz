@@ -382,7 +382,7 @@ form label textarea {
     min-height: auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 60px;
     padding: 80px 8vw 60px;
     width: 100%;
     max-width: 1600px;
@@ -393,7 +393,7 @@ form label textarea {
 
 .hero-top {
     display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-columns: 1fr 0.8fr;
     gap: 60px;
     align-items: stretch;
     width: 100%;
@@ -516,18 +516,18 @@ form label textarea {
 /* HERO VALUES - Integrated What You Get */
 .hero-values-heading {
     text-align: center;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 800;
     font-family: var(--font-alt);
     color: var(--white);
-    margin: 0 0 20px 0;
+    margin: 0 0 16px 0;
     width: 100%;
 }
 
 .hero-values {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
     width: 100%;
 }
 
@@ -535,7 +535,7 @@ form label textarea {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    padding: 24px;
+    padding: 20px;
     transition: all 0.3s ease;
 }
 
@@ -546,7 +546,7 @@ form label textarea {
 }
 
 .hero-value-box h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--cyan);
     margin-bottom: 8px;
