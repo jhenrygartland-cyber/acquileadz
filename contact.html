@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Content Security Policy - Enhanced security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.web3forms.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://assets.calendly.com; connect-src 'self' https://api.web3forms.com https://calendly.com; frame-src https://calendly.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;">
     <meta name="theme-color" content="#0A1927">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
@@ -56,6 +56,10 @@
     <link rel="stylesheet" href="styles.min.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <!-- Calendly widget script -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -151,7 +155,6 @@
                 <p>Choose a time slot below and we'll call you. No back-and-forth emails.</p>
                 <!-- Calendly inline widget begin -->
                 <div class="calendly-inline-widget" data-url="https://calendly.com/john-acquileadz" style="min-width:320px;height:700px;"></div>
-                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                 <!-- Calendly inline widget end -->
                 <button class="exit-popup-dismiss">I'll use the form instead</button>
             </div>
