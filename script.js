@@ -844,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Team member data
     const teamData = {
         'John Gartland': {
-            photo: 'assets/john-gartland.png',
+            photo: '/assets/john-gartland.png',
             name: 'John Gartland',
             role: 'Founder & Operations',
             email: 'john@acquileadz.com',
@@ -861,7 +861,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         'Luke McCloskey': {
-            photo: 'assets/Luke.png',
+            photo: '/assets/Luke.png',
             name: 'Luke McCloskey',
             role: 'Co-Founder & Strategy',
             email: 'luke@acquileadz.com',
