@@ -457,9 +457,7 @@ form label textarea {
     margin: 2px 0;
     animation: bounce 2s ease-in-out infinite;
     display: block;
-    text-align: center;
     align-self: center;
-    width: 100%;
 }
 
 @keyframes bounce {
