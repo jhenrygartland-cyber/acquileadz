@@ -2371,6 +2371,46 @@ form label textarea {
     margin-bottom: 0;
 }
 
+/* BACKGROUND SECTION */
+.about-background {
+    padding: 80px 80px;
+    background: #ffffff;
+}
+
+.background-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.background-image {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.background-image img {
+    width: 320px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(10, 25, 39, 0.15);
+}
+
+.background-caption {
+    font-size: 14px;
+    color: #6b7a8c;
+    font-style: italic;
+    margin-top: 16px;
+    line-height: 1.5;
+}
+
+.background-text p {
+    font-size: 18px;
+    color: #4a5568;
+    line-height: 1.8;
+}
+
 /* MISSION & VALUES */
 .about-mission {
     padding: 100px 80px;
@@ -3579,12 +3619,23 @@ footer {
     }
 
     .about-story,
+    .about-background,
     .about-mission,
     .about-audience,
     .about-proof,
     .about-team,
     .about-cta {
         padding: 80px 40px;
+    }
+
+    .background-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 32px;
+    }
+
+    .background-image img {
+        width: 280px;
     }
 
     .values-grid {
