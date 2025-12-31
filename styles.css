@@ -2159,6 +2159,13 @@ form label textarea {
     color: var(--muted);
 }
 
+.contact-spanish {
+    font-size: 16px;
+    color: var(--cyan);
+    font-weight: 600;
+    margin-top: 16px;
+}
+
 .calendly-skip-btn {
     margin-top: 32px;
     display: inline-flex;
@@ -3272,6 +3279,13 @@ footer {
 .footer-contact a {
     color: var(--cyan);
     text-decoration: underline;
+    font-weight: 600;
+}
+
+.footer-spanish {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--cyan);
     font-weight: 600;
 }
 
