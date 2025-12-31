@@ -2492,6 +2492,37 @@ form label textarea {
     line-height: 2;
 }
 
+/* BACKGROUND PROOF PHOTOS */
+.background-proof {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.proof-photos {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.proof-photos img {
+    flex: 1;
+    max-width: 420px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(10, 25, 39, 0.18);
+}
+
+.proof-caption {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #6b7a8c;
+    font-style: italic;
+}
+
 /* MISSION & VALUES */
 .about-mission {
     padding: 100px 80px;
@@ -3741,6 +3772,20 @@ footer {
     .background-text p {
         font-size: 18px;
         line-height: 1.9;
+    }
+
+    .background-proof {
+        margin-top: 40px;
+    }
+
+    .proof-photos {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .proof-photos img {
+        max-width: 100%;
+        height: 220px;
     }
 
     .values-grid {
