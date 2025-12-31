@@ -2185,6 +2185,72 @@ form label textarea {
     font-size: 20px;
 }
 
+/* WHAT HAPPENS NEXT TIMELINE */
+.contact-timeline {
+    padding: 60px 80px;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-alt) 100%);
+    text-align: center;
+}
+
+.contact-timeline h2 {
+    font-size: 28px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    color: var(--white);
+    margin-bottom: 40px;
+}
+
+.timeline-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline-step {
+    flex: 1;
+    max-width: 260px;
+    padding: 28px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(43, 183, 218, 0.2);
+}
+
+.timeline-number {
+    width: 40px;
+    height: 40px;
+    background: var(--cyan);
+    color: var(--navy-deep);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    margin: 0 auto 16px;
+}
+
+.timeline-step h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.timeline-step p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.timeline-arrow {
+    font-size: 24px;
+    color: var(--cyan);
+    flex-shrink: 0;
+}
+
 .contact-form-section {
     padding: 80px 80px 120px;
     background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
@@ -3433,6 +3499,24 @@ footer {
     .social-proof {
         padding: 28px 40px;
         gap: 20px;
+    }
+
+    /* RESPONSIVE - CONTACT TIMELINE */
+    .contact-timeline {
+        padding: 50px 24px;
+    }
+
+    .timeline-steps {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .timeline-step {
+        max-width: 100%;
+    }
+
+    .timeline-arrow {
+        transform: rotate(90deg);
     }
 
     /* RESPONSIVE - PROCESS FLOW */
