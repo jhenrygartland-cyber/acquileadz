@@ -398,6 +398,31 @@
         </div>
     </footer>
 
+    <!-- FLOATING TEXT US BUTTON -->
+    <div class="text-us-widget">
+        <button class="text-us-btn" id="textUsBtn" aria-label="Text us">
+            <span class="text-us-icon">💬</span>
+            <span class="text-us-label">Talk to a Human</span>
+        </button>
+        <div class="text-us-popup" id="textUsPopup">
+            <div class="text-us-popup-header">
+                <span>Send Us a Text</span>
+                <button class="text-us-close" aria-label="Close">&times;</button>
+            </div>
+            <p>Enter your info and we'll text you back.</p>
+            <form class="text-us-form" id="textUsForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="1b112abb-70d7-4e79-a0af-5d0b3e425015">
+                <input type="hidden" name="subject" value="New SMS Request from Website">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="tel" name="phone" placeholder="Cell Phone #" required>
+                <textarea name="message" placeholder="Message" rows="2" required></textarea>
+                <button type="submit" class="text-us-submit">Send</button>
+            </form>
+            <p class="text-us-note">By submitting, you agree to receive SMS. Rates may apply.</p>
+        </div>
+    </div>
+
     <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
         <div class="cookie-content">
             <div class="cookie-text">

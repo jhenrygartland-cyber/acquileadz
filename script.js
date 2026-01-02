@@ -42,6 +42,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ===== TEXT US FLOATING WIDGET =====
+    const textUsBtn = document.getElementById('textUsBtn');
+    const textUsPopup = document.getElementById('textUsPopup');
+    const textUsClose = document.querySelector('.text-us-close');
+    const textUsForm = document.getElementById('textUsForm');
+
+    if (textUsBtn && textUsPopup) {
+        textUsBtn.addEventListener('click', () => {
+            textUsPopup.classList.toggle('active');
+        });
+
+        if (textUsClose) {
+            textUsClose.addEventListener('click', () => {
+                textUsPopup.classList.remove('active');
+            });
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.text-us-widget') && textUsPopup.classList.contains('active')) {
+                textUsPopup.classList.remove('active');
+            }
+        });
+
+        // Handle form submission
+        if (textUsForm) {
+            textUsForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = textUsForm.querySelector('.text-us-submit');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                try {
+                    const formData = new FormData(textUsForm);
+                    const response = await fetch(textUsForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        textUsForm.innerHTML = '<p style="text-align:center;color:#25D366;font-weight:600;padding:20px 0;">Got it! We\'ll text you shortly.</p>';
+                    } else {
+                        submitBtn.textContent = 'Try Again';
+                        submitBtn.disabled = false;
+                    }
+                } catch (error) {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+    }
+
     // ===== MOBILE MENU TOGGLE =====
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
