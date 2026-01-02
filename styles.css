@@ -3358,6 +3358,151 @@ footer {
     margin-bottom: 0;
 }
 
+/* TEXT US FLOATING WIDGET */
+.text-us-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    font-family: var(--font-main);
+}
+
+.text-us-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+}
+
+.text-us-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+}
+
+.text-us-icon {
+    font-size: 20px;
+}
+
+.text-us-popup {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 280px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: none;
+    animation: slideUp 0.3s ease;
+}
+
+.text-us-popup.active {
+    display: block;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.text-us-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.text-us-popup-header span {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.text-us-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.text-us-close:hover {
+    color: var(--navy);
+}
+
+.text-us-popup p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.text-us-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.text-us-link:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+}
+
+.text-us-phone-icon {
+    font-size: 20px;
+}
+
+.text-us-note {
+    font-size: 12px !important;
+    color: #999 !important;
+    text-align: center;
+    margin-top: 12px !important;
+    margin-bottom: 0 !important;
+}
+
+/* Mobile adjustments for text-us widget */
+@media (max-width: 768px) {
+    .text-us-label {
+        display: none;
+    }
+
+    .text-us-btn {
+        padding: 14px;
+        border-radius: 50%;
+    }
+
+    .text-us-popup {
+        right: -10px;
+        width: 260px;
+    }
+}
+
 /* 3D DASHBOARD */
 .dashboard-3d {
     width: 100%;
