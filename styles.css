@@ -3454,35 +3454,54 @@ footer {
     line-height: 1.5;
 }
 
-.text-us-link {
+.text-us-form {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     gap: 10px;
-    padding: 14px 20px;
+}
+
+.text-us-form input,
+.text-us-form textarea {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: var(--font-main);
+    transition: border-color 0.2s ease;
+}
+
+.text-us-form input:focus,
+.text-us-form textarea:focus {
+    outline: none;
+    border-color: #25D366;
+}
+
+.text-us-form textarea {
+    resize: none;
+}
+
+.text-us-submit {
+    padding: 12px 20px;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
     font-weight: 700;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.text-us-link:hover {
+.text-us-submit:hover {
     transform: scale(1.02);
     box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
 }
 
-.text-us-phone-icon {
-    font-size: 20px;
-}
-
 .text-us-note {
-    font-size: 12px !important;
+    font-size: 11px !important;
     color: #999 !important;
     text-align: center;
-    margin-top: 12px !important;
+    margin-top: 8px !important;
     margin-bottom: 0 !important;
 }
 

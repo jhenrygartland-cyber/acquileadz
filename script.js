@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const textUsBtn = document.getElementById('textUsBtn');
     const textUsPopup = document.getElementById('textUsPopup');
     const textUsClose = document.querySelector('.text-us-close');
+    const textUsForm = document.getElementById('textUsForm');
 
     if (textUsBtn && textUsPopup) {
         textUsBtn.addEventListener('click', () => {
@@ -64,6 +65,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 textUsPopup.classList.remove('active');
             }
         });
+
+        // Handle form submission
+        if (textUsForm) {
+            textUsForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = textUsForm.querySelector('.text-us-submit');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                try {
+                    const formData = new FormData(textUsForm);
+                    const response = await fetch(textUsForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        textUsForm.innerHTML = '<p style="text-align:center;color:#25D366;font-weight:600;padding:20px 0;">Got it! We\'ll text you shortly.</p>';
+                    } else {
+                        submitBtn.textContent = 'Try Again';
+                        submitBtn.disabled = false;
+                    }
+                } catch (error) {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
     }
 
     // ===== MOBILE MENU TOGGLE =====

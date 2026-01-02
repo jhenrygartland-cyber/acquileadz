@@ -493,15 +493,20 @@
         </button>
         <div class="text-us-popup" id="textUsPopup">
             <div class="text-us-popup-header">
-                <span>Text Us Directly</span>
+                <span>Send Us a Text</span>
                 <button class="text-us-close" aria-label="Close">&times;</button>
             </div>
-            <p>Skip the forms. Text us and a real person will respond.</p>
-            <a href="sms:5828959732" class="text-us-link">
-                <span class="text-us-phone-icon">📱</span>
-                (582) 895-9732
-            </a>
-            <p class="text-us-note">Tap to open your messaging app</p>
+            <p>Enter your info and we'll text you back.</p>
+            <form class="text-us-form" id="textUsForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="1b112abb-70d7-4e79-a0af-5d0b3e425015">
+                <input type="hidden" name="subject" value="New SMS Request from Website">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="tel" name="phone" placeholder="Cell Phone #" required>
+                <textarea name="message" placeholder="Message" rows="2" required></textarea>
+                <button type="submit" class="text-us-submit">Send</button>
+            </form>
+            <p class="text-us-note">By submitting, you agree to receive SMS. Rates may apply.</p>
         </div>
     </div>
 
