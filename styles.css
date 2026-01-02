@@ -2655,6 +2655,14 @@ form label textarea {
     color: var(--navy);
 }
 
+.audience-note {
+    margin-top: 24px;
+    font-size: 15px;
+    color: #6b7a8c;
+    text-align: center;
+    font-style: italic;
+}
+
 /* SOCIAL PROOF STATS */
 .about-proof {
     padding: 80px 80px;
