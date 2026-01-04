@@ -1549,11 +1549,11 @@ form label textarea {
 
 /* SERVICES HERO */
 .services-hero {
-    padding: 160px 80px 120px;
+    padding: 120px 80px 80px;
     text-align: center;
-    background: 
-        radial-gradient(circle at 25% 25%, rgba(43,183,218,0.2), transparent 40%),
-        radial-gradient(circle at 75% 20%, rgba(43,183,218,0.15), transparent 35%),
+    background:
+        radial-gradient(circle at 25% 25%, rgba(43,183,218,0.15), transparent 40%),
+        radial-gradient(circle at 75% 20%, rgba(43,183,218,0.1), transparent 35%),
         linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
     position: relative;
     overflow: hidden;
@@ -2137,11 +2137,11 @@ form label textarea {
 
 /* CONTACT PAGE */
 .contact-header {
-    padding: 140px 80px 100px;
+    padding: 120px 80px 60px;
     text-align: center;
-    background: 
-        radial-gradient(circle at 30% 30%, rgba(43,183,218,0.2), transparent 40%),
-        radial-gradient(circle at 70% 20%, rgba(43,183,218,0.15), transparent 35%),
+    background:
+        radial-gradient(circle at 30% 30%, rgba(43,183,218,0.15), transparent 40%),
+        radial-gradient(circle at 70% 20%, rgba(43,183,218,0.1), transparent 35%),
         linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
     position: relative;
     overflow: hidden;
@@ -2394,11 +2394,11 @@ form label textarea {
 
 /* ABOUT HERO */
 .about-hero-new {
-    padding: 160px 80px 100px;
+    padding: 120px 80px 60px;
     text-align: center;
-    background: 
-        radial-gradient(circle at 35% 25%, rgba(43,183,218,0.2), transparent 40%),
-        radial-gradient(circle at 65% 15%, rgba(43,183,218,0.15), transparent 35%),
+    background:
+        radial-gradient(circle at 35% 25%, rgba(43,183,218,0.15), transparent 40%),
+        radial-gradient(circle at 65% 15%, rgba(43,183,218,0.1), transparent 35%),
         linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
     position: relative;
     overflow: hidden;
@@ -3257,41 +3257,39 @@ footer {
 
 .footer-disclaimer {
     flex: 1;
-    text-align: center;
+    text-align: left;
     padding: 0;
     max-width: 760px;
 }
 
 .footer-disclaimer p {
-    font-size: clamp(12px, 1.2vw, 14px);
+    font-size: 13px;
     color: var(--gray);
-    line-height: 1.7;
-    margin: 0;
-    letter-spacing: 0.02em;
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.01em;
 }
 
-.footer-disclaimer p {
-    font-size: clamp(12px, 1.2vw, 14px);
-    color: var(--gray);
-    line-height: 1.7;
-    margin: 0;
-    letter-spacing: 0.02em;
+.footer-disclaimer p:last-child {
+    margin-bottom: 0;
 }
 
 .footer-contact {
-    margin-top: 12px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--gray);
 }
 
 .footer-contact a {
     color: var(--cyan);
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: 600;
 }
 
+.footer-contact a:hover {
+    text-decoration: underline;
+}
+
 .footer-spanish {
-    margin-top: 12px;
     font-size: 13px;
     color: var(--cyan);
     font-weight: 600;
@@ -3801,17 +3799,17 @@ footer {
     .footer-main {
         flex-direction: column;
         gap: 24px;
-        text-align: center;
-        align-items: center;
+        text-align: left;
+        align-items: flex-start;
     }
 
     .footer-brand {
-        justify-self: center;
+        justify-self: flex-start;
     }
 
     .footer-disclaimer {
         max-width: 100%;
-        text-align: center;
+        text-align: left;
     }
 
     .footer-spacer {
@@ -4319,15 +4317,16 @@ footer {
     .footer-main {
         flex-direction: column;
         gap: 20px;
-        text-align: center;
+        text-align: left;
     }
 
     .footer-brand {
-        margin: 0 auto;
+        margin: 0;
     }
 
     .footer-disclaimer {
         padding: 0;
+        text-align: left;
     }
 
     .footer-disclaimer p {
