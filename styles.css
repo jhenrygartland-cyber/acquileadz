@@ -1549,33 +1549,33 @@ form label textarea {
 
 /* SERVICES HERO */
 .services-hero {
-    padding: 120px 80px 80px;
+    padding: 100px 80px 50px;
     text-align: center;
     background:
-        radial-gradient(circle at 25% 25%, rgba(43,183,218,0.15), transparent 40%),
-        radial-gradient(circle at 75% 20%, rgba(43,183,218,0.1), transparent 35%),
+        radial-gradient(circle at 25% 25%, rgba(43,183,218,0.12), transparent 40%),
+        radial-gradient(circle at 75% 20%, rgba(43,183,218,0.08), transparent 35%),
         linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
     position: relative;
     overflow: hidden;
 }
 
 .services-hero-content {
-    max-width: 800px;
+    max-width: 720px;
     margin: 0 auto;
 }
 
 .services-hero h1 {
-    font-size: 52px;
-    margin-bottom: 24px;
+    font-size: 42px;
+    margin-bottom: 20px;
     font-weight: 800;
     font-family: var(--font-alt);
-    line-height: 1.15;
+    line-height: 1.2;
 }
 
 .services-hero p {
-    font-size: 20px;
+    font-size: 17px;
     color: var(--muted);
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     line-height: 1.6;
 }
 
@@ -1919,6 +1919,32 @@ form label textarea {
     color: var(--muted);
     line-height: 1.7;
     margin-bottom: 48px;
+}
+
+.pricing-tier-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(43, 183, 218, 0.3);
+}
+
+.pricing-tier-alt {
+    margin-top: 40px;
+    color: var(--muted);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.pricing-details-alt {
+    opacity: 0.85;
+}
+
+.pricing-tier-note {
+    font-size: 14px;
+    color: var(--gray);
+    font-style: italic;
+    margin-bottom: 40px;
 }
 
 .pricing-details {
@@ -3556,6 +3582,14 @@ footer {
 
 .dashboard-3d svg {
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+.dashboard-disclaimer {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-top: 12px;
+    font-style: italic;
 }
 
 .hero-image-container:hover .dashboard-3d {
@@ -5204,6 +5238,15 @@ footer {
 
 .exit-popup-content {
     text-align: center;
+}
+
+.exit-popup-eyebrow {
+    font-size: 14px;
+    color: var(--cyan);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
 }
 
 .exit-popup-icon {
