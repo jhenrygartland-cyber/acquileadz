@@ -42,65 +42,76 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ===== TEXT US FLOATING WIDGET =====
-    const textUsBtn = document.getElementById('textUsBtn');
-    const textUsPopup = document.getElementById('textUsPopup');
-    const textUsClose = document.querySelector('.text-us-close');
-    const textUsForm = document.getElementById('textUsForm');
+    // ===== TALK TO A HUMAN MODAL (Accessible) =====
+    const talkHumanBtn = document.getElementById('talkHumanBtn');
+    const talkHumanModal = document.getElementById('talkHumanModal');
+    const talkHumanClose = document.getElementById('talkHumanClose');
 
-    if (textUsBtn && textUsPopup) {
-        textUsBtn.addEventListener('click', () => {
-            textUsPopup.classList.toggle('active');
-        });
+    if (talkHumanBtn && talkHumanModal) {
+        // Get focusable elements within modal
+        const getFocusableElements = () => {
+            return talkHumanModal.querySelectorAll(
+                'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+        };
 
-        if (textUsClose) {
-            textUsClose.addEventListener('click', () => {
-                textUsPopup.classList.remove('active');
-            });
+        // Open modal
+        function openModal() {
+            talkHumanModal.removeAttribute('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // Focus first focusable element (close button)
+            setTimeout(() => {
+                const focusable = getFocusableElements();
+                if (focusable.length) focusable[0].focus();
+            }, 100);
         }
 
-        // Close popup when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.text-us-widget') && textUsPopup.classList.contains('active')) {
-                textUsPopup.classList.remove('active');
+        // Close modal
+        function closeModal() {
+            talkHumanModal.setAttribute('hidden', '');
+            document.body.style.overflow = '';
+            talkHumanBtn.focus(); // Return focus to trigger
+        }
+
+        // Open on button click
+        talkHumanBtn.addEventListener('click', openModal);
+
+        // Close on close button click
+        if (talkHumanClose) {
+            talkHumanClose.addEventListener('click', closeModal);
+        }
+
+        // Close on backdrop click
+        talkHumanModal.addEventListener('click', (e) => {
+            if (e.target === talkHumanModal) {
+                closeModal();
             }
         });
 
-        // Handle form submission
-        if (textUsForm) {
-            textUsForm.addEventListener('submit', async (e) => {
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !talkHumanModal.hasAttribute('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Focus trap within modal
+        talkHumanModal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+
+            const focusable = getFocusableElements();
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (e.shiftKey && document.activeElement === first) {
                 e.preventDefault();
-                const submitBtn = textUsForm.querySelector('.text-us-submit');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-
-                try {
-                    const formData = new FormData(textUsForm);
-                    const response = await fetch(textUsForm.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    const data = await response.json();
-
-                    if (data.success) {
-                        textUsForm.innerHTML = '<p style="text-align:center;color:#25D366;font-weight:600;padding:20px 0;">Got it! We\'ll text you back shortly.</p>';
-                    } else {
-                        submitBtn.textContent = 'Try Again';
-                        submitBtn.disabled = false;
-                        console.error('Web3Forms error:', data);
-                    }
-                } catch (error) {
-                    submitBtn.textContent = 'Try Again';
-                    submitBtn.disabled = false;
-                    console.error('Form submission error:', error);
-                }
-            });
-        }
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
     }
 
     // ===== MOBILE MENU TOGGLE =====

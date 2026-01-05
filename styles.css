@@ -475,6 +475,13 @@ form label textarea {
     50% { transform: translateY(8px); }
 }
 
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .hero-arrow {
+        animation: none;
+    }
+}
+
 .hero-content p {
     font-size: 16px;
     max-width: 440px;
@@ -1549,7 +1556,7 @@ form label textarea {
 
 /* SERVICES HERO */
 .services-hero {
-    padding: 100px 80px 50px;
+    padding: 90px 80px 40px;
     text-align: center;
     background:
         radial-gradient(circle at 25% 25%, rgba(43,183,218,0.12), transparent 40%),
@@ -2163,26 +2170,29 @@ form label textarea {
 
 /* CONTACT PAGE */
 .contact-header {
-    padding: 120px 80px 60px;
+    padding: 90px 80px 40px;
     text-align: center;
     background:
-        radial-gradient(circle at 30% 30%, rgba(43,183,218,0.15), transparent 40%),
-        radial-gradient(circle at 70% 20%, rgba(43,183,218,0.1), transparent 35%),
+        radial-gradient(circle at 30% 30%, rgba(43,183,218,0.12), transparent 40%),
+        radial-gradient(circle at 70% 20%, rgba(43,183,218,0.08), transparent 35%),
         linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
     position: relative;
     overflow: hidden;
 }
 
 .contact-header h1 {
-    font-size: 56px;
-    margin-bottom: 20px;
+    font-size: 38px;
+    margin-bottom: 16px;
     font-weight: 800;
     font-family: var(--font-alt);
 }
 
 .contact-header p {
-    font-size: 20px;
+    font-size: 16px;
     color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .contact-spanish {
@@ -2420,7 +2430,7 @@ form label textarea {
 
 /* ABOUT HERO */
 .about-hero-new {
-    padding: 120px 80px 60px;
+    padding: 90px 80px 40px;
     text-align: center;
     background:
         radial-gradient(circle at 35% 25%, rgba(43,183,218,0.15), transparent 40%),
@@ -2436,8 +2446,8 @@ form label textarea {
 }
 
 .about-hero-new h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+    font-size: 38px;
+    margin-bottom: 16px;
     font-weight: 800;
     font-family: var(--font-alt);
     line-height: 1.2;
@@ -3407,167 +3417,212 @@ footer {
     margin-bottom: 0;
 }
 
-/* TEXT US FLOATING WIDGET */
-.text-us-widget {
+/* TALK TO A HUMAN - FLOATING BUTTON & MODAL */
+.talk-human-btn {
     position: fixed;
     bottom: 24px;
     right: 24px;
     z-index: 9999;
-    font-family: var(--font-main);
-}
-
-.text-us-btn {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 14px 20px;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    background: linear-gradient(135deg, var(--cyan) 0%, #1a9ab8 100%);
     color: white;
     border: none;
     border-radius: 50px;
     font-size: 15px;
     font-weight: 600;
+    font-family: var(--font-main);
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 4px 20px rgba(43, 183, 218, 0.4);
     transition: all 0.3s ease;
 }
 
-.text-us-btn:hover {
+.talk-human-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+    box-shadow: 0 6px 28px rgba(43, 183, 218, 0.5);
 }
 
-.text-us-icon {
+.talk-human-btn:focus {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+}
+
+.talk-human-icon {
     font-size: 20px;
 }
 
-.text-us-popup {
-    position: absolute;
-    bottom: 70px;
-    right: 0;
-    width: 280px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    display: none;
-    animation: slideUp 0.3s ease;
-}
-
-.text-us-popup.active {
-    display: block;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.text-us-popup-header {
+/* Modal Overlay */
+.talk-human-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 25, 39, 0.8);
+    z-index: 10000;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.text-us-popup-header span {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--navy);
+.talk-human-overlay:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
 }
 
-.text-us-close {
-    background: none;
+.talk-human-overlay[hidden] {
+    display: flex !important;
+}
+
+/* Modal Box */
+.talk-human-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.talk-human-overlay:not([hidden]) .talk-human-modal {
+    transform: scale(1) translateY(0);
+}
+
+.talk-human-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: #f5f5f5;
     border: none;
+    border-radius: 50%;
     font-size: 24px;
-    color: #999;
+    color: #666;
     cursor: pointer;
-    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
     line-height: 1;
 }
 
-.text-us-close:hover {
+.talk-human-close:hover {
+    background: #eee;
     color: var(--navy);
 }
 
-.text-us-popup p {
-    font-size: 14px;
+.talk-human-close:focus {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+}
+
+.talk-human-modal h2 {
+    font-size: 24px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    color: var(--navy);
+    margin-bottom: 8px;
+}
+
+.talk-human-desc {
+    font-size: 15px;
     color: #666;
-    margin-bottom: 16px;
+    margin-bottom: 28px;
     line-height: 1.5;
 }
 
-.text-us-form {
+/* Action Buttons */
+.talk-human-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.talk-human-action {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.2s ease;
 }
 
-.text-us-form input,
-.text-us-form textarea {
-    padding: 12px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: var(--font-main);
-    transition: border-color 0.2s ease;
+.talk-human-action:focus {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
 }
 
-.text-us-form input:focus,
-.text-us-form textarea:focus {
-    outline: none;
-    border-color: #25D366;
-}
-
-.text-us-form textarea {
-    resize: none;
-}
-
-.text-us-submit {
-    padding: 12px 20px;
+.talk-human-call {
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     color: white;
-    border: none;
-    border-radius: 8px;
+}
+
+.talk-human-call:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.talk-human-text {
+    background: linear-gradient(135deg, var(--cyan) 0%, #1a9ab8 100%);
+    color: white;
+}
+
+.talk-human-text:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(43, 183, 218, 0.4);
+}
+
+.action-icon {
+    font-size: 28px;
+}
+
+.action-text {
     font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.text-us-submit:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+.talk-human-hours {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.5;
 }
 
-.text-us-note {
-    font-size: 11px !important;
-    color: #999 !important;
-    text-align: center;
-    margin-top: 8px !important;
-    margin-bottom: 0 !important;
-}
-
-/* Mobile adjustments for text-us widget */
+/* Mobile adjustments */
 @media (max-width: 768px) {
-    .text-us-label {
+    .talk-human-label {
         display: none;
     }
 
-    .text-us-btn {
+    .talk-human-btn {
         padding: 14px;
         border-radius: 50%;
     }
 
-    .text-us-popup {
-        right: -10px;
-        width: 260px;
+    .talk-human-modal {
+        padding: 32px 24px;
+    }
+
+    .talk-human-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .talk-human-action {
+        flex-direction: row;
+        justify-content: center;
+        padding: 18px 24px;
     }
 }
 

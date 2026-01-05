@@ -216,28 +216,31 @@
         </div>
     </footer>
 
-    <!-- FLOATING TEXT US BUTTON -->
-    <div class="text-us-widget">
-        <button class="text-us-btn" id="textUsBtn" aria-label="Text us">
-            <span class="text-us-icon">💬</span>
-            <span class="text-us-label">Talk to a Human</span>
-        </button>
-        <div class="text-us-popup" id="textUsPopup">
-            <div class="text-us-popup-header">
-                <span>Send Us a Text</span>
-                <button class="text-us-close" aria-label="Close">&times;</button>
+    <!-- FLOATING TALK TO A HUMAN BUTTON -->
+    <button class="talk-human-btn" id="talkHumanBtn" aria-label="Talk to a Human" aria-haspopup="dialog">
+        <span class="talk-human-icon">💬</span>
+        <span class="talk-human-label">Talk to a Human</span>
+    </button>
+
+    <!-- TALK TO A HUMAN MODAL -->
+    <div class="talk-human-overlay" id="talkHumanModal" role="dialog" aria-modal="true" aria-labelledby="talkHumanTitle" hidden>
+        <div class="talk-human-modal">
+            <button class="talk-human-close" id="talkHumanClose" aria-label="Close dialog">&times;</button>
+            <h2 id="talkHumanTitle">Talk to a Human</h2>
+            <p class="talk-human-desc">Real person. Real answers. Pick how you want to connect:</p>
+
+            <div class="talk-human-actions">
+                <a href="tel:5828969732" class="talk-human-action talk-human-call">
+                    <span class="action-icon">📞</span>
+                    <span class="action-text">Call Now</span>
+                </a>
+                <a href="sms:5828969732?body=Hi%2C%20I%27m%20a%20contractor.%20I%27m%20interested%20in%20more%20booked%20jobs.%20My%20trade%20is%3A%20____" class="talk-human-action talk-human-text">
+                    <span class="action-icon">💬</span>
+                    <span class="action-text">Text Me</span>
+                </a>
             </div>
-            <p>Enter your info and we'll text you back.</p>
-            <form class="text-us-form" id="textUsForm" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="1b112abb-70d7-4e79-a0af-5d0b3e425015">
-                <input type="hidden" name="subject" value="New SMS Request from Website">
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="tel" name="phone" placeholder="Cell Phone #" required>
-                <textarea name="message" placeholder="Message" rows="2" required></textarea>
-                <button type="submit" class="text-us-submit">Send</button>
-            </form>
-            <p class="text-us-note">By submitting, you agree to receive SMS. Rates may apply.</p>
+
+            <p class="talk-human-hours">Business hours: 8am–6pm. If we miss you, we respond within 5 minutes.</p>
         </div>
     </div>
 
