@@ -2460,6 +2460,31 @@ form label textarea {
     background: #ffffff;
 }
 
+/* Founder Story Box - labeled container */
+.founder-story-box {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding: 40px;
+    border: 2px solid rgba(43, 183, 218, 0.25);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(43, 183, 218, 0.03) 0%, transparent 100%);
+}
+
+.founder-label {
+    position: absolute;
+    top: -14px;
+    left: 40px;
+    background: #ffffff;
+    padding: 4px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+}
+
 .background-content {
     max-width: 1100px;
     margin: 0 auto;
