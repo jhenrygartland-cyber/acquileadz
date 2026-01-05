@@ -79,18 +79,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     const formData = new FormData(textUsForm);
                     const response = await fetch(textUsForm.action, {
                         method: 'POST',
-                        body: formData
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
                     });
 
-                    if (response.ok) {
-                        textUsForm.innerHTML = '<p style="text-align:center;color:#25D366;font-weight:600;padding:20px 0;">Got it! We\'ll text you shortly.</p>';
+                    const data = await response.json();
+
+                    if (data.success) {
+                        textUsForm.innerHTML = '<p style="text-align:center;color:#25D366;font-weight:600;padding:20px 0;">Got it! We\'ll text you back shortly.</p>';
                     } else {
                         submitBtn.textContent = 'Try Again';
                         submitBtn.disabled = false;
+                        console.error('Web3Forms error:', data);
                     }
                 } catch (error) {
-                    submitBtn.textContent = originalText;
+                    submitBtn.textContent = 'Try Again';
                     submitBtn.disabled = false;
+                    console.error('Form submission error:', error);
                 }
             });
         }
