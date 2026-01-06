@@ -377,6 +377,23 @@ form label textarea {
     background: linear-gradient(135deg, #1ca6c8 0%, #1a9ab8 100%);
 }
 
+/* SHARED PAGE HERO BASE -------------------------------------- */
+/* Base styles for consistent hero heights across pages */
+.page-hero {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 80px 60px;
+    text-align: center;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(43,183,218,0.12), transparent 40%),
+        radial-gradient(circle at 70% 20%, rgba(43,183,218,0.08), transparent 35%),
+        linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
 /* HERO SECTION -------------------------------------- */
 .hero {
     min-height: auto;
@@ -1554,16 +1571,9 @@ form label textarea {
    SERVICES PAGE - COMPREHENSIVE LAYOUT
    ============================================ */
 
-/* SERVICES HERO */
+/* SERVICES HERO - extends .page-hero */
 .services-hero {
-    padding: 90px 80px 40px;
-    text-align: center;
-    background:
-        radial-gradient(circle at 25% 25%, rgba(43,183,218,0.12), transparent 40%),
-        radial-gradient(circle at 75% 20%, rgba(43,183,218,0.08), transparent 35%),
-        linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
-    position: relative;
-    overflow: hidden;
+    /* Inherits from .page-hero base class */
 }
 
 .services-hero-content {
@@ -2168,16 +2178,17 @@ form label textarea {
     font-size: 17px;
 }
 
-/* CONTACT PAGE */
+/* CONTACT PAGE - extends .page-hero */
 .contact-header {
-    padding: 90px 80px 40px;
-    text-align: center;
-    background:
-        radial-gradient(circle at 30% 30%, rgba(43,183,218,0.12), transparent 40%),
-        radial-gradient(circle at 70% 20%, rgba(43,183,218,0.08), transparent 35%),
-        linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
-    position: relative;
-    overflow: hidden;
+    /* Inherits from .page-hero base class */
+}
+
+.contact-header-content {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .contact-header h1 {
@@ -3728,6 +3739,12 @@ footer {
         left: 8px;
         bottom: 50%;
         transform: translateY(50%);
+    }
+
+    /* Responsive page-hero base */
+    .page-hero {
+        min-height: 360px;
+        padding: 90px 32px 50px;
     }
 
     .hero {
