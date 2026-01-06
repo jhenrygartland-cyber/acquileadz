@@ -261,7 +261,49 @@
     </div>
 
     <script defer src="/script.min.js?v=2"></script>
-    <!-- Exit intent popup - contact page only -->
-    <script defer src="/exit-intent.min.js?v=2"></script>
+    <!-- Exit intent popup - embedded directly -->
+    <script>
+    console.log('INLINE SCRIPT RUNNING');
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded fired');
+        const exitPopup = document.getElementById('exitPopup');
+        const skipFormBtn = document.getElementById('skipFormBtn');
+        console.log('exitPopup:', exitPopup);
+        console.log('skipFormBtn:', skipFormBtn);
+
+        if (!exitPopup) {
+            console.log('ERROR: exitPopup not found!');
+            return;
+        }
+
+        function showPopup() {
+            console.log('showPopup called');
+            exitPopup.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hidePopup() {
+            exitPopup.classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        if (skipFormBtn) {
+            skipFormBtn.addEventListener('click', () => {
+                console.log('Skip button clicked!');
+                showPopup();
+            });
+        }
+
+        // Close handlers
+        const closeBtn = exitPopup.querySelector('.exit-popup-close');
+        const dismissBtn = exitPopup.querySelector('.exit-popup-dismiss');
+
+        if (closeBtn) closeBtn.addEventListener('click', hidePopup);
+        if (dismissBtn) dismissBtn.addEventListener('click', hidePopup);
+        exitPopup.addEventListener('click', (e) => {
+            if (e.target === exitPopup) hidePopup();
+        });
+    });
+    </script>
 </body>
 </html>
