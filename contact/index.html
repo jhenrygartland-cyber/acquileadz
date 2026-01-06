@@ -276,8 +276,12 @@
             return;
         }
 
+        let popupShown = false;
+
         function showPopup() {
+            if (popupShown) return;
             console.log('showPopup called');
+            popupShown = true;
             exitPopup.classList.add('visible');
             document.body.style.overflow = 'hidden';
         }
@@ -287,12 +291,35 @@
             document.body.style.overflow = '';
         }
 
+        // Skip button click
         if (skipFormBtn) {
             skipFormBtn.addEventListener('click', () => {
                 console.log('Skip button clicked!');
+                popupShown = false; // Allow manual trigger
                 showPopup();
             });
         }
+
+        // EXIT INTENT: Mouse leaving toward top of page
+        document.addEventListener('mouseout', (e) => {
+            const isNearTop = e.clientY <= 10;
+            const isLeavingPage = !e.relatedTarget || e.relatedTarget.nodeName === 'HTML';
+            if (isNearTop && isLeavingPage) {
+                console.log('Exit intent triggered - mouse leaving top');
+                showPopup();
+            }
+        });
+
+        // EXIT INTENT: Fast upward mouse movement
+        let lastY = 0;
+        document.addEventListener('mousemove', (e) => {
+            const velocity = lastY - e.clientY;
+            lastY = e.clientY;
+            if (velocity > 50 && e.clientY < 100) {
+                console.log('Exit intent triggered - fast upward movement');
+                showPopup();
+            }
+        });
 
         // Close handlers
         const closeBtn = exitPopup.querySelector('.exit-popup-close');
@@ -302,6 +329,9 @@
         if (dismissBtn) dismissBtn.addEventListener('click', hidePopup);
         exitPopup.addEventListener('click', (e) => {
             if (e.target === exitPopup) hidePopup();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hidePopup();
         });
     });
     </script>
