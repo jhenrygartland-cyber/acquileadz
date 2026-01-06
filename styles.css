@@ -3664,6 +3664,11 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 1200px) {
+    .page-hero {
+        min-height: 400px;
+        padding: 100px 60px 60px;
+    }
+
     .hero {
         grid-template-columns: 1fr;
         gap: 60px;
@@ -3996,9 +4001,7 @@ footer {
     }
 
     /* RESPONSIVE - SERVICES PAGE */
-    .services-hero {
-        padding: 120px 40px 80px;
-    }
+    /* Services hero uses .page-hero base responsive styles */
 
     .services-hero h1 {
         font-size: 36px;
@@ -4127,10 +4130,15 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .page-hero {
+        min-height: 340px;
+        padding: 80px 24px 48px;
+    }
+
     .hero-title-line {
         font-size: 32px;
     }
-    
+
     .nav-logo img {
         height: 52px;
         max-height: 52px;
