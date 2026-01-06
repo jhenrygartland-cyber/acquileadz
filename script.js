@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Open modal
         function openModal() {
             talkHumanModal.removeAttribute('hidden');
-            document.body.style.overflow = 'hidden';
+            // Don't block scroll - popup is small and positioned near button
 
             // Focus first focusable element (close button)
             setTimeout(() => {
@@ -70,7 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Close modal
         function closeModal() {
             talkHumanModal.setAttribute('hidden', '');
-            document.body.style.overflow = '';
+            // Reset form view when closing
+            const computerForm = document.getElementById('computerForm');
+            const talkHumanOptions = document.getElementById('talkHumanOptions');
+            if (computerForm && talkHumanOptions) {
+                computerForm.hidden = true;
+                talkHumanOptions.hidden = false;
+            }
             talkHumanBtn.focus(); // Return focus to trigger
         }
 

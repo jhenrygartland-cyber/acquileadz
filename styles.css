@@ -3464,46 +3464,55 @@ footer {
     font-size: 20px;
 }
 
-/* Modal Overlay */
-.talk-human-overlay {
+/* Popup positioned near button */
+.talk-human-popup {
     position: fixed;
-    inset: 0;
-    background: rgba(10, 25, 39, 0.8);
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.talk-human-overlay:not([hidden]) {
-    opacity: 1;
-    visibility: visible;
-}
-
-.talk-human-overlay[hidden] {
-    display: flex !important;
-}
-
-/* Modal Box */
-.talk-human-modal {
+    bottom: 100px;
+    right: 24px;
     background: white;
     border-radius: 20px;
-    padding: 40px;
-    max-width: 400px;
-    width: 100%;
-    position: relative;
+    padding: 28px;
+    width: 340px;
+    max-width: calc(100vw - 48px);
+    z-index: 10000;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
     transform: scale(0.9) translateY(20px);
-    transition: transform 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
 
-.talk-human-overlay:not([hidden]) .talk-human-modal {
+.talk-human-popup:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
     transform: scale(1) translateY(0);
+}
+
+.talk-human-popup[hidden] {
+    display: block !important;
+}
+
+.talk-human-popup h2 {
+    font-size: 20px;
+    font-weight: 800;
+    font-family: var(--font-alt);
+    color: var(--navy);
+    margin-bottom: 6px;
+}
+
+.talk-human-popup .talk-human-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.talk-human-popup .talk-human-hours {
+    font-size: 12px;
+    color: #888;
+    margin-top: 16px;
+    margin-bottom: 0;
 }
 
 .talk-human-close {
@@ -3553,22 +3562,33 @@ footer {
 /* Action Buttons */
 .talk-human-actions {
     display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .talk-human-action {
-    flex: 1;
+    flex: 1 1 calc(50% - 5px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 24px 16px;
-    border-radius: 12px;
+    gap: 6px;
+    padding: 16px 12px;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 13px;
     transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.talk-human-action .action-icon {
+    font-size: 22px;
+}
+
+.talk-human-action .action-text {
+    font-size: 12px;
 }
 
 .talk-human-action:focus {
@@ -3596,6 +3616,17 @@ footer {
     box-shadow: 0 6px 20px rgba(43, 183, 218, 0.4);
 }
 
+.talk-human-computer {
+    flex: 1 1 100%;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+}
+
+.talk-human-computer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
 .action-icon {
     font-size: 28px;
 }
@@ -3608,6 +3639,88 @@ footer {
     font-size: 13px;
     color: #888;
     line-height: 1.5;
+}
+
+/* Computer Form */
+.talk-human-form {
+    text-align: left;
+}
+
+.talk-human-form .form-intro {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.talk-human-form .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.talk-human-form input,
+.talk-human-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.talk-human-form input:focus,
+.talk-human-form textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+}
+
+.talk-human-form textarea {
+    min-height: 80px;
+    resize: vertical;
+    margin-bottom: 12px;
+}
+
+.talk-human-send {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--cyan) 0%, #1a9ab8 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.talk-human-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(43, 183, 218, 0.4);
+}
+
+.talk-human-form .form-disclaimer {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.back-to-options {
+    background: none;
+    border: none;
+    color: var(--cyan);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 8px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.back-to-options:hover {
+    text-decoration: underline;
 }
 
 /* Mobile adjustments */
