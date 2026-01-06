@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initExitIntentPopup() {
+    console.log('Exit intent popup initializing...');
     // Configuration constants
     const EXIT_INTENT_CONFIG = {
         MOUSE_VELOCITY_THRESHOLD: 50,        // Pixels per mousemove event
@@ -14,7 +15,11 @@ function initExitIntentPopup() {
     };
 
     const exitPopup = document.getElementById('exitPopup');
-    if (!exitPopup) return;
+    console.log('exitPopup element:', exitPopup);
+    if (!exitPopup) {
+        console.log('exitPopup not found, exiting');
+        return;
+    }
 
     const closeBtn = exitPopup.querySelector('.exit-popup-close');
     const dismissBtn = exitPopup.querySelector('.exit-popup-dismiss');
@@ -39,11 +44,13 @@ function initExitIntentPopup() {
     }
 
     function showPopup(manual = false) {
+        console.log('showPopup called, manual:', manual, 'popupShown:', popupShown, 'popupDismissed:', popupDismissed);
         // If manually triggered (skip button), always show
         if (!manual && (popupShown || popupDismissed || formSubmitted)) return;
         popupShown = true;
         exitPopup.classList.add('visible');
         document.body.style.overflow = 'hidden';
+        console.log('Popup should now be visible, classes:', exitPopup.className);
     }
 
     function hidePopup() {
@@ -54,8 +61,10 @@ function initExitIntentPopup() {
 
     // Manual trigger - Skip form button
     const skipFormBtn = document.getElementById('skipFormBtn');
+    console.log('skipFormBtn element:', skipFormBtn);
     if (skipFormBtn) {
         skipFormBtn.addEventListener('click', () => {
+            console.log('Skip button clicked!');
             showPopup(true); // Manual trigger, bypass checks
         });
     }
