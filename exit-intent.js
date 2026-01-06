@@ -1,4 +1,5 @@
 // Exit Intent Popup - Only for Contact Page
+console.log('EXIT-INTENT.JS FILE LOADED');
 document.addEventListener('DOMContentLoaded', () => {
     initExitIntentPopup();
 });
