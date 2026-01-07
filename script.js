@@ -70,12 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Close modal
         function closeModal() {
             talkHumanModal.setAttribute('hidden', '');
-            // Reset form view when closing
-            const computerForm = document.getElementById('computerForm');
-            const talkHumanOptions = document.getElementById('talkHumanOptions');
-            if (computerForm && talkHumanOptions) {
-                computerForm.hidden = true;
-                talkHumanOptions.hidden = false;
+            // Reset form view and restore original HTML when closing
+            if (typeof window._resetTalkHumanForm === 'function') {
+                window._resetTalkHumanForm();
             }
             talkHumanBtn.focus(); // Return focus to trigger
         }
@@ -126,6 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const talkHumanOptions = document.getElementById('talkHumanOptions');
         const talkHumanForm = document.getElementById('talkHumanForm');
 
+        // Store original form HTML for reset
+        const originalFormHTML = computerForm ? computerForm.innerHTML : '';
+
         if (showComputerFormBtn && computerForm && talkHumanOptions) {
             showComputerFormBtn.addEventListener('click', () => {
                 talkHumanOptions.hidden = true;
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     // Add Web3Forms access key
-                    formData.append('access_key', '41e71528-90a1-49f2-87a4-35f8cab5251c');
+                    formData.append('access_key', '1b112abb-70d7-4e79-a0af-5d0b3e425015');
                     formData.append('subject', 'Talk to Human Form - Acquileadz');
 
                     const response = await fetch('https://api.web3forms.com/submit', {
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (data.success) {
                         // Show success confirmation
                         computerForm.innerHTML = `
-                            <div style="text-align: center; padding: 20px 0;">
+                            <div class="talk-human-success" style="text-align: center; padding: 20px 0;">
                                 <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
                                         <polyline points="20 6 9 17 4 12"></polyline>
@@ -190,6 +190,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+        // Store reset function for closeModal to use
+        window._resetTalkHumanForm = function() {
+            if (computerForm && originalFormHTML) {
+                computerForm.innerHTML = originalFormHTML;
+                computerForm.hidden = true;
+            }
+            if (talkHumanOptions) {
+                talkHumanOptions.hidden = false;
+            }
+        };
     }
 
     // ===== MOBILE MENU TOGGLE =====
@@ -269,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initGSAPAnimations() {
     // Check if GSAP and ScrollTrigger are available
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        console.log('GSAP not loaded - skipping animations');
+        // GSAP not loaded - animations skipped, CSS fallback ensures visibility
         return;
     }
     

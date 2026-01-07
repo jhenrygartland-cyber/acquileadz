@@ -21,6 +21,33 @@
     --font-alt: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
+/* GSAP FALLBACK - Ensure animated elements visible if GSAP fails to load */
+.metric,
+.value-box,
+.feature-card,
+.testimonial-card,
+.service-detail,
+.problem-item,
+.benefit-item,
+.offering-card,
+.process-step,
+.faq-item,
+.pricing-item,
+.value-item,
+.trait-item,
+.proof-stat,
+.team-card,
+.about-card,
+.diff-card,
+.final-cta-content,
+.flow-step,
+.step-box,
+.animated-text,
+.arrow-head {
+    opacity: 1;
+    transform: none;
+}
+
 /* COMPREHENSIVE RESET - Cross-browser */
 *, *::before, *::after {
     margin: 0;
