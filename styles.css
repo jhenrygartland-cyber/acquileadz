@@ -5758,3 +5758,275 @@ footer {
 .footer-disclaimer p:first-child::after {
     content: none;
 }
+
+/* ============================================
+   MOBILE OVERHAUL - iPhone 16 Pro & Similar
+   Scale down "in your face" feeling
+   ============================================ */
+
+@media screen and (max-width: 480px) {
+    /* ---- TEAM MODAL POPUP FIX ---- */
+    /* Ensure close button is fully visible and tappable */
+    .team-modal {
+        max-height: 90vh;
+        max-width: 95vw;
+        margin: 5vh auto;
+        overflow-y: auto;
+    }
+
+    .team-modal-close {
+        position: fixed;
+        top: calc(5vh + 12px);
+        right: calc(2.5vw + 12px);
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        z-index: 10002;
+    }
+
+    /* ---- MY STORY / PROOF PHOTOS FIX ---- */
+    /* Prevent vertical stretching, maintain aspect ratio */
+    .proof-photos {
+        gap: 12px;
+    }
+
+    .proof-photos img {
+        height: auto;
+        max-height: 180px;
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 16 / 10;
+    }
+
+    /* ---- GLOBAL FONT SIZE REDUCTION ---- */
+    /* Scale everything down ~15-20% for less "in your face" feel */
+
+    /* Headings */
+    h1, .hero h1, .hero-title-line {
+        font-size: 26px !important;
+        line-height: 1.15;
+    }
+
+    h2, .section-title {
+        font-size: 22px !important;
+    }
+
+    h3 {
+        font-size: 18px !important;
+    }
+
+    h4 {
+        font-size: 16px !important;
+    }
+
+    /* Body text */
+    p, .hero-content p, .story-text p, .background-text p {
+        font-size: 14px !important;
+        line-height: 1.6;
+    }
+
+    /* Smaller supporting text */
+    .hero-content p {
+        font-size: 14px !important;
+    }
+
+    /* Labels and small text */
+    .section-label, .founder-label {
+        font-size: 11px !important;
+    }
+
+    /* ---- SECTION SPACING CONSOLIDATION ---- */
+    /* Tighter spacing between sections for better flow */
+
+    section {
+        padding: 40px 4vw !important;
+    }
+
+    .about-story,
+    .about-background,
+    .about-mission,
+    .about-audience,
+    .about-proof,
+    .about-team,
+    .about-cta {
+        padding: 40px 16px !important;
+    }
+
+    .qa-section {
+        padding: 40px 4vw !important;
+    }
+
+    /* Hero section - less overwhelming */
+    .hero {
+        padding: 56px 4vw 44px !important;
+        row-gap: 20px;
+    }
+
+    .page-hero {
+        min-height: 280px;
+        padding: 70px 16px 36px;
+    }
+
+    /* ---- ELEMENT SIZE REDUCTION ---- */
+
+    /* Cards and boxes - more compact */
+    .value-box,
+    .service-detail,
+    .offering-card,
+    .feature-card {
+        padding: 20px 16px;
+    }
+
+    /* CTA buttons - slightly smaller */
+    .cta-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .cta-btn-large {
+        padding: 14px 24px !important;
+        font-size: 14px !important;
+    }
+
+    /* Hero image - scale back */
+    .hero-visual {
+        width: min(90%, 300px) !important;
+    }
+
+    .hero-image-container {
+        max-width: 300px !important;
+        border-radius: 18px;
+    }
+
+    /* Team cards */
+    .team-card {
+        padding: 16px;
+    }
+
+    .team-photo {
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Stats and metrics - more compact */
+    .proof-stat,
+    .metric {
+        padding: 16px 12px;
+    }
+
+    .proof-stat h3,
+    .metric h3 {
+        font-size: 28px !important;
+    }
+
+    /* ---- SPACING BETWEEN ELEMENTS ---- */
+
+    /* Reduce gaps in grids */
+    .values-grid,
+    .team-grid,
+    .services-grid {
+        gap: 16px;
+    }
+
+    /* Section headers - tighter margins */
+    .section-title {
+        margin-bottom: 24px;
+    }
+
+    /* Story content */
+    .story-content {
+        padding: 0 8px;
+    }
+
+    .story-text p {
+        margin-bottom: 14px;
+    }
+
+    /* Background content */
+    .background-content {
+        gap: 24px;
+    }
+
+    .background-image img {
+        width: 240px !important;
+        max-width: 80%;
+    }
+
+    /* Founder story box */
+    .founder-story-box {
+        padding: 24px 16px;
+    }
+
+    /* Navigation - more compact */
+    .nav-logo img {
+        height: 44px;
+    }
+
+    /* ---- OTHER POPUP FIXES ---- */
+
+    /* Talk to Human popup - ensure close button visible */
+    .talk-human-popup {
+        width: calc(100vw - 32px);
+        max-width: 320px;
+        right: 16px;
+        bottom: 90px;
+        padding: 24px 20px;
+    }
+
+    .talk-human-popup h2 {
+        font-size: 18px;
+    }
+
+    .talk-human-close {
+        top: 12px;
+        right: 12px;
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+    }
+
+    /* Exit intent / Calendly popup */
+    .exit-popup {
+        margin: 12px;
+        max-width: calc(100vw - 24px);
+        padding: 28px 20px;
+    }
+
+    .exit-popup-close {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .exit-popup-icon {
+        font-size: 40px;
+        margin-bottom: 16px;
+    }
+
+    .exit-popup-content h3 {
+        font-size: 20px !important;
+    }
+
+    .exit-popup-content p {
+        font-size: 14px !important;
+        margin-bottom: 20px;
+    }
+
+    .exit-popup-cta {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+
+    /* Calendly popup - needs room for widget */
+    .calendly-popup {
+        padding: 20px 16px;
+    }
+
+    .calendly-popup .calendly-inline-widget {
+        min-height: 500px;
+    }
+}
