@@ -6054,95 +6054,98 @@ footer {
         min-height: 500px;
     }
 
-    /* ---- PROCESS FLOW - COMPACT WITH ARROWS ---- */
-    /* Override the stacked vertical layout - make it more like desktop */
+    /* ---- PROCESS FLOW - SAME ZIGZAG LAYOUT AS DESKTOP ---- */
 
     .process-flow-container {
-        padding: 48px 16px !important;
+        padding: 36px 10px !important;
     }
 
     .process-flow-intro {
-        margin-bottom: 32px;
+        margin-bottom: 20px;
     }
 
     .process-flow-intro .qa-header h2,
     .process-flow-intro .section-header h2 {
-        font-size: 22px !important;
+        font-size: 18px !important;
+    }
+
+    .process-flow-intro .subtext {
+        font-size: 12px !important;
     }
 
     .spiral-process {
-        padding: 16px 8px 32px !important;
+        padding: 10px 4px 20px !important;
     }
 
-    /* Compact flow steps - multiple visible on screen */
+    /* Smaller margins between steps */
     .flow-step {
-        margin-bottom: 40px !important;
+        margin-bottom: 50px !important;
     }
 
-    /* Remove the alternating zigzag - straight compact layout */
+    /* KEEP ZIGZAG - smaller percentages to fit mobile */
     .flow-step[data-step="1"],
-    .flow-step[data-step="2"],
     .flow-step[data-step="3"],
-    .flow-step[data-step="4"],
-    .flow-step[data-step="5"],
-    .flow-step[data-step="6"] {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
+    .flow-step[data-step="5"] {
+        padding-left: 0 !important;
+        padding-right: 25% !important;
     }
 
-    /* Smaller step boxes */
+    .flow-step[data-step="2"],
+    .flow-step[data-step="4"] {
+        padding-left: 25% !important;
+        padding-right: 0 !important;
+    }
+
+    .flow-step[data-step="6"] {
+        padding-left: 12% !important;
+        padding-right: 12% !important;
+    }
+
+    /* MUCH smaller step boxes */
     .step-box {
-        padding: 20px 16px !important;
-        border-radius: 16px;
+        padding: 12px 10px !important;
+        border-radius: 10px;
     }
 
     .step-number {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-        top: -14px;
-        left: 16px;
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+        top: -10px;
+        left: 10px;
     }
 
     .animated-text {
-        font-size: 16px !important;
-        margin-bottom: 8px;
+        font-size: 12px !important;
+        margin-bottom: 4px;
     }
 
     .step-box p {
-        font-size: 13px !important;
-        line-height: 1.5;
+        font-size: 10px !important;
+        line-height: 1.35;
     }
 
-    /* SHOW ARROWS on mobile - simplified vertical arrows */
+    /* SHOW SVG ARROWS - scaled down */
     .arrow-connector {
         display: block !important;
-        position: relative !important;
-        width: 100% !important;
-        height: 40px !important;
-        bottom: auto !important;
-        left: auto !important;
-        right: auto !important;
-        margin: -20px auto 0 !important;
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .arrow-down-right {
+        bottom: -40px !important;
+        right: 30% !important;
+    }
+
+    .arrow-down-left {
+        bottom: -40px !important;
+        left: 30% !important;
     }
 
     .arrow-svg {
-        display: none;
-    }
-
-    /* Simple vertical arrow indicator */
-    .arrow-connector::after {
-        content: '↓';
-        display: block;
-        text-align: center;
-        font-size: 24px;
-        color: var(--cyan);
-        opacity: 0.7;
-    }
-
-    /* Hide last arrow */
-    .flow-step:last-child .arrow-connector {
-        display: none !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
     }
 
     /* ---- FINAL CTA - SHOW GRADIENT ANIMATION ---- */
