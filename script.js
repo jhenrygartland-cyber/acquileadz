@@ -166,14 +166,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = await response.json();
 
                     if (data.success) {
-                        talkHumanForm.innerHTML = '<p style="text-align:center;color:#28a745;font-weight:600;">Message sent! We\'ll text you back shortly.</p>';
-                        setTimeout(closeModal, 2500);
+                        // Show success confirmation
+                        computerForm.innerHTML = `
+                            <div style="text-align: center; padding: 20px 0;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <h3 style="font-size: 18px; font-weight: 700; color: #0A1927; margin-bottom: 8px;">Message Received!</h3>
+                                <p style="font-size: 14px; color: #666; line-height: 1.5;">We'll text you back within 5 minutes during business hours (8am-6pm EST).</p>
+                            </div>
+                        `;
                     } else {
                         throw new Error('Submission failed');
                     }
                 } catch (error) {
                     alert('Something went wrong. Please try calling or texting us directly.');
-                } finally {
                     if (submitBtn) {
                         submitBtn.disabled = false;
                         submitBtn.textContent = originalText;

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Thank you for contacting Acquileadz. We'll be in touch shortly.">
+    <meta name="theme-color" content="#0A1927">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Message Sent | Acquileadz</title>
+    <link rel="stylesheet" href="/styles.min.css?v=12">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <style>
+        .success-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+            background: linear-gradient(135deg, var(--navy) 0%, #0d2233 100%);
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--cyan) 0%, #1a9ab8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            animation: checkDraw 0.6s ease-out 0.3s forwards;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes checkDraw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .success-title {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 800;
+            font-family: var(--font-alt);
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .success-message {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 500px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .success-details {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px 32px;
+            margin-bottom: 40px;
+            max-width: 400px;
+        }
+
+        .success-details p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .success-details strong {
+            color: var(--cyan);
+        }
+
+        .success-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--cyan) 0%, #1a9ab8 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .success-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(35, 206, 235, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <main class="success-page">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+
+        <h1 class="success-title">Message Received!</h1>
+
+        <p class="success-message">
+            Thanks for reaching out. We've got your message and we'll get back to you within 5 minutes during business hours.
+        </p>
+
+        <div class="success-details">
+            <p><strong>Business Hours:</strong> 8am - 6pm EST</p>
+            <p style="margin-top: 8px;">If it's urgent, call us at <a href="tel:5828969732" style="color: var(--cyan);">(582) 896-9732</a></p>
+        </div>
+
+        <a href="/" class="success-back">
+            <span>Back to Home</span>
+        </a>
+    </main>
+
+    <script defer src="/script.min.js?v=2"></script>
+</body>
+</html>
