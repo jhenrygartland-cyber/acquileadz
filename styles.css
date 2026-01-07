@@ -6053,4 +6053,127 @@ footer {
     .calendly-popup .calendly-inline-widget {
         min-height: 500px;
     }
+
+    /* ---- PROCESS FLOW - COMPACT WITH ARROWS ---- */
+    /* Override the stacked vertical layout - make it more like desktop */
+
+    .process-flow-container {
+        padding: 48px 16px !important;
+    }
+
+    .process-flow-intro {
+        margin-bottom: 32px;
+    }
+
+    .process-flow-intro .qa-header h2,
+    .process-flow-intro .section-header h2 {
+        font-size: 22px !important;
+    }
+
+    .spiral-process {
+        padding: 16px 8px 32px !important;
+    }
+
+    /* Compact flow steps - multiple visible on screen */
+    .flow-step {
+        margin-bottom: 40px !important;
+    }
+
+    /* Remove the alternating zigzag - straight compact layout */
+    .flow-step[data-step="1"],
+    .flow-step[data-step="2"],
+    .flow-step[data-step="3"],
+    .flow-step[data-step="4"],
+    .flow-step[data-step="5"],
+    .flow-step[data-step="6"] {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    /* Smaller step boxes */
+    .step-box {
+        padding: 20px 16px !important;
+        border-radius: 16px;
+    }
+
+    .step-number {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+        top: -14px;
+        left: 16px;
+    }
+
+    .animated-text {
+        font-size: 16px !important;
+        margin-bottom: 8px;
+    }
+
+    .step-box p {
+        font-size: 13px !important;
+        line-height: 1.5;
+    }
+
+    /* SHOW ARROWS on mobile - simplified vertical arrows */
+    .arrow-connector {
+        display: block !important;
+        position: relative !important;
+        width: 100% !important;
+        height: 40px !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: -20px auto 0 !important;
+    }
+
+    .arrow-svg {
+        display: none;
+    }
+
+    /* Simple vertical arrow indicator */
+    .arrow-connector::after {
+        content: '↓';
+        display: block;
+        text-align: center;
+        font-size: 24px;
+        color: var(--cyan);
+        opacity: 0.7;
+    }
+
+    /* Hide last arrow */
+    .flow-step:last-child .arrow-connector {
+        display: none !important;
+    }
+
+    /* ---- FINAL CTA - SHOW GRADIENT ANIMATION ---- */
+    .final-cta {
+        padding: 48px 20px !important;
+        overflow: visible;
+    }
+
+    /* Ensure the rotating gradient is visible */
+    .final-cta::before {
+        display: block !important;
+        opacity: 1 !important;
+        animation: rotate 20s linear infinite !important;
+    }
+
+    .cta-problem {
+        font-size: 22px !important;
+    }
+
+    .cta-solution {
+        font-size: 14px !important;
+        margin-bottom: 24px;
+    }
+
+    /* Services final CTA */
+    .services-final-cta {
+        padding: 48px 20px !important;
+    }
+
+    .services-final-cta::before {
+        display: block !important;
+        opacity: 1 !important;
+    }
 }
