@@ -5802,47 +5802,47 @@ footer {
     }
 
     /* ---- GLOBAL FONT SIZE REDUCTION ---- */
-    /* Scale everything down ~15-20% for less "in your face" feel */
+    /* Scale everything down aggressively - user wants it way smaller */
 
-    /* Headings */
+    /* Headings - much smaller */
     h1, .hero h1, .hero-title-line {
-        font-size: 26px !important;
-        line-height: 1.15;
+        font-size: 22px !important;
+        line-height: 1.2;
     }
 
     h2, .section-title {
-        font-size: 22px !important;
-    }
-
-    h3 {
         font-size: 18px !important;
     }
 
-    h4 {
-        font-size: 16px !important;
+    h3 {
+        font-size: 15px !important;
     }
 
-    /* Body text */
-    p, .hero-content p, .story-text p, .background-text p {
+    h4 {
         font-size: 14px !important;
-        line-height: 1.6;
+    }
+
+    /* Body text - smaller */
+    p, .hero-content p, .story-text p, .background-text p {
+        font-size: 13px !important;
+        line-height: 1.5;
     }
 
     /* Smaller supporting text */
     .hero-content p {
-        font-size: 14px !important;
+        font-size: 13px !important;
     }
 
     /* Labels and small text */
     .section-label, .founder-label {
-        font-size: 11px !important;
+        font-size: 10px !important;
     }
 
-    /* ---- SECTION SPACING CONSOLIDATION ---- */
-    /* Tighter spacing between sections for better flow */
+    /* ---- SECTION SPACING - MUCH TIGHTER ---- */
+    /* Consolidate sections for better flow */
 
     section {
-        padding: 40px 4vw !important;
+        padding: 28px 4vw !important;
     }
 
     .about-story,
@@ -5852,117 +5852,122 @@ footer {
     .about-proof,
     .about-team,
     .about-cta {
-        padding: 40px 16px !important;
+        padding: 28px 14px !important;
     }
 
     .qa-section {
-        padding: 40px 4vw !important;
+        padding: 28px 4vw !important;
     }
 
-    /* Hero section - less overwhelming */
+    /* Hero section - compact */
     .hero {
-        padding: 56px 4vw 44px !important;
-        row-gap: 20px;
+        padding: 48px 4vw 36px !important;
+        row-gap: 16px;
     }
 
     .page-hero {
-        min-height: 280px;
-        padding: 70px 16px 36px;
+        min-height: 220px;
+        padding: 60px 14px 28px;
     }
 
     /* ---- ELEMENT SIZE REDUCTION ---- */
 
-    /* Cards and boxes - more compact */
+    /* Cards and boxes - very compact */
     .value-box,
     .service-detail,
     .offering-card,
     .feature-card {
-        padding: 20px 16px;
+        padding: 14px 12px;
     }
 
-    /* CTA buttons - slightly smaller */
+    /* CTA buttons - smaller */
     .cta-btn {
-        padding: 12px 20px;
-        font-size: 14px;
+        padding: 10px 16px;
+        font-size: 13px;
     }
 
     .cta-btn-large {
-        padding: 14px 24px !important;
-        font-size: 14px !important;
+        padding: 12px 20px !important;
+        font-size: 13px !important;
     }
 
-    /* Hero image - scale back */
+    /* Hero image - much smaller */
     .hero-visual {
-        width: min(90%, 300px) !important;
+        width: min(75%, 260px) !important;
     }
 
     .hero-image-container {
-        max-width: 300px !important;
-        border-radius: 18px;
+        max-width: 260px !important;
+        border-radius: 14px;
     }
 
-    /* Team cards */
+    /* Team cards - compact */
     .team-card {
-        padding: 16px;
+        padding: 12px;
     }
 
     .team-photo {
-        width: 70px;
-        height: 70px;
+        width: 56px;
+        height: 56px;
     }
 
-    /* Stats and metrics - more compact */
+    /* Stats and metrics - compact */
     .proof-stat,
     .metric {
-        padding: 16px 12px;
+        padding: 12px 10px;
     }
 
     .proof-stat h3,
     .metric h3 {
-        font-size: 28px !important;
+        font-size: 22px !important;
     }
 
     /* ---- SPACING BETWEEN ELEMENTS ---- */
 
-    /* Reduce gaps in grids */
+    /* Tighter grid gaps */
     .values-grid,
     .team-grid,
     .services-grid {
-        gap: 16px;
+        gap: 12px;
     }
 
-    /* Section headers - tighter margins */
+    /* Section headers - tight margins */
     .section-title {
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     /* Story content */
     .story-content {
-        padding: 0 8px;
+        padding: 0;
     }
 
     .story-text p {
-        margin-bottom: 14px;
+        margin-bottom: 10px;
     }
 
     /* Background content */
     .background-content {
-        gap: 24px;
+        gap: 16px;
     }
 
     .background-image img {
-        width: 240px !important;
-        max-width: 80%;
+        width: 200px !important;
+        max-width: 70%;
     }
 
     /* Founder story box */
     .founder-story-box {
-        padding: 24px 16px;
+        padding: 16px 12px;
     }
 
-    /* Navigation - more compact */
+    /* Navigation - compact */
     .nav-logo img {
-        height: 44px;
+        height: 40px;
+    }
+
+    /* Remove excessive whitespace between sections */
+    section + section {
+        margin-top: -8px;
     }
 
     /* ---- OTHER POPUP FIXES ---- */
