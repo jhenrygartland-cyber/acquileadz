@@ -118,6 +118,69 @@ document.addEventListener('DOMContentLoaded', () => {
                 first.focus();
             }
         });
+
+        // ===== COMPUTER FORM TOGGLE =====
+        const showComputerFormBtn = document.getElementById('showComputerForm');
+        const backToOptionsBtn = document.getElementById('backToOptions');
+        const computerForm = document.getElementById('computerForm');
+        const talkHumanOptions = document.getElementById('talkHumanOptions');
+        const talkHumanForm = document.getElementById('talkHumanForm');
+
+        if (showComputerFormBtn && computerForm && talkHumanOptions) {
+            showComputerFormBtn.addEventListener('click', () => {
+                talkHumanOptions.hidden = true;
+                computerForm.hidden = false;
+            });
+        }
+
+        if (backToOptionsBtn && computerForm && talkHumanOptions) {
+            backToOptionsBtn.addEventListener('click', () => {
+                computerForm.hidden = true;
+                talkHumanOptions.hidden = false;
+            });
+        }
+
+        // Handle form submission
+        if (talkHumanForm) {
+            talkHumanForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(talkHumanForm);
+                const submitBtn = talkHumanForm.querySelector('.talk-human-send');
+                const originalText = submitBtn?.textContent || 'Send';
+
+                try {
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Sending...';
+                    }
+
+                    // Add Web3Forms access key
+                    formData.append('access_key', '41e71528-90a1-49f2-87a4-35f8cab5251c');
+                    formData.append('subject', 'Talk to Human Form - Acquileadz');
+
+                    const response = await fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        talkHumanForm.innerHTML = '<p style="text-align:center;color:#28a745;font-weight:600;">Message sent! We\'ll text you back shortly.</p>';
+                        setTimeout(closeModal, 2500);
+                    } else {
+                        throw new Error('Submission failed');
+                    }
+                } catch (error) {
+                    alert('Something went wrong. Please try calling or texting us directly.');
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                    }
+                }
+            });
+        }
     }
 
     // ===== MOBILE MENU TOGGLE =====
