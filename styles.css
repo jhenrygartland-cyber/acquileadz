@@ -5765,6 +5765,12 @@ footer {
    ============================================ */
 
 @media screen and (max-width: 480px) {
+    /* ---- FIX iOS SCROLL BUG ---- */
+    /* background-attachment: fixed causes janky scrolling on iOS */
+    body {
+        background-attachment: scroll !important;
+    }
+
     /* ---- HIDE DASHBOARD GRAPH ON MOBILE ---- */
     /* Complex SVG doesn't scale well on small screens */
     .hero-visual,
