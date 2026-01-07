@@ -3560,6 +3560,12 @@ footer {
 }
 
 /* Action Buttons */
+/* Hide options/form when hidden attribute is present */
+.talk-human-actions[hidden],
+.talk-human-form[hidden] {
+    display: none !important;
+}
+
 .talk-human-actions {
     display: flex;
     flex-wrap: wrap;

@@ -280,25 +280,30 @@
     <script defer src="/script.min.js?v=2"></script>
     <!-- Exit intent popup - embedded directly -->
     <script>
-    console.log('INLINE SCRIPT RUNNING');
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('DOMContentLoaded fired');
         const exitPopup = document.getElementById('exitPopup');
         const skipFormBtn = document.getElementById('skipFormBtn');
-        console.log('exitPopup:', exitPopup);
-        console.log('skipFormBtn:', skipFormBtn);
 
-        if (!exitPopup) {
-            console.log('ERROR: exitPopup not found!');
-            return;
-        }
+        if (!exitPopup) return;
 
         let popupShown = false;
+        const SESSION_KEY = 'exitPopupShown';
 
-        function showPopup() {
-            if (popupShown) return;
-            console.log('showPopup called');
+        // Check if popup was already shown this session
+        function wasPopupShown() {
+            return sessionStorage.getItem(SESSION_KEY) === 'true';
+        }
+
+        // Mark popup as shown for this session
+        function markPopupShown() {
+            sessionStorage.setItem(SESSION_KEY, 'true');
+        }
+
+        function showPopup(bypassSession = false) {
+            // Only show if not already shown this session (unless bypassed by skip button)
+            if (popupShown || (!bypassSession && wasPopupShown())) return;
             popupShown = true;
+            markPopupShown();
             exitPopup.classList.add('visible');
             document.body.style.overflow = 'hidden';
         }
@@ -308,12 +313,11 @@
             document.body.style.overflow = '';
         }
 
-        // Skip button click
+        // Skip button click - always shows popup (bypasses session check)
         if (skipFormBtn) {
             skipFormBtn.addEventListener('click', () => {
-                console.log('Skip button clicked!');
-                popupShown = false; // Allow manual trigger
-                showPopup();
+                popupShown = false;
+                showPopup(true);
             });
         }
 
@@ -322,7 +326,6 @@
             const isNearTop = e.clientY <= 10;
             const isLeavingPage = !e.relatedTarget || e.relatedTarget.nodeName === 'HTML';
             if (isNearTop && isLeavingPage) {
-                console.log('Exit intent triggered - mouse leaving top');
                 showPopup();
             }
         });
@@ -333,7 +336,6 @@
             const velocity = lastY - e.clientY;
             lastY = e.clientY;
             if (velocity > 50 && e.clientY < 100) {
-                console.log('Exit intent triggered - fast upward movement');
                 showPopup();
             }
         });
@@ -399,12 +401,18 @@
                     });
 
                     if (response.ok) {
-                        submitBtn.textContent = 'Sent!';
-                        talkHumanForm.reset();
-                        setTimeout(() => {
-                            submitBtn.textContent = originalText;
-                            submitBtn.disabled = false;
-                        }, 2000);
+                        // Show success confirmation
+                        computerForm.innerHTML = `
+                            <div style="text-align: center; padding: 20px 0;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <h3 style="font-size: 18px; font-weight: 700; color: #0A1927; margin-bottom: 8px;">Message Received!</h3>
+                                <p style="font-size: 14px; color: #666; line-height: 1.5;">We'll text you back within 5 minutes during business hours (8am-6pm EST).</p>
+                            </div>
+                        `;
                     } else {
                         throw new Error('Failed');
                     }
