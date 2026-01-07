@@ -6,7 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Content Security Policy - Enhanced security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: https:;
+        connect-src 'self' https://api.web3forms.com;
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self' https://api.web3forms.com;
+        object-src 'none';
+        upgrade-insecure-requests;
+    ">
     <meta name="theme-color" content="#0A1927">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
@@ -42,7 +54,7 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/styles.min.css">
+    <link rel="stylesheet" href="/styles.min.css?v=3">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
 </head>
@@ -351,6 +363,6 @@
     <!-- GSAP and ScrollTrigger - must load before main script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="/script.min.js"></script>
+    <script defer src="/script.min.js?v=3"></script>
 </body>
 </html>

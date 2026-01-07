@@ -6,7 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Content Security Policy - Enhanced security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.web3forms.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://assets.calendly.com; connect-src 'self' https://api.web3forms.com https://calendly.com; frame-src https://calendly.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://assets.calendly.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: https:;
+        connect-src 'self' https://api.web3forms.com https://calendly.com;
+        frame-src https://calendly.com;
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self' https://api.web3forms.com;
+        object-src 'none';
+        upgrade-insecure-requests;
+    ">
     <meta name="theme-color" content="#0A1927">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
@@ -53,7 +66,7 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/styles.min.css">
+    <link rel="stylesheet" href="/styles.min.css?v=3">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
 
@@ -277,155 +290,7 @@
         </div>
     </div>
 
-    <script defer src="/script.min.js?v=2"></script>
-    <!-- Exit intent popup - embedded directly -->
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const exitPopup = document.getElementById('exitPopup');
-        const skipFormBtn = document.getElementById('skipFormBtn');
-
-        if (!exitPopup) return;
-
-        let popupShown = false;
-        const SESSION_KEY = 'exitPopupShown';
-
-        // Check if popup was already shown this session
-        function wasPopupShown() {
-            return sessionStorage.getItem(SESSION_KEY) === 'true';
-        }
-
-        // Mark popup as shown for this session
-        function markPopupShown() {
-            sessionStorage.setItem(SESSION_KEY, 'true');
-        }
-
-        function showPopup(bypassSession = false) {
-            // Only show if not already shown this session (unless bypassed by skip button)
-            if (popupShown || (!bypassSession && wasPopupShown())) return;
-            popupShown = true;
-            markPopupShown();
-            exitPopup.classList.add('visible');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function hidePopup() {
-            exitPopup.classList.remove('visible');
-            document.body.style.overflow = '';
-        }
-
-        // Skip button click - always shows popup (bypasses session check)
-        if (skipFormBtn) {
-            skipFormBtn.addEventListener('click', () => {
-                popupShown = false;
-                showPopup(true);
-            });
-        }
-
-        // EXIT INTENT: Mouse leaving toward top of page
-        document.addEventListener('mouseout', (e) => {
-            const isNearTop = e.clientY <= 10;
-            const isLeavingPage = !e.relatedTarget || e.relatedTarget.nodeName === 'HTML';
-            if (isNearTop && isLeavingPage) {
-                showPopup();
-            }
-        });
-
-        // EXIT INTENT: Fast upward mouse movement
-        let lastY = 0;
-        document.addEventListener('mousemove', (e) => {
-            const velocity = lastY - e.clientY;
-            lastY = e.clientY;
-            if (velocity > 50 && e.clientY < 100) {
-                showPopup();
-            }
-        });
-
-        // Close handlers
-        const closeBtn = exitPopup.querySelector('.exit-popup-close');
-        const dismissBtn = exitPopup.querySelector('.exit-popup-dismiss');
-
-        if (closeBtn) closeBtn.addEventListener('click', hidePopup);
-        if (dismissBtn) dismissBtn.addEventListener('click', hidePopup);
-        exitPopup.addEventListener('click', (e) => {
-            if (e.target === exitPopup) hidePopup();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') hidePopup();
-        });
-    });
-
-    // Talk to Human - Computer Form Toggle
-    document.addEventListener('DOMContentLoaded', () => {
-        const showComputerFormBtn = document.getElementById('showComputerForm');
-        const backToOptionsBtn = document.getElementById('backToOptions');
-        const computerForm = document.getElementById('computerForm');
-        const talkHumanOptions = document.getElementById('talkHumanOptions');
-        const talkHumanForm = document.getElementById('talkHumanForm');
-
-        if (showComputerFormBtn && computerForm && talkHumanOptions) {
-            showComputerFormBtn.addEventListener('click', () => {
-                talkHumanOptions.hidden = true;
-                computerForm.hidden = false;
-            });
-        }
-
-        if (backToOptionsBtn && computerForm && talkHumanOptions) {
-            backToOptionsBtn.addEventListener('click', () => {
-                computerForm.hidden = true;
-                talkHumanOptions.hidden = false;
-            });
-        }
-
-        // Form submission
-        if (talkHumanForm) {
-            talkHumanForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(talkHumanForm);
-                const submitBtn = talkHumanForm.querySelector('.talk-human-send');
-                const originalText = submitBtn.textContent;
-
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Sending...';
-
-                try {
-                    const response = await fetch('https://api.web3forms.com/submit', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            access_key: '1b112abb-70d7-4e79-a0af-5d0b3e425015',
-                            name: formData.get('name'),
-                            phone: formData.get('phone'),
-                            message: formData.get('message'),
-                            subject: 'Talk to Human - SMS Request'
-                        })
-                    });
-
-                    if (response.ok) {
-                        // Show success confirmation
-                        computerForm.innerHTML = `
-                            <div style="text-align: center; padding: 20px 0;">
-                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </div>
-                                <h3 style="font-size: 18px; font-weight: 700; color: #0A1927; margin-bottom: 8px;">Message Received!</h3>
-                                <p style="font-size: 14px; color: #666; line-height: 1.5;">We'll text you back within 5 minutes during business hours (8am-6pm EST).</p>
-                            </div>
-                        `;
-                    } else {
-                        throw new Error('Failed');
-                    }
-                } catch (err) {
-                    submitBtn.textContent = 'Error - Try Again';
-                    submitBtn.disabled = false;
-                    setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                    }, 2000);
-                }
-            });
-        }
-    });
-    </script>
+    <script defer src="/script.min.js?v=3"></script>
+    <script defer src="/exit-intent.min.js?v=3"></script>
 </body>
 </html>
