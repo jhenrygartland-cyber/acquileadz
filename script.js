@@ -1101,7 +1101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// FOOTER LEGAL LINKS TOGGLE (Mobile Only)
+// FOOTER LEGAL LINKS TOGGLE (Mobile/Tablet)
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     const footerToggle = document.querySelector('.footer-links-toggle');
@@ -1117,6 +1117,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update ARIA attribute
             footerToggle.setAttribute('aria-expanded', !isExpanded);
+
+            // Auto-scroll to show the dropdown when opening
+            if (!isExpanded) {
+                setTimeout(() => {
+                    footerLinks.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
         });
     }
 });
