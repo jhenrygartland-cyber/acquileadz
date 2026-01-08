@@ -3872,6 +3872,7 @@ footer {
         --header-height: 80px;
         flex-wrap: wrap;
         padding: 12px 20px;
+        overflow: visible;
     }
 
     .nav-links.active {
