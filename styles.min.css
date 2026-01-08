@@ -6518,4 +6518,118 @@ footer {
     .timeline-step p {
         font-size: 10px !important;
     }
+
+    /* ============================================
+       ADDITIONAL MOBILE FIXES
+       ============================================ */
+
+    /* 90-Day Guarantee Box - smaller */
+    .guarantee-section {
+        padding: 32px 16px !important;
+    }
+
+    .guarantee-box {
+        padding: 20px 16px !important;
+        border-radius: 12px;
+    }
+
+    .guarantee-icon {
+        font-size: 32px !important;
+        margin-bottom: 12px;
+    }
+
+    .guarantee-box h3 {
+        font-size: 16px !important;
+        margin-bottom: 8px;
+    }
+
+    .guarantee-box p {
+        font-size: 11px !important;
+        line-height: 1.4;
+    }
+
+    .guarantee-fine-print {
+        font-size: 9px !important;
+        margin-top: 12px;
+    }
+
+    /* Final CTA "Losing Jobs" - smaller with gradient */
+    .final-cta {
+        padding: 36px 16px !important;
+    }
+
+    .final-cta-content {
+        max-width: 100%;
+    }
+
+    .cta-problem {
+        font-size: 18px !important;
+        line-height: 1.3;
+        margin-bottom: 10px;
+    }
+
+    .cta-solution {
+        font-size: 12px !important;
+        margin-bottom: 16px;
+    }
+
+    .final-cta .cta-btn-large {
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+    }
+
+    /* Calendly popup X button fix */
+    .calendly-popup {
+        padding: 16px 12px !important;
+        margin: 8px !important;
+        max-width: calc(100vw - 16px) !important;
+    }
+
+    .calendly-popup .exit-popup-close {
+        top: 8px !important;
+        right: 8px !important;
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 18px !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+        z-index: 10003 !important;
+    }
+
+    /* Contact page - What happens next timeline */
+    .contact-timeline {
+        padding: 24px 12px !important;
+    }
+
+    .contact-timeline h2 {
+        font-size: 16px !important;
+        margin-bottom: 16px;
+    }
+
+    .timeline-steps {
+        gap: 8px !important;
+    }
+
+    .timeline-step {
+        padding: 10px 8px !important;
+    }
+
+    .timeline-number {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 11px !important;
+    }
+
+    .timeline-step h3 {
+        font-size: 11px !important;
+    }
+
+    .timeline-step p {
+        font-size: 9px !important;
+    }
+
+    .timeline-arrow {
+        font-size: 14px !important;
+        padding: 0 4px !important;
+    }
 }
