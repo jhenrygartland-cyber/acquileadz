@@ -5262,6 +5262,73 @@ footer {
         font-size: 36px !important;
     }
 
+    /* New pricing packages responsive */
+    .pricing-package {
+        padding: 24px 20px !important;
+    }
+
+    .package-header h3 {
+        font-size: 18px !important;
+    }
+
+    .package-tagline {
+        font-size: 13px !important;
+    }
+
+    .package-description {
+        font-size: 13px !important;
+    }
+
+    .package-includes li {
+        font-size: 12px !important;
+        padding: 6px 0 6px 20px !important;
+    }
+
+    .pricing-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+        padding: 14px !important;
+    }
+
+    .pricing-label {
+        font-size: 13px !important;
+        min-width: unset !important;
+    }
+
+    .pricing-value {
+        font-size: 16px !important;
+        text-align: left !important;
+    }
+
+    .pricing-note {
+        font-size: 11px !important;
+        min-width: unset !important;
+        text-align: left !important;
+    }
+
+    .pricing-additional {
+        padding: 18px !important;
+    }
+
+    .pricing-additional ul {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .pricing-fit-note {
+        padding: 20px !important;
+    }
+
+    .pricing-fit-note h4 {
+        font-size: 16px !important;
+    }
+
+    .pricing-fit-note p,
+    .pricing-fit-note li {
+        font-size: 13px !important;
+    }
+
     /* ---- FINAL CTA - Gradient Animation ---- */
     .final-cta {
         padding: 50px 5vw !important;
@@ -5707,6 +5774,60 @@ footer {
 
     .price-display {
         font-size: 40px !important;
+    }
+
+    /* New pricing packages responsive */
+    .pricing-package {
+        padding: 28px 24px !important;
+    }
+
+    .package-header h3 {
+        font-size: 20px !important;
+    }
+
+    .package-tagline {
+        font-size: 14px !important;
+    }
+
+    .package-description {
+        font-size: 14px !important;
+    }
+
+    .package-includes li {
+        font-size: 13px !important;
+    }
+
+    .pricing-item {
+        padding: 16px 18px !important;
+    }
+
+    .pricing-label {
+        font-size: 14px !important;
+    }
+
+    .pricing-value {
+        font-size: 16px !important;
+    }
+
+    .pricing-note {
+        font-size: 12px !important;
+    }
+
+    .pricing-additional {
+        padding: 20px !important;
+    }
+
+    .pricing-fit-note {
+        padding: 24px !important;
+    }
+
+    .pricing-fit-note h4 {
+        font-size: 17px !important;
+    }
+
+    .pricing-fit-note p,
+    .pricing-fit-note li {
+        font-size: 14px !important;
     }
 
     /* ---- HOW IT WORKS - Smaller ---- */
@@ -7500,6 +7621,105 @@ body.popup-open {
     .services-problem h2,
     .services-offerings h2 {
         font-size: 18px !important;
+    }
+
+    /* New pricing packages - mobile */
+    .pricing-package {
+        padding: 20px 16px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .package-header h3 {
+        font-size: 16px !important;
+    }
+
+    .package-tagline {
+        font-size: 12px !important;
+    }
+
+    .package-description {
+        font-size: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .package-includes h4,
+    .package-pricing h4 {
+        font-size: 11px !important;
+    }
+
+    .package-includes li {
+        font-size: 11px !important;
+        padding: 5px 0 5px 18px !important;
+    }
+
+    .pricing-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 2px !important;
+        padding: 12px !important;
+    }
+
+    .pricing-label {
+        font-size: 12px !important;
+        min-width: unset !important;
+    }
+
+    .pricing-value {
+        font-size: 14px !important;
+        text-align: left !important;
+    }
+
+    .pricing-note {
+        font-size: 10px !important;
+        min-width: unset !important;
+        text-align: left !important;
+    }
+
+    .package-best-for {
+        font-size: 11px !important;
+        padding: 12px !important;
+    }
+
+    .pricing-additional {
+        padding: 16px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .pricing-additional h4 {
+        font-size: 14px !important;
+    }
+
+    .pricing-additional ul {
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+
+    .pricing-additional li {
+        font-size: 11px !important;
+        padding: 6px 12px !important;
+    }
+
+    .pricing-fit-note {
+        padding: 16px !important;
+        margin-bottom: 24px !important;
+    }
+
+    .pricing-fit-note h4 {
+        font-size: 14px !important;
+    }
+
+    .pricing-fit-note p {
+        font-size: 12px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .pricing-fit-note li {
+        font-size: 11px !important;
+        padding: 4px 0 4px 16px !important;
+    }
+
+    .fit-conclusion {
+        font-size: 12px !important;
     }
 
     /* ============================================
