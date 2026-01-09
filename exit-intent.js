@@ -38,17 +38,25 @@
             }
         }
 
+        var scrollPosition = 0;
+
         function showPopup(bypassSession) {
             if (popupShown || (!bypassSession && wasPopupShown())) return;
             popupShown = true;
             markPopupShown();
+            // Store scroll position and lock body
+            scrollPosition = window.pageYOffset;
+            document.body.classList.add('popup-open');
+            document.body.style.top = '-' + scrollPosition + 'px';
             exitPopup.classList.add('visible');
-            document.body.style.overflow = 'hidden';
         }
 
         function hidePopup() {
             exitPopup.classList.remove('visible');
-            document.body.style.overflow = '';
+            // Restore scroll position and unlock body
+            document.body.classList.remove('popup-open');
+            document.body.style.top = '';
+            window.scrollTo(0, scrollPosition);
         }
 
         // Skip button click - always shows popup (bypasses session check)
