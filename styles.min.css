@@ -2072,6 +2072,25 @@ form label textarea {
     opacity: 0.9;
 }
 
+.pricing-package-addon {
+    border-color: rgba(255, 200, 100, 0.3);
+    background: linear-gradient(135deg, rgba(255, 200, 100, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+    position: relative;
+}
+
+.package-addon-label {
+    display: inline-block;
+    background: linear-gradient(135deg, #f0b429 0%, #e09422 100%);
+    color: #1a1a1a;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
 .package-header {
     margin-bottom: 16px;
 }
@@ -2847,9 +2866,9 @@ form label textarea {
     object-position: center 70%; /* Focus toward bottom of image */
 }
 
-/* Right image - focus on person on roof, not sky */
+/* Right image (roof2.png) - move viewpoint UP to see person */
 .proof-photos img:last-child {
-    object-position: center 65%; /* Focus on person, less sky */
+    object-position: center 20%; /* Focus on upper portion of image */
 }
 
 .proof-caption {
@@ -5164,9 +5183,9 @@ footer {
         object-position: center 70% !important;
     }
 
-    /* Right image - focus on person not sky */
+    /* Right image (roof2.png) - viewpoint UP to see person */
     .proof-photos img:last-child {
-        object-position: center 65% !important;
+        object-position: center 20% !important;
     }
 
     /* ---- MEET THE TEAM - 2 across ---- */
@@ -5704,9 +5723,9 @@ footer {
         object-position: center 70% !important;
     }
 
-    /* Right image - focus on person not sky */
+    /* Right image (roof2.png) - viewpoint UP to see person */
     .proof-photos img:last-child {
-        object-position: center 65% !important;
+        object-position: center 20% !important;
     }
 
     /* ---- MEET THE TEAM - 2 across ---- */
