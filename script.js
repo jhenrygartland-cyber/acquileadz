@@ -1,6 +1,11 @@
 // Acquileadz Website JavaScript
 // GSAP ScrollTrigger for scroll-linked animations
 
+// Force HTTPS redirect (runs immediately)
+if (location.protocol === 'http:') {
+    location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // ===== COOKIE CONSENT BANNER =====
     const cookieBanner = document.querySelector('.cookie-banner');
